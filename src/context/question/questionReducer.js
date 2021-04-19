@@ -9,8 +9,6 @@ import {
 } from '../types';
 
 const questionReducer = (state, action) => {
-  console.log(action.type);
-
   switch (action.type) {
     case ADD_QUESTION:
       return {
@@ -46,6 +44,21 @@ const questionReducer = (state, action) => {
       return {
         ...state,
         current: null,
+      };
+
+    case FILTER_QUESTIONS:
+      return {
+        ...state,
+        filtered: state.questions.filter((question) => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return question.title.match(regex) || question.content.match(regex);
+        }),
+      };
+
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
       };
     default:
       return state;

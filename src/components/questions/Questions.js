@@ -5,12 +5,21 @@ import QuestionContext from '../../context/question/questionContext';
 const Questions = () => {
   const questionContext = useContext(QuestionContext);
 
-  const { questions } = questionContext;
+  const { questions, filtered } = questionContext;
+
+  if (questions.length === 0) {
+    return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;
+  }
+
   return (
     <Fragment>
-      {questions.map((question) => (
-        <QuestionItem key={question.questionId} question={question} />
-      ))}
+      {filtered !== null
+        ? filtered.map((question) => (
+            <QuestionItem key={question.questionId} question={question} />
+          ))
+        : questions.map((question) => (
+            <QuestionItem key={question.questionId} question={question} />
+          ))}
     </Fragment>
   );
 };

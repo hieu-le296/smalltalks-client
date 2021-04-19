@@ -68,6 +68,7 @@ const QuestionState = (props) => {
       },
     ],
     current: null,
+    filtered: null,
   };
 
   const [state, dispatch] = useReducer(questionReducer, initState);
@@ -99,19 +100,28 @@ const QuestionState = (props) => {
   };
 
   // Filter Question
+  const filterQuestions = (text) => {
+    dispatch({ type: FILTER_QUESTIONS, payload: text });
+  };
 
   // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     <QuestionContext.Provider
       value={{
         questions: state.questions,
         current: state.current,
+        filtered: state.filtered,
         addQuestion,
         setCurrent,
         updateQuestion,
         clearCurrent,
         deleteQuestion,
+        filterQuestions,
+        clearFilter,
       }}
     >
       {props.children}
