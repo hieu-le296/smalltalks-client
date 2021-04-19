@@ -53,6 +53,19 @@ const QuestionState = (props) => {
         createdAt: '2021-04-12T03:45:31.000Z',
         updatedAt: '2021-04-12T03:45:31.000Z',
       },
+
+      {
+        questionId: 4,
+        postedBy: {
+          userId: 3,
+          username: 'hieule',
+          name: 'Hieu Le',
+        },
+        title: 'What’s your favorite color?',
+        content: 'For me, I like blue. How about you, guys?',
+        createdAt: '2021-04-12T03:45:31.000Z',
+        updatedAt: '2021-04-12T03:45:31.000Z',
+      },
     ],
   };
 
@@ -61,6 +74,9 @@ const QuestionState = (props) => {
   //   Add Question
 
   //   Delete Question
+  const deleteQuestion = (questionId) => {
+    dispatch({ type: DELETE_QUESTION, payload: questionId });
+  };
 
   // Set Current Question
 
@@ -76,6 +92,7 @@ const QuestionState = (props) => {
     <QuestionContext.Provider
       value={{
         questions: state.questions,
+        deleteQuestion,
       }}
     >
       {props.children}
