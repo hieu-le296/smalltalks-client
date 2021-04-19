@@ -13,7 +13,17 @@ const questionReducer = (state, action) => {
     case ADD_QUESTION:
       return {
         ...state,
-        questions: [...state.questions, action.payload],
+        questions: [action.payload, ...state.questions],
+      };
+
+    case UPDATE_QUESTION:
+      return {
+        ...state,
+        questions: state.questions.map((question) =>
+          question.questionId === action.payload.questionId
+            ? action.payload
+            : question
+        ),
       };
 
     case DELETE_QUESTION:

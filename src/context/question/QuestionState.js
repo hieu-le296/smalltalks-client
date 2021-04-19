@@ -78,22 +78,26 @@ const QuestionState = (props) => {
     dispatch({ type: ADD_QUESTION, payload: question });
   };
 
+  // Update Question
+  const updateQuestion = (question) => {
+    console.log(question);
+    dispatch({ type: UPDATE_QUESTION, payload: question });
+  };
+
   //   Delete Question
   const deleteQuestion = (questionId) => {
     dispatch({ type: DELETE_QUESTION, payload: questionId });
   };
 
   // Set Current Question
-  const setCurrent = (contact) => {
-    dispatch({ type: SET_CURRENT_QUESTION, payload: contact });
+  const setCurrent = (question) => {
+    dispatch({ type: SET_CURRENT_QUESTION, payload: question });
   };
 
   // Clear Current Question
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT_QUESTION });
   };
-
-  // Update Question
 
   // Filter Question
 
@@ -106,6 +110,7 @@ const QuestionState = (props) => {
         current: state.current,
         addQuestion,
         setCurrent,
+        updateQuestion,
         clearCurrent,
         deleteQuestion,
       }}
