@@ -6,25 +6,28 @@ import DashBoard from './components/pages/Dashboard';
 import About from './components/pages/About';
 
 import QuestionState from './context/question/QuestionState';
+import AuthState from './context/auth/AuthState';
 
 import './App.css';
 
 function App() {
   return (
-    <QuestionState>
-      <Router>
-        <Fragment>
-          <NavBar />
-          <div className='container'>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/dashboard' component={DashBoard} />
-              <Route exact path='/about' component={About} />
-            </Switch>
-          </div>
-        </Fragment>
-      </Router>
-    </QuestionState>
+    <AuthState>
+      <QuestionState>
+        <Router>
+          <Fragment>
+            <NavBar />
+            <div className='container'>
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/dashboard' component={DashBoard} />
+                <Route exact path='/about' component={About} />
+              </Switch>
+            </div>
+          </Fragment>
+        </Router>
+      </QuestionState>
+    </AuthState>
   );
 }
 
