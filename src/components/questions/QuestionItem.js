@@ -15,7 +15,7 @@ const QuestionItem = ({ question }) => {
   };
 
   return (
-    <div className='card mt-3' style={cardStyle}>
+    <div className='card'>
       <div className='card-body'>
         <h5 className='card-title fw-bold' style={{ color: '#4c51a4' }}>
           {title}
@@ -25,11 +25,7 @@ const QuestionItem = ({ question }) => {
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
         <div className='card-text'>
-          <textarea
-            style={textAreaStyle}
-            readOnly={true}
-            value={content}
-          ></textarea>
+          <textarea readOnly={true} value={content}></textarea>
         </div>
         {/* <p className='card-text'>{content}</p> */}
         <button
@@ -58,17 +54,6 @@ const QuestionItem = ({ question }) => {
 
 QuestionItem.propTypes = {
   question: PropTypes.object.isRequired,
-};
-
-const cardStyle = {
-  background: '#ddc9e6',
-  margin: '15px 0 15px 0px',
-};
-
-const textAreaStyle = {
-  background: '#ddc9e6',
-  width: '100%',
-  border: 'none',
 };
 
 export default QuestionItem;

@@ -46,10 +46,15 @@ const QuestionForm = () => {
     clearCurrent();
   };
 
+  const auto_height = (e) => {
+    e.target.style.height = '1px';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  };
+
   return (
     <form
-      className='form-outLine'
-      style={{ margin: '15px 20px 0 0' }}
+      className='form-outLine mt-5'
+      style={{ marginRight: '5rem' }}
       onSubmit={onSubmit}
     >
       <h2 className='text-center'>
@@ -63,6 +68,8 @@ const QuestionForm = () => {
           className='form-control'
           id='title'
           name='title'
+          rows='1'
+          onInput={auto_height}
           value={title}
           onChange={onChange}
         ></textarea>
@@ -73,9 +80,11 @@ const QuestionForm = () => {
           Content
         </label>
         <textarea
-          className='form-control form-control-lg'
+          className='form-control'
           id='content'
           name='content'
+          row='1'
+          onInput={auto_height}
           value={content}
           onChange={onChange}
         ></textarea>

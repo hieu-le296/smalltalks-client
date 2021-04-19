@@ -80,7 +80,6 @@ const QuestionState = (props) => {
 
   // Update Question
   const updateQuestion = (question) => {
-    console.log(question);
     dispatch({ type: UPDATE_QUESTION, payload: question });
   };
 

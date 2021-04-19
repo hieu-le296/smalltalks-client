@@ -4,9 +4,10 @@ import NavBar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import DashBoard from './components/pages/Dashboard';
 import About from './components/pages/About';
-import './App.css';
 
 import QuestionState from './context/question/QuestionState';
+
+import './App.css';
 
 function App() {
   return (

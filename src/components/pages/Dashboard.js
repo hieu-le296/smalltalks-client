@@ -9,6 +9,7 @@ const Dashboard = () => {
         <QuestionForm />
       </div>
       <div className='col-6'>
+        <h3 className='text-center mt-5'>Your Posted Questions</h3>
         <Questions />
       </div>
     </div>
