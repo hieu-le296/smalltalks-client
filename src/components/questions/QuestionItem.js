@@ -5,22 +5,31 @@ import QuestionContext from '../../context/question/questionContext';
 const QuestionItem = ({ question }) => {
   const questionContext = useContext(QuestionContext);
 
-  const { deleteQuestion } = questionContext;
+  const { deleteQuestion, setCurrent, clearCurrent } = questionContext;
 
   const { questionId, title, content, createdAt, updatedAt } = question;
 
   const onDelete = () => {
     deleteQuestion(questionId);
+    clearCurrent();
   };
 
   return (
     <div className='card' style={cardStyle}>
       <div className='card-body'>
-        <h5 className='card-title' style={{ color: '#4c51a4' }}>
+        <h5 className='card-title fw-bold' style={{ color: '#4c51a4' }}>
           {title}
         </h5>
+        <p className='text-muted fs-6'>
+          <strong>Created: </strong>
+          {new Date(`${createdAt}`).toLocaleString()}
+        </p>
         <p className='card-text'>{content}</p>
-        <button type='button' className='btn btn-primary btn-sm me-3'>
+        <button
+          type='button'
+          className='btn btn-primary btn-sm me-3'
+          onClick={() => setCurrent(question)}
+        >
           Edit <i className='fas fa-pencil-alt'></i>
         </button>
         <button
@@ -31,11 +40,9 @@ const QuestionItem = ({ question }) => {
           Delete <i className='fas fa-trash'></i>
         </button>
       </div>
-      <div className='card-footer text-muted'>
+      <div className='card-footer text-muted fs-6'>
         <p>
-          <strong>Created</strong> : {new Date(`${createdAt}`).toLocaleString()}{' '}
-          | <strong>Modified</strong>:{' '}
-          {new Date(`${updatedAt}`).toLocaleString()}
+          <strong>Modified</strong>: {new Date(`${updatedAt}`).toLocaleString()}
         </p>
       </div>
     </div>

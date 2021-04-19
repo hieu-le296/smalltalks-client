@@ -67,11 +67,16 @@ const QuestionState = (props) => {
         updatedAt: '2021-04-12T03:45:31.000Z',
       },
     ],
+    current: null,
   };
 
   const [state, dispatch] = useReducer(questionReducer, initState);
 
   //   Add Question
+  const addQuestion = (question) => {
+    question.questionId = uuid();
+    dispatch({ type: ADD_QUESTION, payload: question });
+  };
 
   //   Delete Question
   const deleteQuestion = (questionId) => {
@@ -79,8 +84,14 @@ const QuestionState = (props) => {
   };
 
   // Set Current Question
+  const setCurrent = (contact) => {
+    dispatch({ type: SET_CURRENT_QUESTION, payload: contact });
+  };
 
   // Clear Current Question
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT_QUESTION });
+  };
 
   // Update Question
 
@@ -92,6 +103,10 @@ const QuestionState = (props) => {
     <QuestionContext.Provider
       value={{
         questions: state.questions,
+        current: state.current,
+        addQuestion,
+        setCurrent,
+        clearCurrent,
         deleteQuestion,
       }}
     >
