@@ -30,7 +30,7 @@ const QuestionItem = ({ question }) => {
         {/* <p className='card-text'>{content}</p> */}
         <button
           type='button'
-          className='btn btn-primary btn-sm me-3'
+          className='btn btn-secondary btn-sm me-3'
           onClick={() => setCurrent(question)}
         >
           <i className='fas fa-pencil-alt'></i> Edit

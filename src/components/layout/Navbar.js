@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ icon }) => {
   return (
-    <nav className='navbar navbar-expand-lg bg-secondary'>
+    <nav className='navbar navbar-expand-lg bg-primary'>
       <div className='container-fluid '>
         <button
           className='navbar-toggler'
@@ -41,6 +41,16 @@ const Navbar = ({ icon }) => {
             <li className='nav-item'>
               <Link to='/profile' className='nav-link text-white'>
                 Profile
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link to='/register' className='nav-link text-white'>
+                Register
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link to='/login' className='nav-link text-white'>
+                Login
               </Link>
             </li>
 

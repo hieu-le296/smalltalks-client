@@ -100,7 +100,7 @@ const QuestionForm = () => {
             </button>
           </div>
         ) : (
-          <button type='submit' className='btn btn-secondary btn-lg'>
+          <button type='submit' className='btn btn-primary btn-lg'>
             <i className='fas fa-plus'></i> Post question
           </button>
         )}
