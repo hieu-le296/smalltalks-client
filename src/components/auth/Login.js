@@ -5,7 +5,7 @@ import AlertContext from '../../context/alert/alertContext';
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
+  const { alerts, setAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
   const { login, error, clearErrors, isAuthenticated } = authContext;
@@ -14,7 +14,6 @@ const Login = (props) => {
     if (isAuthenticated) {
       props.history.push('/dashboard');
     }
-
     if (error !== null) {
       setAlert(error, 'danger');
       clearErrors();
