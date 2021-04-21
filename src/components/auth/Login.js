@@ -5,7 +5,7 @@ import AlertContext from '../../context/alert/alertContext';
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
-  const { alerts, setAlert } = alertContext;
+  const { setAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
   const { login, error, clearErrors, isAuthenticated } = authContext;

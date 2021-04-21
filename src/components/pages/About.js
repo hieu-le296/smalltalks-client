@@ -14,8 +14,9 @@ const About = () => {
           <div className='card border-0 shadow'>
             <img
               src='https://hieulocker.tk/images/hieu.jpg'
-              class='card-img-top rounded-circle'
+              className='card-img-top rounded-circle mx-auto mt-3'
               alt='...'
+              style={{ maxHeight: '50%', maxWidth: '50%' }}
             />
             <div className='card-body text-center'>
               <h5 className='card-title mb-0'>Team member</h5>
@@ -34,8 +35,9 @@ const About = () => {
           <div className='card border-0 shadow'>
             <img
               src='https://gurjitlocker.tk/images/profile.jpg'
-              class='card-img-top rounded-circle'
+              className='card-img-top rounded-circle mx-auto mt-3'
               alt='...'
+              style={{ maxHeight: '50%', maxWidth: '50%' }}
             />
             <div className='card-body text-center'>
               <h5 className='card-title mb-0'>Team member</h5>

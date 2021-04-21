@@ -17,9 +17,7 @@ const QuestionItem = ({ question }) => {
   return (
     <div className='card'>
       <div className='card-body'>
-        <h5 className='card-title fw-bold' style={{ color: '#4c51a4' }}>
-          {title}
-        </h5>
+        <h5 className='card-title fw-bold'>{title}</h5>
         <p className='text-muted fs-6'>
           <strong>Created: </strong>
           {new Date(`${createdAt}`).toLocaleString()}

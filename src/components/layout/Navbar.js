@@ -29,7 +29,6 @@ const Navbar = ({ icon, profilePic }) => {
       <li className='nav-item dropdown'>
         <a
           className='nav-link dropdown-toggle d-flex align-items-center'
-          href='#'
           id='navbarDropdownMenuLink'
           role='button'
           data-mdb-toggle='dropdown'
@@ -38,7 +37,7 @@ const Navbar = ({ icon, profilePic }) => {
           <img
             src={user && `${API_URL}/${user.data.profilePic}`}
             className='rounded-circle'
-            height='22'
+            height='25'
             alt=''
             loading='lazy'
             onError={(e) => (e.style.visibility = 'hidden')}

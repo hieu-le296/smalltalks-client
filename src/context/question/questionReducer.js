@@ -1,15 +1,26 @@
 import {
+  GET_QUESTIONS,
+  GET_USER_QUESTIONS,
   ADD_QUESTION,
   UPDATE_QUESTION,
   DELETE_QUESTION,
+  CLEAR_QUESTIONS,
   SET_CURRENT_QUESTION,
   CLEAR_CURRENT_QUESTION,
   FILTER_QUESTIONS,
   CLEAR_FILTER,
+  QUESTION_ERROR,
 } from '../types';
 
 const questionReducer = (state, action) => {
   switch (action.type) {
+    case GET_QUESTIONS:
+    case GET_USER_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+
     case ADD_QUESTION:
       return {
         ...state,
@@ -59,6 +70,12 @@ const questionReducer = (state, action) => {
       return {
         ...state,
         filtered: null,
+      };
+
+    case QUESTION_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
