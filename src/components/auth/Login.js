@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth, clearErrors, login } from '../../context/auth/AuthState';
 import AlertContext from '../../context/alert/alertContext';
 

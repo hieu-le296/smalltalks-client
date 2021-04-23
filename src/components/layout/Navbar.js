@@ -1,8 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useAuth, logout } from '../../context/auth/AuthState';
-import QuestionContext from '../../context/question/questionContext';
+import {useQuestions, clearQuestions} from '../../context/question/QuestionState'
+
 
 const API_URL = 'http://datacomputation.com/uploads';
 
@@ -10,14 +11,12 @@ const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
   const { isAuthenticated, user } = authState;
 
-  const questionContext = useContext(QuestionContext);
-
-  const { clearQuestions } = questionContext;
-
+  // We just need questionDispatch, so questionDispatch is at index 1
+  const  questionDispatch = useQuestions()[1];
 
   const onLogout = () => {
     logout(authDispatch);
-    clearQuestions();
+    clearQuestions(questionDispatch);
   };
 
   const authLinks = (

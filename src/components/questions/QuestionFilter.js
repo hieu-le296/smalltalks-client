@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import QuestionContext from '../../context/question/questionContext';
+import React, { useEffect, useRef } from 'react';
+import {useQuestions, filterQuestions, clearFilter} from '../../context/question/QuestionState'
+
 
 const QuestionFilter = () => {
-  const questionContext = useContext(QuestionContext);
-
-  const { filtered, filterQuestions, clearFilter } = questionContext;
+ 
+  const [questionState, questionDispatch] = useQuestions();
+  const {filtered} = questionState
 
   const text = useRef('');
 
@@ -16,9 +17,9 @@ const QuestionFilter = () => {
 
   const onChange = (e) => {
     if (text.current.value !== '') {
-      filterQuestions(e.target.value);
+      filterQuestions(questionDispatch, e.target.value);
     } else {
-      clearFilter();
+      clearFilter(questionDispatch);
     }
   };
 

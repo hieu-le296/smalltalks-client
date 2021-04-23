@@ -1,18 +1,19 @@
-import React, { useContext, useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import QuestionItem from './QuestionItem';
-import QuestionContext from '../../context/question/questionContext';
+import {useQuestions, getUserQuestions} from '../../context/question/QuestionState'
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
 
 const Questions = () => {
   const [spinner, setSpinner] = useState(true);
 
-  const [authState, authDispatch] = useAuth();
+    // We just need authState, so autState is at index 0
+  const authState = useAuth()[0];
   const { isAuthenticated, user } = authState;
 
-  const questionContext = useContext(QuestionContext);
 
-  const { questions, getUserQuestions, filtered } = questionContext;
+  const [questionState, questionDispatch] = useQuestions();
+  const {questions, filtered} = questionState
 
 
   // Run once when re-render
@@ -22,7 +23,7 @@ const Questions = () => {
     }, 3000);
 
     if (user && isAuthenticated) {
-      getUserQuestions(user.data.userId);
+      getUserQuestions(questionDispatch, user.data.userId);
     }
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);

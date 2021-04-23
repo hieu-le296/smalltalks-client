@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import QuestionContext from '../../context/question/questionContext';
+import {useQuestions, deleteQuestion, setCurrent, clearCurrent} from '../../context/question/QuestionState'
 import AlertContext from '../../context/alert/alertContext';
 
 const QuestionItem = ({ question }) => {
-  const questionContext = useContext(QuestionContext);
 
-  const { deleteQuestion, setCurrent, clearCurrent } = questionContext;
+    // We just need questionDispatch, so questionDispatch is at index 1
+  const  questionDispatch = useQuestions()[1];
 
   const { questionId, title, content, createdAt, updatedAt } = question;
 
@@ -15,9 +15,9 @@ const QuestionItem = ({ question }) => {
 
   const onDelete = () => {
     if (window.confirm('Are you sure?')) {
-      deleteQuestion(questionId);
+      deleteQuestion(questionDispatch, questionId);
       setAlert('Question deleted!', 'warning');
-      clearCurrent();
+      clearCurrent(questionDispatch, questionDispatch);
     }
   };
 
@@ -37,7 +37,7 @@ const QuestionItem = ({ question }) => {
           <button
             type='button'
             className='btn btn-secondary btn-sm me-3'
-            onClick={() => setCurrent(question)}
+            onClick={() => setCurrent(questionDispatch, question)}
           >
             <i className='fas fa-pencil-alt'></i> Edit
           </button>

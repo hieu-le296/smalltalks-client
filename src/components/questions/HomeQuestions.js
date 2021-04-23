@@ -1,14 +1,13 @@
-import React, { useContext, useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import HomeQuestionItem from './HomeQuestionItem';
-import QuestionContext from '../../context/question/questionContext';
+import {useQuestions, getQuestions} from '../../context/question/QuestionState'
 import Spinner from '../layout/Spinner';
 
 const HomeQuestions = ({ questionHomeStyles }) => {
   const [spinner, setSpinner] = useState(true);
 
-  const questionContext = useContext(QuestionContext);
-
-  const { questions, getQuestions, filtered } = questionContext;
+  const [questionState, questionDispatch] = useQuestions();
+  const {questions, filtered} = questionState
 
   // Run once when re-render
   useEffect(() => {
@@ -16,9 +15,9 @@ const HomeQuestions = ({ questionHomeStyles }) => {
       setSpinner(false);
     }, 3000);
     
-    getQuestions();
+    getQuestions(questionDispatch);
     // eslint-disable-next-line
-  }, [setSpinner]);
+  }, [setSpinner, questionDispatch]);
 
   if (questions.length === 0 || questions === null) {
     return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;

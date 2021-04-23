@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import QuestionContext from '../../context/question/questionContext';
+import {useQuestions, addQuestion, updateQuestion, clearCurrent} from '../../context/question/QuestionState'
 import AlertContext from '../../context/alert/alertContext';
 
 const QuestionForm = () => {
-  const questionContext = useContext(QuestionContext);
-
-  const {
-    addQuestion,
-    updateQuestion,
-    current,
-    clearCurrent,
-    error,
-  } = questionContext;
+  const [questionState, questionDispatch] = useQuestions();
+  const {current, error} = questionState
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -32,7 +25,7 @@ const QuestionForm = () => {
         content: '',
       });
     }
-  }, [questionContext, current]);
+  }, [current]);
 
   const onChange = (e) =>
     setQuestion({ ...question, [e.target.name]: e.target.value });
@@ -41,13 +34,12 @@ const QuestionForm = () => {
     e.preventDefault();
     let msg;
     if (current === null) {
-      msg = await addQuestion(question);
+      msg = await addQuestion(questionDispatch, question);
       setAlert(msg, 'success');
     } else {
-      msg = await updateQuestion(question);
+      msg = await updateQuestion(questionDispatch, question);
       setAlert(msg, 'success');
     }
-    console.log(error);
     if (error) {
       setAlert(error, 'danger');
     }
@@ -55,7 +47,7 @@ const QuestionForm = () => {
   };
 
   const clearAll = () => {
-    clearCurrent();
+    clearCurrent(questionDispatch);
   };
 
   const auto_height = (e) => {
