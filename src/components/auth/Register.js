@@ -1,26 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
-import AuthContext from '../../context/auth/authContext';
+import { useAuth, clearErrors, register } from '../../context/auth/AuthState';
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
+  const {setAlert } = alertContext;
 
-  const authContext = useContext(AuthContext);
-  const { register, error, clearErrors, isAuthenticated } = authContext;
+  const [authState, authDispatch] = useAuth();
+  const { error, isAuthenticated } = authState;
 
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push('/dashboard');
     }
-
     if (error !== null) {
       setAlert('User already Exits!', 'danger');
-      clearErrors();
+      clearErrors(authDispatch);
     }
     // eslint-disable-next-line
-  }, [error, isAuthenticated, props.history]);
+  }, [error, isAuthenticated, authDispatch, setAlert, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -43,7 +42,7 @@ const Register = (props) => {
     } else if (password !== password2) {
       setAlert('Passwords doe not match', 'danger');
     } else {
-      register({
+      register(authDispatch, {
         name,
         username,
         email,

@@ -15,10 +15,10 @@ const HomeQuestions = ({ questionHomeStyles }) => {
     setTimeout(() => {
       setSpinner(false);
     }, 3000);
-
+    
     getQuestions();
     // eslint-disable-next-line
-  }, []);
+  }, [setSpinner]);
 
   if (questions.length === 0 || questions === null) {
     return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;

@@ -1,26 +1,22 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import { useAuth, logout } from '../../context/auth/AuthState';
 import QuestionContext from '../../context/question/questionContext';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
 const Navbar = ({ icon }) => {
-  const authContext = useContext(AuthContext);
-  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated, user } = authState;
 
   const questionContext = useContext(QuestionContext);
 
   const { clearQuestions } = questionContext;
 
-  useEffect(() => {
-    loadUser();
-    // eslint-disable-next-line
-  }, []);
 
   const onLogout = () => {
-    logout();
+    logout(authDispatch);
     clearQuestions();
   };
 
