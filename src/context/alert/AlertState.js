@@ -11,7 +11,7 @@ const AlertState = (props) => {
   const [state, dispatch] = useReducer(alertReducer, initialState);
 
   //   Set Alert
-  const setAlert = useCallback((msg, type, timeout = 3000) => {
+  const setAlert = useCallback((msg, type, timeout = 4000) => {
     const id = uuid();
     dispatch({
       type: SET_ALERT,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import QuestionContext from '../../context/question/questionContext';
+import AlertContext from '../../context/alert/alertContext';
 
 const QuestionForm = () => {
   const questionContext = useContext(QuestionContext);
@@ -9,7 +10,11 @@ const QuestionForm = () => {
     updateQuestion,
     current,
     clearCurrent,
+    error,
   } = questionContext;
+
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
 
   const [question, setQuestion] = useState({
     title: '',
@@ -32,12 +37,19 @@ const QuestionForm = () => {
   const onChange = (e) =>
     setQuestion({ ...question, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    let msg;
     if (current === null) {
-      addQuestion(question);
+      msg = await addQuestion(question);
+      setAlert(msg, 'success');
     } else {
-      updateQuestion(question);
+      msg = await updateQuestion(question);
+      setAlert(msg, 'success');
+    }
+    console.log(error);
+    if (error) {
+      setAlert(error, 'danger');
     }
     clearAll();
   };
@@ -53,6 +65,7 @@ const QuestionForm = () => {
 
   return (
     <form
+      id='question-form'
       className='form-outLine mt-5'
       style={{ marginRight: '5rem' }}
       onSubmit={onSubmit}
@@ -95,7 +108,7 @@ const QuestionForm = () => {
             <button type='submit' className='btn btn-success btn-lg mx-5'>
               <i className='fas fa-save'></i> Save
             </button>
-            <button className='btn btn-light btn-lg' onClick={clearAll}>
+            <button className='btn btn-light btn-lg mt-3' onClick={clearAll}>
               <i className='fas fa-times'></i> Cancel
             </button>
           </div>

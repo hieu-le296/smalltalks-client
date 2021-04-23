@@ -62,3 +62,12 @@ textarea {
 #dropDown {
   margin-left: -5rem !important;
 }
+
+@media (min-width: 768px) {
+  #question-form {
+    z-index: 4;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}

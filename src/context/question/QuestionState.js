@@ -58,16 +58,31 @@ const QuestionState = (props) => {
     };
     try {
       const res = await axios.post(`${API_URL}/questions`, question, config);
-      console.log(res.data);
       dispatch({ type: ADD_QUESTION, payload: res.data.data });
+      return res.data.msg;
     } catch (err) {
-      dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+      dispatch({ type: QUESTION_ERROR, payload: err.response.data.error });
     }
   };
 
   // Update Question
-  const updateQuestion = (question) => {
-    dispatch({ type: UPDATE_QUESTION, payload: question });
+  const updateQuestion = async (question) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.put(
+        `${API_URL}/questions/${question.questionId}`,
+        question,
+        config
+      );
+      dispatch({ type: UPDATE_QUESTION, payload: res.data.data });
+      return res.data.msg;
+    } catch (err) {
+      dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+    }
   };
 
   //   Delete Question
