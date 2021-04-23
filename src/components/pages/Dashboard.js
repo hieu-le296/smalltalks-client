@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Questions from '../questions/Questions';
 import QuestionForm from '../questions/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
 
+import AuthContext from '../../context/auth/authContext';
+
 const Dashboard = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <div className='row'>
       <div className='col-6'>

@@ -2,12 +2,17 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import QuestionContext from '../../context/question/questionContext';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
 const Navbar = ({ icon, profilePic }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logout, user, loadUser } = authContext;
+
+  const questionContext = useContext(QuestionContext);
+
+  const { clearQuestions } = questionContext;
 
   useEffect(() => {
     loadUser();
@@ -16,6 +21,7 @@ const Navbar = ({ icon, profilePic }) => {
 
   const onLogout = () => {
     logout();
+    clearQuestions();
   };
 
   const authLinks = (

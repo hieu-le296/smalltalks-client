@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 
-const Login = (props) => {
+const Login = () => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
@@ -11,15 +11,12 @@ const Login = (props) => {
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push('/dashboard');
-    }
     if (error !== null) {
       setAlert(error, 'danger');
       clearErrors();
     }
     // eslint-disable-next-line
-  }, [error, isAuthenticated, props.history]);
+  }, [error, isAuthenticated]);
 
   const [user, setUser] = useState({
     email: '',
@@ -43,6 +40,10 @@ const Login = (props) => {
       });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div className='form-container mt-5'>

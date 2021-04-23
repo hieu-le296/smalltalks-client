@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import QuestionContext from './questionContext';
 import questionReducer from './questionReducer';
@@ -29,17 +29,17 @@ const QuestionState = (props) => {
   const [state, dispatch] = useReducer(questionReducer, initState);
 
   // Get All Questions
-  const getQuestions = useCallback(async () => {
+  const getQuestions = async () => {
     try {
       const res = await axios.get(`${API_URL}/questions`);
       dispatch({ type: GET_QUESTIONS, payload: res.data.data });
     } catch (err) {
       dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
     }
-  }, []);
+  };
 
   // Get User Question
-  const getUserQuestions = useCallback(async (userId) => {
+  const getUserQuestions = async (userId) => {
     try {
       const res = await axios.get(`${API_URL}/users/${userId}/questions`);
 
@@ -47,7 +47,7 @@ const QuestionState = (props) => {
     } catch (err) {
       dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
     }
-  }, []);
+  };
 
   //   Add Question
   const addQuestion = async (question) => {
@@ -58,7 +58,8 @@ const QuestionState = (props) => {
     };
     try {
       const res = await axios.post(`${API_URL}/questions`, question, config);
-      dispatch({ type: ADD_QUESTION, payload: res.data });
+      console.log(res.data);
+      dispatch({ type: ADD_QUESTION, payload: res.data.data });
     } catch (err) {
       dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
     }
@@ -94,6 +95,11 @@ const QuestionState = (props) => {
     dispatch({ type: CLEAR_FILTER });
   };
 
+  // Clear questions
+  const clearQuestions = () => {
+    dispatch({ type: CLEAR_QUESTIONS });
+  };
+
   return (
     <QuestionContext.Provider
       value={{
@@ -110,6 +116,7 @@ const QuestionState = (props) => {
         deleteQuestion,
         filterQuestions,
         clearFilter,
+        clearQuestions,
       }}
     >
       {props.children}

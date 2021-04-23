@@ -21,7 +21,7 @@ const AuthState = (props) => {
   const initState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
-    loading: false,
+    loading: true,
     user: null,
     error: null,
   };
@@ -29,7 +29,7 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initState);
 
   //   Load User
-  const loadUser = useCallback(async () => {
+  const loadUser = async () => {
     // Load token into global headers
     setAuthToken(localStorage.token);
 
@@ -39,7 +39,7 @@ const AuthState = (props) => {
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
     }
-  }, []);
+  };
 
   //   Register User
   const register = async (formData) => {

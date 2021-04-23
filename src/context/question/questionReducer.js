@@ -45,6 +45,15 @@ const questionReducer = (state, action) => {
         ),
       };
 
+    case CLEAR_QUESTIONS:
+      return {
+        ...state,
+        questions: [],
+        filtered: null,
+        error: null,
+        current: null,
+      };
+
     case SET_CURRENT_QUESTION:
       return {
         ...state,
