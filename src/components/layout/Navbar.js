@@ -6,7 +6,7 @@ import QuestionContext from '../../context/question/questionContext';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
-const Navbar = ({ icon, profilePic }) => {
+const Navbar = ({ icon }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logout, user, loadUser } = authContext;
 
@@ -33,12 +33,12 @@ const Navbar = ({ icon, profilePic }) => {
       </li>
 
       <li className='nav-item dropdown'>
-        <a
+        <button
           className='nav-link dropdown-toggle d-flex align-items-center'
           id='navbarDropdownMenuLink'
-          role='button'
           data-mdb-toggle='dropdown'
           aria-expanded='false'
+          style={{ background: 'none', border: 'none' }}
         >
           <img
             src={user && `${API_URL}/${user.data.profilePic}`}
@@ -48,7 +48,7 @@ const Navbar = ({ icon, profilePic }) => {
             loading='lazy'
             onError={(e) => (e.style.visibility = 'hidden')}
           />
-        </a>
+        </button>
         <ul
           className='dropdown-menu'
           id='dropDown'

@@ -1,19 +1,14 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
-import QuestionItem from './QuestionItem';
+import HomeQuestionItem from './HomeQuestionItem';
 import QuestionContext from '../../context/question/questionContext';
-import AuthContext from '../../context/auth/authContext';
 import Spinner from '../layout/Spinner';
 
-const Questions = () => {
+const HomeQuestions = ({ questionHomeStyles }) => {
   const [spinner, setSpinner] = useState(true);
 
   const questionContext = useContext(QuestionContext);
 
-  const { questions, getUserQuestions, filtered } = questionContext;
-
-  const authContext = useContext(AuthContext);
-
-  const { isAuthenticated, user } = authContext;
+  const { questions, getQuestions, filtered } = questionContext;
 
   // Run once when re-render
   useEffect(() => {
@@ -21,11 +16,9 @@ const Questions = () => {
       setSpinner(false);
     }, 3000);
 
-    if (user && isAuthenticated) {
-      getUserQuestions(user.data.userId);
-    }
+    getQuestions();
     // eslint-disable-next-line
-  }, [user, isAuthenticated]);
+  }, []);
 
   if (questions.length === 0 || questions === null) {
     return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;
@@ -38,23 +31,23 @@ const Questions = () => {
       ) : (
         <Fragment>
           {questions !== null ? (
-            <Fragment>
+            <div style={questionHomeStyles}>
               {filtered !== null
                 ? filtered.map((question) => (
-                    <QuestionItem
+                    <HomeQuestionItem
                       key={question.questionId}
                       id={question.questionId}
                       question={question}
                     />
                   ))
                 : questions.map((question) => (
-                    <QuestionItem
+                    <HomeQuestionItem
                       key={question.questionId}
                       id={question.questionId}
                       question={question}
                     />
                   ))}
-            </Fragment>
+            </div>
           ) : (
             <Spinner />
           )}
@@ -64,4 +57,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default HomeQuestions;

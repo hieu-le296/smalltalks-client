@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import AuthContext from '../auth/authContext';
 import authReducer from '../auth/authReducer';
