@@ -71,8 +71,13 @@ const QuestionState = (props) => {
   };
 
   //   Delete Question
-  const deleteQuestion = (questionId) => {
-    dispatch({ type: DELETE_QUESTION, payload: questionId });
+  const deleteQuestion = async (questionId) => {
+    try {
+      await axios.delete(`${API_URL}/questions/${questionId}`);
+      dispatch({ type: DELETE_QUESTION, payload: questionId });
+    } catch (err) {
+      dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+    }
   };
 
   // Set Current Question

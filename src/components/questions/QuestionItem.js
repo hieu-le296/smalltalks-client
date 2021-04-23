@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import QuestionContext from '../../context/question/questionContext';
+import AlertContext from '../../context/alert/alertContext';
 
 const QuestionItem = ({ question }) => {
   const questionContext = useContext(QuestionContext);
@@ -9,9 +10,15 @@ const QuestionItem = ({ question }) => {
 
   const { questionId, title, content, createdAt, updatedAt } = question;
 
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   const onDelete = () => {
-    deleteQuestion(questionId);
-    clearCurrent();
+    if (window.confirm('Are you sure?')) {
+      deleteQuestion(questionId);
+      setAlert('Question deleted!', 'warning');
+      clearCurrent();
+    }
   };
 
   return (
@@ -26,20 +33,22 @@ const QuestionItem = ({ question }) => {
           <textarea readOnly={true} value={content}></textarea>
         </div>
         {/* <p className='card-text'>{content}</p> */}
-        <button
-          type='button'
-          className='btn btn-secondary btn-sm me-3'
-          onClick={() => setCurrent(question)}
-        >
-          <i className='fas fa-pencil-alt'></i> Edit
-        </button>
-        <button
-          type='button'
-          className='btn btn-danger btn-sm me-3'
-          onClick={onDelete}
-        >
-          <i className='fas fa-trash'></i> Delete
-        </button>
+        <div className='float-end'>
+          <button
+            type='button'
+            className='btn btn-secondary btn-sm me-3'
+            onClick={() => setCurrent(question)}
+          >
+            <i className='fas fa-pencil-alt'></i> Edit
+          </button>
+          <button
+            type='button'
+            className='btn btn-danger btn-sm me-3'
+            onClick={onDelete}
+          >
+            <i className='fas fa-trash'></i> Delete
+          </button>
+        </div>
       </div>
       <div className='card-footer text-muted fs-6'>
         <p>
