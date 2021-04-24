@@ -28,7 +28,7 @@ const Admin = () => {
 
 const adminPage = (
 <Fragment> 
-                    <div className="row mt-10">
+                    <div className="row mt-5">
                 <div className="col">
                     <ul className="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
                         <li className="nav-item" role="presentation">
