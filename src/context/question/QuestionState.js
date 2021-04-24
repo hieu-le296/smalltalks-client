@@ -4,6 +4,7 @@ import QuestionContext from './questionContext';
 import questionReducer from './questionReducer';
 import {
   GET_QUESTIONS,
+  GET_QUESTION,
   GET_USER_QUESTIONS,
   ADD_QUESTION,
   UPDATE_QUESTION,
@@ -21,9 +22,9 @@ const API_URL = 'https://datacomputation.com/api/v1';
 // Create a custom hook to use the contact context
 
 export const useQuestions = () => {
-  const {state, dispatch} = useContext(QuestionContext);
+  const { state, dispatch } = useContext(QuestionContext);
   return [state, dispatch];
-}
+};
 
 // Action creator
 
@@ -37,7 +38,15 @@ export const getQuestions = async (dispatch) => {
   }
 };
 
-
+// Get single question
+export const getQuestion = async (dispatch, questionId) => {
+  try {
+    const res = await axios.get(`${API_URL}/questions/${questionId}`);
+    dispatch({ type: GET_QUESTION, payload: res.data.data });
+  } catch (err) {
+    dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+  }
+};
 
 // Get User Question
 export const getUserQuestions = async (dispatch, userId) => {
@@ -124,6 +133,7 @@ export const clearQuestions = (dispatch) => {
 const QuestionState = (props) => {
   const initState = {
     questions: [],
+    question: {},
     current: null,
     filtered: null,
     error: null,
@@ -131,10 +141,8 @@ const QuestionState = (props) => {
 
   const [state, dispatch] = useReducer(questionReducer, initState);
 
-  
-
   return (
-    <QuestionContext.Provider value={{state, dispatch}}>
+    <QuestionContext.Provider value={{ state, dispatch }}>
       {props.children}
     </QuestionContext.Provider>
   );

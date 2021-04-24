@@ -1,5 +1,6 @@
 import {
   GET_QUESTIONS,
+  GET_QUESTION,
   GET_USER_QUESTIONS,
   ADD_QUESTION,
   UPDATE_QUESTION,
@@ -19,6 +20,12 @@ const questionReducer = (state, action) => {
       return {
         ...state,
         questions: action.payload,
+      };
+
+    case GET_QUESTION:
+      return {
+        ...state,
+        question: action.payload,
       };
 
     case ADD_QUESTION:
