@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import QuestionForm from '../questions/auth/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
-import AdminViewQuestions from '../admin/Questions';
+import Questions from '../admin/Questions';
 import {useAuth} from '../../context/auth/AuthState'
 import Spinner from '../layout/Spinner'
 
@@ -90,21 +90,28 @@ const adminPage = (
         <div className='col-xl-6 col-md-6 mb-4'>
            <QuestionForm />
          </div>
-         <div className='col-xl-6 col-md-6 mb-4'>
+       </Fragment>
+       ):
+       <div className='col-xl-6 col-md-6 mb-4'>
+      
+      <div className>
+      <h3 className='text-center mt-5'>Question Administration</h3>
+      <div className="card mt-5 form-outLine">
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item">Edit a question by clicking <button type="button" class="btn btn-secondary btn-sm me-3"><i class="fas fa-pencil-alt"></i> Edit</button> </li>
+    <li className="list-group-item">Delete a question by clicking <button type="button" class="btn btn-danger btn-sm me-3"><i class="fas fa-trash"></i> Delete</button></li>
+    
+  </ul>
+</div>
+          </div>
+     </div>}  
+
+
+     <div className='col-xl-6 col-md-6 mb-4'>
         <h3 className='text-center mt-5'>Posted Questions</h3>
         <QuestionFilter />
-        <AdminViewQuestions />
-      </div>
-
-       </Fragment>
-          
-         
-       ):
-       <div className='col-xl-12 col-md-12 mb-4'>
-       <h3 className='text-center mt-5'>Posted Questions</h3>
-       <QuestionFilter />
-       <AdminViewQuestions />
-     </div>}                
+        <Questions />
+      </div>              
       
      
     </div>
