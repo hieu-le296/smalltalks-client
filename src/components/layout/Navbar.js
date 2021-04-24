@@ -19,6 +19,7 @@ const Navbar = ({ icon }) => {
     clearQuestions(questionDispatch);
   };
 
+
   const authLinks = (
     <Fragment>
       <li className='nav-item'>
@@ -56,6 +57,16 @@ const Navbar = ({ icon }) => {
               My Profile
             </Link>
           </li>
+
+          
+          {user && user.data.role == 'admin' ?
+            <li className='dropdown-item nav-link text-black '>
+            <i className="fas fa-lock"></i>{' '}
+            <Link to='/admin' className='text-black'>
+              Admin Page
+            </Link>
+          </li> : ''}
+
 
           <li className='nav-item '>
             <a onClick={onLogout} href='#!' className='nav-link text-black '>
