@@ -1,5 +1,5 @@
-import Questions from '../questions/Questions';
-import QuestionForm from '../questions/QuestionForm';
+import Questions from '../questions/auth/Questions';
+import QuestionForm from '../questions/auth/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
 
 const Dashboard = () => {

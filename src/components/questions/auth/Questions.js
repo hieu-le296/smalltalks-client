@@ -1,20 +1,21 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import QuestionItem from './QuestionItem';
-import {useQuestions, getUserQuestions} from '../../context/question/QuestionState'
-import { useAuth } from '../../context/auth/AuthState';
-import Spinner from '../layout/Spinner';
+import {
+  useQuestions,
+  getUserQuestions,
+} from '../../../context/question/QuestionState';
+import { useAuth } from '../../../context/auth/AuthState';
+import Spinner from '../../layout/Spinner';
 
 const Questions = () => {
   const [spinner, setSpinner] = useState(true);
 
-    // We just need authState, so autState is at index 0
+  // We just need authState, so autState is at index 0
   const authState = useAuth()[0];
   const { isAuthenticated, user } = authState;
 
-
   const [questionState, questionDispatch] = useQuestions();
-  const {questions, filtered} = questionState
-
+  const { questions, filtered } = questionState;
 
   // Run once when re-render
   useEffect(() => {

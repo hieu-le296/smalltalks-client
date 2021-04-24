@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {useQuestions, addQuestion, updateQuestion, clearCurrent} from '../../context/question/QuestionState'
-import AlertContext from '../../context/alert/alertContext';
+import {
+  useQuestions,
+  addQuestion,
+  updateQuestion,
+  clearCurrent,
+} from '../../../context/question/QuestionState';
+import AlertContext from '../../../context/alert/alertContext';
 
 const QuestionForm = () => {
   const [questionState, questionDispatch] = useQuestions();
-  const {current, error} = questionState
+  const { current, error } = questionState;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;

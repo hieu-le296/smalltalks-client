@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import QuestionFilter from '../questions/QuestionFilter';
-import HomeQuestions from '../questions/HomeQuestions';
+import HomeQuestions from '../questions/public/HomeQuestions';
 
 const Home = () => {
   return (

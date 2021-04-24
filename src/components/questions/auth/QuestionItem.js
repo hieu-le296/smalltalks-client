@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import {useQuestions, deleteQuestion, setCurrent, clearCurrent} from '../../context/question/QuestionState'
-import AlertContext from '../../context/alert/alertContext';
+import {
+  useQuestions,
+  deleteQuestion,
+  setCurrent,
+  clearCurrent,
+} from '../../../context/question/QuestionState';
+import AlertContext from '../../../context/alert/alertContext';
 
 const QuestionItem = ({ question }) => {
-
-    // We just need questionDispatch, so questionDispatch is at index 1
-  const  questionDispatch = useQuestions()[1];
+  // We just need questionDispatch, so questionDispatch is at index 1
+  const questionDispatch = useQuestions()[1];
 
   const { questionId, title, content, createdAt, updatedAt } = question;
 

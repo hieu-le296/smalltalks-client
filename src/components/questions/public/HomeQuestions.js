@@ -1,20 +1,23 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import HomeQuestionItem from './HomeQuestionItem';
-import {useQuestions, getQuestions} from '../../context/question/QuestionState'
-import Spinner from '../layout/Spinner';
+import {
+  useQuestions,
+  getQuestions,
+} from '../../../context/question/QuestionState';
+import Spinner from '../../layout/Spinner';
 
 const HomeQuestions = ({ questionHomeStyles }) => {
   const [spinner, setSpinner] = useState(true);
 
   const [questionState, questionDispatch] = useQuestions();
-  const {questions, filtered} = questionState
+  const { questions, filtered } = questionState;
 
   // Run once when re-render
   useEffect(() => {
     setTimeout(() => {
       setSpinner(false);
     }, 3000);
-    
+
     getQuestions(questionDispatch);
     // eslint-disable-next-line
   }, [setSpinner, questionDispatch]);
