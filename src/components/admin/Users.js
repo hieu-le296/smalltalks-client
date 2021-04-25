@@ -5,6 +5,7 @@ import {
   useUsers
 } from '../../context/users/UserState';
 import { useAuth } from '../../context/auth/AuthState';
+import UserItem from '../users/auth/UserItem';
 import Spinner from '../layout/Spinner';
 
 const Users = () => {
@@ -23,7 +24,7 @@ const Users = () => {
         setSpinner(false);
       }, 3000);
   
-      if (user && isAuthenticated) {
+      if (user && isAuthenticated && user.data.role == 'admin') {
         getUsers(userDispatch);
       }
       // eslint-disable-next-line
@@ -39,20 +40,20 @@ const Users = () => {
               <Fragment>
                 {filtered !== null
                   ? filtered.map((userElement) => (
-                      <h3>{userElement.username}</h3>
-                    //   <QuestionItem
-                    //     key={user.userId}
-                    //     id={user.userId}
-                    //     question={question}
-                    //   />
+                 
+                      <UserItem
+                        key={user.userId}
+                        id={user.userId}
+                        user={userElement}
+                      />
                     ))
                   : users.map((userElement) => (
-                      <h3>{userElement.username}</h3>
-                    //   <QuestionItem
-                    //     key={question.questionId}
-                    //     id={question.questionId}
-                    //     question={question}
-                    //   />
+                
+                      <UserItem
+                      key={user.userId}
+                      id={user.userId}
+                      user={userElement}
+                      />
                     ))
                     }
               </Fragment>
