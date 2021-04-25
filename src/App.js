@@ -40,7 +40,7 @@ function App() {
                   <Route exact path='/' component={Home} />
                   <Route
                     exact
-                    path='/questions/:questionId'
+                    path='/questions/:slug'
                     component={QuestionPage}
                   />
                   <PrivateRoute exact path='/dashboard' component={DashBoard} />

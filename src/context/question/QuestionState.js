@@ -39,9 +39,9 @@ export const getQuestions = async (dispatch) => {
 };
 
 // Get single question
-export const getQuestion = async (dispatch, questionId) => {
+export const getQuestion = async (dispatch, slug) => {
   try {
-    const res = await axios.get(`${API_URL}/questions/${questionId}`);
+    const res = await axios.get(`${API_URL}/questions/${slug}`);
     dispatch({ type: GET_QUESTION, payload: res.data.data });
   } catch (err) {
     dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
@@ -49,9 +49,9 @@ export const getQuestion = async (dispatch, questionId) => {
 };
 
 // Get User Question
-export const getUserQuestions = async (dispatch, userId) => {
+export const getUserQuestions = async (dispatch, username) => {
   try {
-    const res = await axios.get(`${API_URL}/users/${userId}/questions`);
+    const res = await axios.get(`${API_URL}/users/${username}/questions`);
 
     dispatch({ type: GET_USER_QUESTIONS, payload: res.data.questions });
   } catch (err) {

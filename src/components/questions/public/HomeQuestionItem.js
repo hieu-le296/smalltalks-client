@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const HomeQuestionItem = ({ question }) => {
-  const { questionId, title, content, createdAt, updatedAt } = question;
+  const { slug, title, content, createdAt, updatedAt } = question;
 
   return (
     <div className='card'>
@@ -21,7 +21,7 @@ const HomeQuestionItem = ({ question }) => {
           <strong>Modified</strong>: {new Date(`${updatedAt}`).toLocaleString()}
         </p>
       </div>
-      <Link to={`/questions/${questionId}`} className='btn btn-info'>
+      <Link to={`/questions/${slug}`} className='btn btn-info'>
         Read More <i className='fas fa-arrow-circle-right'></i>
       </Link>
     </div>
