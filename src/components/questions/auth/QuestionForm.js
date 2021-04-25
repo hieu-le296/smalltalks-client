@@ -78,7 +78,6 @@ const QuestionForm = () => {
           className='form-control'
           id='title'
           name='title'
-          rows='1'
           onInput={auto_height}
           value={title}
           onChange={onChange}

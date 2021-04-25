@@ -25,6 +25,11 @@ const QuestionItem = ({ question }) => {
     }
   };
 
+  const auto_height = (e) => {
+    e.target.style.height = '1px';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  };
+
   return (
     <div className='card'>
       <div className='card-body'>
@@ -34,9 +39,13 @@ const QuestionItem = ({ question }) => {
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
         <div className='card-text'>
-          <textarea readOnly={true} value={content}></textarea>
+          <textarea
+            readOnly={true}
+            value={content}
+            onInput={auto_height}
+          ></textarea>
+          {/* <p className='article-content'>{content}</p> */}
         </div>
-        {/* <p className='card-text'>{content}</p> */}
         <div className='float-end'>
           <button
             type='button'

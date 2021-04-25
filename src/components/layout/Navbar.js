@@ -2,8 +2,10 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useAuth, logout } from '../../context/auth/AuthState';
-import {useQuestions, clearQuestions} from '../../context/question/QuestionState'
-
+import {
+  useQuestions,
+  clearQuestions,
+} from '../../context/question/QuestionState';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
@@ -12,13 +14,12 @@ const Navbar = ({ icon }) => {
   const { isAuthenticated, user } = authState;
 
   // We just need questionDispatch, so questionDispatch is at index 1
-  const  questionDispatch = useQuestions()[1];
+  const questionDispatch = useQuestions()[1];
 
   const onLogout = () => {
     logout(authDispatch);
     clearQuestions(questionDispatch);
   };
-
 
   const authLinks = (
     <Fragment>
@@ -58,15 +59,16 @@ const Navbar = ({ icon }) => {
             </Link>
           </li>
 
-          
-          {user && user.data.role == 'admin' ?
+          {user && user.data.role === 'admin' ? (
             <li className='dropdown-item nav-link text-black '>
-            <i className="fas fa-lock"></i>{' '}
-            <Link to='/admin' className='text-black'>
-              Admin Page
-            </Link>
-          </li> : ''}
-
+              <i className='fas fa-lock'></i>{' '}
+              <Link to='/admin' className='text-black'>
+                Admin Page
+              </Link>
+            </li>
+          ) : (
+            ''
+          )}
 
           <li className='nav-item '>
             <a onClick={onLogout} href='#!' className='nav-link text-black '>

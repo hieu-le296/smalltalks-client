@@ -24,7 +24,7 @@ const Questions = () => {
     }, 3000);
 
     if (user && isAuthenticated) {
-      getUserQuestions(questionDispatch, user.data.userId);
+      getUserQuestions(questionDispatch, user.data.username);
     }
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);

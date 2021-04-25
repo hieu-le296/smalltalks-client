@@ -6,18 +6,18 @@ import {
 } from '../../../context/question/QuestionState';
 import Spinner from '../../layout/Spinner';
 
+const API_URL = 'http://datacomputation.com/uploads';
+
 const QuestionPage = ({ match }) => {
   const [questionState, questionDispatch] = useQuestions();
 
   useEffect(() => {
-    getQuestion(questionDispatch, match.params.questionId);
-  }, []);
+    getQuestion(questionDispatch, match.params.slug);
+  }, [questionDispatch, match.params.slug]);
 
   const { question } = questionState;
 
   const { title, content, postedBy, createdAt, updatedAt } = question;
-
-  console.log(question);
 
   return (
     <Fragment>
@@ -28,7 +28,36 @@ const QuestionPage = ({ match }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <div className='card'></div>
+          <div className='card'>
+            <div className='card-body'>
+              <h1 className='card-title fw-bold'>{title}</h1>
+              <p className='text-muted fs-6'>
+                <i className='fas fa-clock'></i>{' '}
+                {new Date(`${createdAt}`).toLocaleString()}
+              </p>
+              <p className='text-muted'>
+                Posted by:{' '}
+                <img
+                  src={`${API_URL}/${postedBy.profilePic}`}
+                  alt='profile'
+                  className='rounded-circle'
+                  height='25'
+                  loading='lazy'
+                />{' '}
+                <strong> {postedBy.username}</strong>
+              </p>
+
+              <div className='card-text'>
+                <p className='article-content'>{content}</p>
+              </div>
+            </div>
+            <div className='card-footer text-muted fs-6'>
+              <p>
+                <i className='fas fa-edit'></i>{' '}
+                {new Date(`${updatedAt}`).toLocaleString()}
+              </p>
+            </div>
+          </div>
         </Fragment>
       )}
     </Fragment>

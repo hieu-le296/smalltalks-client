@@ -11,12 +11,6 @@ body {
   margin: 2rem 0 2rem 0;
 }
 
-.card-title {
-  font-size: 1.2rem;
-  padding: 1rem;
-  margin: 0;
-}
-
 textarea {
   border: none;
   background-color: rgba(255, 255, 255, 0.609) !important;
@@ -24,7 +18,7 @@ textarea {
   width: 100%;
   resize: none;
   overflow: hidden;
-  height: auto;
+  height: fit-content;
 }
 
 .form-control:disabled,
@@ -70,4 +64,8 @@ textarea {
     position: sticky;
     top: 0;
   }
+}
+
+.article-content {
+  white-space: pre-line;
 }
