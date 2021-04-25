@@ -21,6 +21,7 @@ import QuestionPage from './components/questions/public/QuestionPage';
 
 // Import contexts and states
 import QuestionState from './context/question/QuestionState';
+import UserState from './context/users/UserState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <AuthState>
       <QuestionState>
+        <UserState>
         <AlertState>
           <Router>
             <Fragment>
@@ -54,6 +56,7 @@ function App() {
             </Fragment>
           </Router>
         </AlertState>
+        </UserState>
       </QuestionState>
     </AuthState>
   );

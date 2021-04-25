@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import QuestionForm from '../questions/auth/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
 import Questions from '../admin/Questions';
+import Users from '../admin/Users';
 import {useAuth} from '../../context/auth/AuthState'
 import Spinner from '../layout/Spinner'
 
@@ -77,7 +78,7 @@ const adminPage = (
                     role="tabpanel"
                     aria-labelledby="ex2-tab-1"
                 >
-                    Tab 1 content
+                    <Users />
                 </div>
                 <div
                     className="tab-pane fade"
