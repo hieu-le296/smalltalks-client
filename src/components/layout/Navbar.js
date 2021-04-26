@@ -7,7 +7,7 @@ import {
   clearQuestions,
 } from '../../context/question/QuestionState';
 
-const API_URL = 'http://datacomputation.com/uploads';
+const API_URL = 'http://datacomputation.com/uploads/avatars';
 
 const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
@@ -37,13 +37,13 @@ const Navbar = ({ icon }) => {
           aria-expanded='false'
           style={{ background: 'none', border: 'none' }}
         >
-          <img
+          <img 
             src={user && `${API_URL}/${user.data.profilePic}`}
             className='rounded-circle'
             height='25'
             alt=''
             loading='lazy'
-            // onError={(e) => (e.style.visibility = 'hidden')}
+             onError={(e) => (e.style.visibility = 'hidden')}
           />
         </button>
         <ul

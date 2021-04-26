@@ -7,7 +7,7 @@ import {
 
 import AlertContext from '../../../context/alert/alertContext';
 
-const API_URL = 'http://datacomputation.com/uploads';
+const API_URL = 'http://datacomputation.com/uploads/avatars';
 
 
 const UserItem = ({user}) => {

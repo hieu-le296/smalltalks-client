@@ -3,6 +3,7 @@ import QuestionForm from '../questions/auth/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
 import Questions from '../admin/Questions';
 import Users from '../admin/Users';
+import RouteStats from '../admin/RouteStats';
 import {useAuth} from '../../context/auth/AuthState'
 import Spinner from '../layout/Spinner'
 
@@ -68,6 +69,19 @@ const Admin = () => {
                 aria-selected='false'
               >
                 Comments
+              </a>
+            </li>
+            <li className='nav-item' role='presentation'>
+              <a
+                className='nav-link'
+                id='ex2-tab-4'
+                data-mdb-toggle='tab'
+                href='#ex2-tabs-4'
+                role='tab'
+                aria-controls='ex2-tabs-4'
+                aria-selected='false'
+              >
+                Route Statistics
               </a>
             </li>
           </ul>
@@ -137,6 +151,14 @@ const Admin = () => {
           aria-labelledby='ex2-tab-3'
         >
           Tab 3 content
+        </div>
+        <div
+          className='tab-pane fade'
+          id='ex2-tabs-4'
+          role='tabpanel'
+          aria-labelledby='ex2-tab-4'
+        >
+        <RouteStats />
         </div>
       </div>
     </Fragment>

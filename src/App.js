@@ -22,6 +22,7 @@ import QuestionPage from './components/questions/public/QuestionPage';
 // Import contexts and states
 import QuestionState from './context/question/QuestionState';
 import UserState from './context/users/UserState';
+import RouteStatsState from './context/routeStats/routeStatsState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 
@@ -30,8 +31,9 @@ import './App.css';
 function App() {
   return (
     <AuthState>
+      <UserState>
       <QuestionState>
-        <UserState>
+        <RouteStatsState>
         <AlertState>
           <Router>
             <Fragment>
@@ -56,8 +58,9 @@ function App() {
             </Fragment>
           </Router>
         </AlertState>
-        </UserState>
+        </RouteStatsState>
       </QuestionState>
+      </UserState>
     </AuthState>
   );
 }

@@ -40,3 +40,8 @@ export const SET_PASSWORD = 'SET_PASSWORD';
 export const UPDATE_USER = 'UPDATE_USER';
 
 
+
+//types for route Stats
+export const GET_ROUTE_STATS = 'GET_ROUTE_STATS';
+
+
