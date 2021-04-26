@@ -16,6 +16,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/routing/PrivateRoute';
 import ForgotPassword from './components/auth/ForgotPassword';
+import ResetPassword from './components/auth/ResetPassword';
 
 // Import question components
 import QuestionPage from './components/questions/public/QuestionPage';
@@ -61,6 +62,11 @@ function App() {
                         exact
                         path='/forgotpassword'
                         component={ForgotPassword}
+                      />
+                      <Route
+                        exact
+                        path='/resetpassword/:resettoken'
+                        component={ResetPassword}
                       />
                       <Route exact path='/about' component={About} />
                     </Switch>

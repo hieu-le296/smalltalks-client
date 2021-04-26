@@ -40,7 +40,7 @@ const Register = (props) => {
     if (name === '' || username === '' || password === '') {
       setAlert('Please enter all the fields', 'danger');
     } else if (password !== password2) {
-      setAlert('Passwords doe not match', 'danger');
+      setAlert('Passwords does not match', 'danger');
     } else {
       register(authDispatch, {
         name,
