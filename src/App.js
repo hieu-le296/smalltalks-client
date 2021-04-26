@@ -10,6 +10,7 @@ import DashBoard from './components/pages/Dashboard';
 import Profile from './components/pages/Profile';
 import About from './components/pages/About';
 import Admin from './components/pages/Admin';
+import User from './components/pages/User';
 
 // Import Auth components
 import Register from './components/auth/Register';
@@ -49,6 +50,7 @@ function App() {
                         path='/questions/:slug'
                         component={QuestionPage}
                       />
+                      <Route exact path='/users/:username' component={User} />
                       <PrivateRoute
                         exact
                         path='/dashboard'

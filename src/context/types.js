@@ -28,20 +28,18 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 // types for comments
 
-
 // types for users
 export const GET_USERS = 'GET_USERS';
+export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_COMMENTS_OF_A_USER = 'GET_COMMENTS_OF_A_USER';
 export const GET_QUESTIONS_OF_A_USER = 'GET_QUESTIONS_OF_A_USER';
-export const GET_USER = 'GET_USER';
 export const SET_PASSWORD = 'SET_PASSWORD';
-export const UPDATE_USER = 'UPDATE_USER';
-
-
+export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
+export const CLEAR_USER = 'CLEAR_USER';
+export const USER_ERROR = 'USER_ERROR';
 
 //types for route Stats
 export const GET_ROUTE_STATS = 'GET_ROUTE_STATS';
-
-

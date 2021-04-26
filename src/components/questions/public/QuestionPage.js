@@ -44,7 +44,9 @@ const QuestionPage = ({ match }) => {
                   height='25'
                   loading='lazy'
                 />{' '}
-                <strong> {postedBy.username}</strong>
+                <Link to={`/users/${postedBy.username}`}>
+                  <strong> {postedBy.username}</strong>
+                </Link>
               </p>
 
               <div className='card-text'>
