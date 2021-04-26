@@ -11,6 +11,7 @@ import {
   DELETE_QUESTION,
   QUESTION_ERROR,
   CLEAR_QUESTIONS,
+  CLEAR_QUESTION,
   SET_CURRENT_QUESTION,
   CLEAR_CURRENT_QUESTION,
   FILTER_QUESTIONS,
@@ -44,7 +45,7 @@ export const getQuestion = async (dispatch, slug) => {
     const res = await axios.get(`${API_URL}/questions/${slug}`);
     dispatch({ type: GET_QUESTION, payload: res.data.data });
   } catch (err) {
-    dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+    //dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
   }
 };
 
@@ -129,6 +130,11 @@ export const clearFilter = (dispatch) => {
 export const clearQuestions = (dispatch) => {
   dispatch({ type: CLEAR_QUESTIONS });
 };
+
+// Clear single question
+export const clearQuestion = (dispatch) => {
+  dispatch({ type: CLEAR_QUESTION });
+}
 
 const QuestionState = (props) => {
   const initState = {

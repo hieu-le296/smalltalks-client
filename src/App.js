@@ -27,6 +27,7 @@ import UserState from './context/users/UserState';
 import RouteStatsState from './context/routeStats/routeStatsState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
+import CommentState from './context/comment/commentState';
 
 import './App.css';
 
@@ -34,8 +35,9 @@ function App() {
   return (
     <AuthState>
       <UserState>
-        <QuestionState>
           <RouteStatsState>
+        <QuestionState>
+          <CommentState>
             <AlertState>
               <Router>
                 <Fragment>
@@ -74,8 +76,9 @@ function App() {
                 </Fragment>
               </Router>
             </AlertState>
-          </RouteStatsState>
+          </CommentState>
         </QuestionState>
+          </RouteStatsState>
       </UserState>
     </AuthState>
   );
