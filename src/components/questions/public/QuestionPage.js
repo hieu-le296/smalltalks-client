@@ -6,7 +6,7 @@ import {
 } from '../../../context/question/QuestionState';
 import Spinner from '../../layout/Spinner';
 
-const API_URL = 'http://datacomputation.com/uploads';
+const API_URL = 'http://datacomputation.com/uploads/avatars';
 
 const QuestionPage = ({ match }) => {
   const [questionState, questionDispatch] = useQuestions();

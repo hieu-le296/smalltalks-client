@@ -7,7 +7,7 @@ import {
   clearQuestions,
 } from '../../context/question/QuestionState';
 
-const API_URL = 'http://datacomputation.com/uploads';
+const API_URL = 'http://datacomputation.com/uploads/avatars';
 
 const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
@@ -43,7 +43,7 @@ const Navbar = ({ icon }) => {
             height='25'
             alt=''
             loading='lazy'
-            // onError={(e) => (e.style.visibility = 'hidden')}
+            onError={(e) => (e.style.visibility = 'hidden')}
           />
         </button>
         <ul

@@ -39,12 +39,12 @@ const QuestionItem = ({ question }) => {
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
         <div className='card-text'>
-          <textarea
+          {/* <textarea
             readOnly={true}
             value={content}
             onInput={auto_height}
-          ></textarea>
-          {/* <p className='article-content'>{content}</p> */}
+          ></textarea> */}
+          <p className='article-content'>{content}</p>
         </div>
         <div className='float-end'>
           <button

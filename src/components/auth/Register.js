@@ -5,7 +5,7 @@ import { useAuth, clearErrors, register } from '../../context/auth/AuthState';
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext);
-  const {setAlert } = alertContext;
+  const { setAlert } = alertContext;
 
   const [authState, authDispatch] = useAuth();
   const { error, isAuthenticated } = authState;
@@ -56,7 +56,9 @@ const Register = (props) => {
       <h1 className='text-center'>Account Register</h1>
       <form className='mt-5' onSubmit={onSubmit}>
         <div className=' mb-4'>
-          <label htmlFor='name'>Your Name</label>
+          <label className='form-label' htmlFor='name'>
+            Your Name
+          </label>
           <input
             type='text'
             className='form-control'
