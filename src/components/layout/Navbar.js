@@ -23,6 +23,14 @@ const Navbar = ({ icon }) => {
 
   const authLinks = (
     <Fragment>
+      {user && (
+        <li className='nav-item'>
+          <Link to={`/users/${user.data.username}`} className='nav-link'>
+            {user && user.data.name}
+          </Link>
+        </li>
+      )}
+
       <li className='nav-item'>
         <Link to='/dashboard' className='nav-link'>
           Dashboard
@@ -37,7 +45,7 @@ const Navbar = ({ icon }) => {
           aria-expanded='false'
           style={{ background: 'none', border: 'none' }}
         >
-          <img 
+          <img
             src={user && `${API_URL}/${user.data.profilePic}`}
             className='rounded-circle'
             height='25'
@@ -124,12 +132,6 @@ const Navbar = ({ icon }) => {
           id='navbarCenteredExample'
         >
           <ul className='navbar-nav ms-auto me-5'>
-            <li className='nav-item'>
-              <Link to='/' className='nav-link'>
-                Home
-              </Link>
-            </li>
-
             {isAuthenticated ? authLinks : guestLinks}
           </ul>
         </div>
