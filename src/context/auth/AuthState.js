@@ -46,11 +46,7 @@ export const register = async (dispatch, formData) => {
     },
   };
   try {
-    const res = await axios.post(
-      `${API_URL}/auth/register`,
-      formData,
-      config
-    );
+    const res = await axios.post(`${API_URL}/auth/register`, formData, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
@@ -109,7 +105,7 @@ const AuthState = (props) => {
 
   const [state, dispatch] = useReducer(authReducer, initState);
 
-    // set token on initial app loading
+  // set token on initial app loading
   setAuthToken(state.token);
 
   // load user on first run or refresh
@@ -122,7 +118,6 @@ const AuthState = (props) => {
     setAuthToken(state.token);
   }, [state.token]);
 
-  
   return (
     <AuthContext.Provider value={{ state: state, dispatch }}>
       {props.children}

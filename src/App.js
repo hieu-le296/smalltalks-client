@@ -15,6 +15,7 @@ import Admin from './components/pages/Admin';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/routing/PrivateRoute';
+import ForgotPassword from './components/auth/ForgotPassword';
 
 // Import question components
 import QuestionPage from './components/questions/public/QuestionPage';
@@ -32,34 +33,43 @@ function App() {
   return (
     <AuthState>
       <UserState>
-      <QuestionState>
-        <RouteStatsState>
-        <AlertState>
-          <Router>
-            <Fragment>
-              <NavBar />
-              <div className='container'>
-                <Alerts />
-                <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route
-                    exact
-                    path='/questions/:slug'
-                    component={QuestionPage}
-                  />
-                  <PrivateRoute exact path='/dashboard' component={DashBoard} />
-                  <PrivateRoute exact path='/profile' component={Profile} />
-                  <PrivateRoute exact path='/admin' component={Admin} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/about' component={About} />
-                </Switch>
-              </div>
-            </Fragment>
-          </Router>
-        </AlertState>
-        </RouteStatsState>
-      </QuestionState>
+        <QuestionState>
+          <RouteStatsState>
+            <AlertState>
+              <Router>
+                <Fragment>
+                  <NavBar />
+                  <div className='container'>
+                    <Alerts />
+                    <Switch>
+                      <Route exact path='/' component={Home} />
+                      <Route
+                        exact
+                        path='/questions/:slug'
+                        component={QuestionPage}
+                      />
+                      <PrivateRoute
+                        exact
+                        path='/dashboard'
+                        component={DashBoard}
+                      />
+                      <PrivateRoute exact path='/profile' component={Profile} />
+                      <PrivateRoute exact path='/admin' component={Admin} />
+                      <Route exact path='/register' component={Register} />
+                      <Route exact path='/login' component={Login} />
+                      <Route
+                        exact
+                        path='/forgotpassword'
+                        component={ForgotPassword}
+                      />
+                      <Route exact path='/about' component={About} />
+                    </Switch>
+                  </div>
+                </Fragment>
+              </Router>
+            </AlertState>
+          </RouteStatsState>
+        </QuestionState>
       </UserState>
     </AuthState>
   );

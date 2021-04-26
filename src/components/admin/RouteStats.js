@@ -1,13 +1,12 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from 'react';
 
 import {
   getRouteStats,
   useRouteStats,
-} from "../../context/routeStats/routeStatsState";
-import { useAuth } from "../../context/auth/AuthState";
-import RouteStatsItem from "../routeStats/auth/RouteStatItem";
-import Spinner from "../layout/Spinner";
-import RouteStatItem from "../routeStats/auth/RouteStatItem";
+} from '../../context/routeStats/routeStatsState';
+import { useAuth } from '../../context/auth/AuthState';
+import Spinner from '../layout/Spinner';
+import RouteStatItem from '../routeStats/auth/RouteStatItem';
 
 const RouteStats = () => {
   const [spinner, setSpinner] = useState(true);
@@ -25,7 +24,7 @@ const RouteStats = () => {
       setSpinner(false);
     }, 3000);
 
-    if (user && isAuthenticated && user.data.role == "admin") {
+    if (user && isAuthenticated && user.data.role == 'admin') {
       getRouteStats(routeStatsDispatch);
     }
     // eslint-disable-next-line
@@ -41,8 +40,8 @@ const RouteStats = () => {
         <Fragment>
           {statistics !== null ? (
             <Fragment>
-              <div class='table-responsive'>
-                <table class='table table-hover table-borderless table-secondary '>
+              <div className='table-responsive'>
+                <table className='table table-hover table-borderless table-secondary '>
                   <thead>
                     <tr>
                       <th scope='col'>METHOD</th>
@@ -51,7 +50,7 @@ const RouteStats = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {statistics.map((stat,i) => (
+                    {statistics.map((stat, i) => (
                       <RouteStatItem route={stat} key={i} id={i} />
                     ))}
                   </tbody>
