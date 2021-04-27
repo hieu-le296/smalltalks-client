@@ -6,6 +6,7 @@ import {
   UPDATE_QUESTION,
   DELETE_QUESTION,
   CLEAR_QUESTIONS,
+  CLEAR_QUESTION,
   SET_CURRENT_QUESTION,
   CLEAR_CURRENT_QUESTION,
   FILTER_QUESTIONS,
@@ -53,9 +54,11 @@ const questionReducer = (state, action) => {
       };
 
     case CLEAR_QUESTIONS:
+      case CLEAR_QUESTION:
       return {
         ...state,
         questions: [],
+        question: {},
         filtered: null,
         error: null,
         current: null,

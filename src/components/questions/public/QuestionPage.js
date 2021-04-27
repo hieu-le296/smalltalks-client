@@ -3,13 +3,22 @@ import { Link } from 'react-router-dom';
 import {
   useQuestions,
   getQuestion,
+  clearQuestion
 } from '../../../context/question/QuestionState';
+import Comments from '../../comments/auth/Comments';
 import Spinner from '../../layout/Spinner';
+
+import {
+  useComment,
+  clearCommentsWhenBack
+} from '../../../context/comment/commentState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
 const QuestionPage = ({ match }) => {
   const [questionState, questionDispatch] = useQuestions();
+
+  const commentDisptach = useComment()[1];
 
   useEffect(() => {
     getQuestion(questionDispatch, match.params.slug);
@@ -17,11 +26,16 @@ const QuestionPage = ({ match }) => {
 
   const { question } = questionState;
 
-  const { title, content, postedBy, createdAt, updatedAt } = question;
+  const {questionId, title, content, postedBy, createdAt, updatedAt } = question;
+
+  const clearComments = () => {
+    clearCommentsWhenBack(commentDisptach);
+    clearQuestion(questionDispatch)
+   }
 
   return (
     <Fragment>
-      <Link to='/' className='btn btn-light mt-5'>
+      <Link to='/' className='btn btn-light mt-5' onClick={clearComments}>
         <i className='fas fa-angle-double-left'></i> Back to Home
       </Link>
       {isEmpty(question) ? (
@@ -60,8 +74,10 @@ const QuestionPage = ({ match }) => {
               </p>
             </div>
           </div>
+        <Comments questionId={questionId}/>
         </Fragment>
       )}
+
     </Fragment>
   );
 };

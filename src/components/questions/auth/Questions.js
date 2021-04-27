@@ -4,6 +4,7 @@ import {
   useQuestions,
   getUserQuestions,
 } from '../../../context/question/QuestionState';
+import Comments from '../../comments/auth/Comments';
 import { useAuth } from '../../../context/auth/AuthState';
 import Spinner from '../../layout/Spinner';
 
@@ -60,6 +61,8 @@ const Questions = () => {
           ) : (
             <Spinner />
           )}
+         
+           
         </Fragment>
       )}
     </Fragment>
