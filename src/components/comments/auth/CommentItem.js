@@ -50,15 +50,11 @@ const CommentItem = ({singleComment}) => {
 
       e.preventDefault();
 
-      console.log('id ---->',singleComment.commentId);
-
     const result =await deleteComment(commentDispatch,singleComment.commentId);
 
     setAlert(result,'warning');
 
-   
-
-
+  
     }
 
     const editComment = (e) => {

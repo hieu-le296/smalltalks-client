@@ -5,7 +5,8 @@ import {
     CLEAR_CURRENT_COMMENT,
     COMMENT_ERROR,
     UPDATE_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    ADD_COMMENT
 } from '../types';
 
 const commentReducer = (state, action) => {
@@ -52,6 +53,12 @@ const commentReducer = (state, action) => {
             (comment) => comment.commentId !== action.payload
           ),
         };
+
+        case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [action.payload, ...state.comments],
+      };
         
             case COMMENT_ERROR:
       return {

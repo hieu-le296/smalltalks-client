@@ -5,6 +5,7 @@ import {
 } from '../../../context/comment/commentState';
 
 import CommentItem from './CommentItem';
+import CommentForm from './CommentForm';
 
 
 import { useAuth } from '../../../context/auth/AuthState';
@@ -31,20 +32,21 @@ const Comments = ({questionId}) => {
           setSpinner(false);
         }, 3000);
     
-        if (user && isAuthenticated) {
+       // if (user && isAuthenticated) {
             console.log(questionId)
 
            getCommentsOfAQuestion(commentDisptach,questionId);
 
            console.log(comments);
 
-        }
+      //  }
         // eslint-disable-next-line
       }, [user, isAuthenticated, setSpinner]);
 
     
       return (
           <Fragment>
+           {isAuthenticated && <CommentForm /> }
             <h3>Comments</h3>
               {
                   comments.map((singleComment)=>{
