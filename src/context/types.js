@@ -34,6 +34,7 @@ export const SET_CURRENT_COMMENT = 'SET_CURRENT_COMMENT';
 export const CLEAR_CURRENT_COMMENT = 'CLEAR_CURRENT_COMMENT';
 export const COMMENT_ERROR = 'COMMENT_ERROR';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // types for users
 export const GET_USERS = 'GET_USERS';

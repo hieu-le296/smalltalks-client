@@ -7,7 +7,8 @@ import {
   useComment,
   setCurrentComment,
   clearCurrentComment,
-  updateComment
+  updateComment,
+  deleteComment
 } from '../../../context/comment/commentState';
 
 import {useQuestions} from '../../../context/question/QuestionState';
@@ -44,6 +45,21 @@ const CommentItem = ({singleComment}) => {
 
 
     const comment = useRef('')
+
+    const deleteSingleComment = async(e) => {
+
+      e.preventDefault();
+
+      console.log('id ---->',singleComment.commentId);
+
+    const result =await deleteComment(commentDispatch,singleComment.commentId);
+
+    setAlert(result,'warning');
+
+   
+
+
+    }
 
     const editComment = (e) => {
       e.preventDefault();
@@ -109,11 +125,14 @@ const CommentItem = ({singleComment}) => {
     !isEdit ? (
       <Fragment>
       <button type="button" className="btn btn-secondary btn-sm me-3" onClick={editComment}><i className="fas fa-pencil-alt"></i> Edit</button>
+      <button type="button" class="btn btn-danger btn-sm me-3" onClick={deleteSingleComment}><i class="fas fa-trash"></i> Delete</button>
+      
 
       </Fragment>
     ) : (
       <Fragment>
         <button type="button" className="btn btn-success btn-sm me-3" onClick={saveComment}><i className="fas fa-save"></i> Save</button>
+        <button type="button" class="btn btn-danger btn-sm me-3" onClick={deleteSingleComment}><i class="fas fa-trash"></i> Delete</button>
       
       </Fragment>
     ) 

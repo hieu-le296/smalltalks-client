@@ -4,7 +4,7 @@ import CommentContext from './commentContext';
 import commentReducer from './commentReducer';
 
 import { GET_COMMENTS_OF_A_QUESTION, CLEAR_COMMENTS_WHEN_BACK,SET_CURRENT_COMMENT,
-  CLEAR_CURRENT_COMMENT, UPDATE_COMMENT, COMMENT_ERROR  } from '../types';
+  CLEAR_CURRENT_COMMENT, UPDATE_COMMENT, COMMENT_ERROR, DELETE_COMMENT  } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
 
@@ -43,6 +43,17 @@ export const updateComment = async (dispatch, comment,commentId) => {
   } catch (err) {
     // console.log(err.response.data.error);
     dispatch({ type: COMMENT_ERROR, payload: err.response.data.error });
+  }
+};
+
+//   Delete Comment
+export const deleteComment = async (dispatch, commentId) => {
+  try {
+     const res = await axios.delete(`${API_URL}/comments/${commentId}`);
+    dispatch({ type: DELETE_COMMENT, payload: commentId });
+    return res.data.msg;
+  } catch (err) {
+    dispatch({ type: COMMENT_ERROR, payload: 'err' });
   }
 };
 
