@@ -2,6 +2,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  USER_ERROR,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -38,6 +39,14 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
+        error: action.payload,
+      };
+
+    case USER_ERROR:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
         error: action.payload,
       };
 

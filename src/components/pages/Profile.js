@@ -1,13 +1,25 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/auth/AuthState';
+import {
+  useAuth,
+  updateUser,
+  updateAvatar,
+  updateBackground,
+} from '../../context/auth/AuthState';
+import AlertContext from '../../context/alert/alertContext';
 import Spinner from '../layout/Spinner';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
 const Profile = () => {
-  const [authState, authStateDispatch] = useAuth();
-  const { user } = authState;
+  const [authState, authDispatch] = useAuth();
+  const { user, error } = authState;
+
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
+  const [avatar, setAvatar] = useState('');
+  const [background, setBackground] = useState('');
 
   const [profile, setProfile] = useState({
     name: '',
@@ -21,8 +33,40 @@ const Profile = () => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onChangeAvatar = (e) => {
+    setAvatar(e.target.files[0]);
+  };
+
+  const onChangeBackGround = (e) => {
+    setBackground(e.target.files[0]);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    const result = await updateUser(authDispatch, profile, user.data.userId);
+
+    setAlert(result, 'success');
+  };
+
+  const onSubmitAvatar = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', avatar);
+
+    await updateAvatar(authDispatch, formData, user.data.userId);
+    setAlert('Profile Image successfully updated!', 'success');
+  };
+
+  const onSubmitBackground = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('file', background);
+
+    await updateBackground(authDispatch, formData, user.data.userId);
+
+    setAlert('Background Image successfully updated!', 'success');
   };
 
   return (
@@ -31,6 +75,9 @@ const Profile = () => {
         <Spinner />
       ) : (
         <Fragment>
+          <Link to='/' className='btn btn-light mt-5'>
+            <i className='fas fa-angle-double-left'></i> Back to Home
+          </Link>
           <div className=' d-flex flex-column justify-content-start align-items-center'>
             <div className='align-self-center' style={{ maxWidth: '50%' }}>
               <img
@@ -48,7 +95,6 @@ const Profile = () => {
                 height='150'
                 alt=''
                 loading='lazy'
-                onError={(e) => (e.style.visibility = 'hidden')}
               />
             </div>
             <h1 className='mt-3'>{user.data.name}</h1>
@@ -144,25 +190,33 @@ const Profile = () => {
                 aria-labelledby='tab-other'
               >
                 <div className='mb-4'>
-                  <label htmlFor='customFile'>Profile Image</label>
-
-                  <input type='file' className='form-control' id='profilePic' />
-
-                  <button className='btn btn-info mt-3' type='submit'>
-                    Update
-                  </button>
+                  <form onSubmit={onSubmitAvatar}>
+                    <label htmlFor='customFile'>Profile Image</label>
+                    <input
+                      type='file'
+                      className='form-control'
+                      id='profilePic'
+                      onChange={onChangeAvatar}
+                    />
+                    <button className='btn btn-info mt-3' type='submit'>
+                      Update
+                    </button>
+                  </form>
                 </div>
 
                 <div className='mb-4'>
-                  <label htmlFor='customFile'>Background Image</label>
-                  <input
-                    type='file'
-                    className='form-control'
-                    id='backgroundPic'
-                  />
-                  <button className='btn btn-info mt-3' type='submit'>
-                    Update
-                  </button>
+                  <form onSubmit={onSubmitBackground}>
+                    <label htmlFor='customFile'>Background Image</label>
+                    <input
+                      type='file'
+                      className='form-control'
+                      id='backgroundPic'
+                      onChange={onChangeBackGround}
+                    />
+                    <button className='btn btn-info mt-3' type='submit'>
+                      Update
+                    </button>
+                  </form>
                 </div>
 
                 <div className='text-center mb-5'>

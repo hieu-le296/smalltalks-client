@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  USER_ERROR,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -81,6 +82,62 @@ export const login = async (dispatch, formData) => {
       type: LOGIN_FAIL,
       payload: err.response.data.error,
     });
+  }
+};
+
+// Update Auth user details
+export const updateUser = async (dispatch, user, userId) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.put(`${API_URL}/users/${userId}`, user, config);
+    await loadUser(dispatch);
+    return res.data.msg;
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
+
+// Update Picture Profile
+export const updateAvatar = async (dispatch, formData, userId) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    const res = await axios.put(
+      `${API_URL}/users/${userId}/profilepic`,
+      formData,
+      config
+    );
+    console.log(res);
+    await loadUser(dispatch);
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+// Update Background image
+export const updateBackground = async (dispatch, formData, userId) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    const res = await axios.put(
+      `${API_URL}/users/${userId}/backgroundpic`,
+      formData,
+      config
+    );
+    await loadUser(dispatch);
+    // dispatch({ type: UPDATE_AVATAR });
+  } catch (err) {
+    console.log(err.response);
   }
 };
 
