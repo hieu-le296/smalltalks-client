@@ -66,6 +66,12 @@ textarea {
   }
 }
 
+@media (max-width: 992px) {
+  #dropDown {
+    margin-left: 0rem !important;
+  }
+}
+
 .article-content {
   white-space: pre-line;
 }

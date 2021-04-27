@@ -26,6 +26,14 @@ const Navbar = ({ icon }) => {
       {user && (
         <li className='nav-item'>
           <Link to={`/users/${user.data.username}`} className='nav-link'>
+            <img
+              src={user && `${API_URL}/${user.data.profilePic}`}
+              className='rounded-circle'
+              height='25'
+              alt=''
+              loading='lazy'
+              onError={(e) => (e.style.visibility = 'hidden')}
+            />{' '}
             {user && user.data.name}
           </Link>
         </li>
@@ -39,20 +47,13 @@ const Navbar = ({ icon }) => {
 
       <li className='nav-item dropdown'>
         <button
-          className='nav-link dropdown-toggle d-flex align-items-center'
+          className='nav-link d-flex align-items-center'
           id='navbarDropdownMenuLink'
           data-mdb-toggle='dropdown'
           aria-expanded='false'
           style={{ background: 'none', border: 'none' }}
         >
-          <img
-            src={user && `${API_URL}/${user.data.profilePic}`}
-            className='rounded-circle'
-            height='25'
-            alt=''
-            loading='lazy'
-            onError={(e) => (e.style.visibility = 'hidden')}
-          />
+          <i className='dropdown-toggle' />
         </button>
         <ul
           className='dropdown-menu'

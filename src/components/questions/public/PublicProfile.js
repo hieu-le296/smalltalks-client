@@ -2,6 +2,10 @@ import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
 import { useUsers, getUser, clearUser } from '../../../context/users/UserState';
+import {
+  useQuestions,
+  clearQuestions,
+} from '../../../context/question/QuestionState';
 
 const API_URL = 'https://datacomputation.com/uploads';
 
@@ -10,9 +14,16 @@ const PublicProfile = ({ username }) => {
 
   const { user } = userState;
 
+  const questionDispatch = useQuestions()[1];
+
   useEffect(() => {
     getUser(userDispatch, username);
   }, [username, userDispatch]);
+
+  const onBackHome = () => {
+    clearUser(userDispatch);
+    clearQuestions(questionDispatch);
+  };
 
   return (
     <Fragment>
@@ -20,11 +31,7 @@ const PublicProfile = ({ username }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link
-            to='/'
-            className='btn btn-light mt-5'
-            onClick={() => clearUser(userDispatch)}
-          >
+          <Link to='/' className='btn btn-light mt-5' onClick={onBackHome}>
             <i className='fas fa-angle-double-left'></i> Back to Home
           </Link>
           <div className=' d-flex flex-column justify-content-start align-items-center'>

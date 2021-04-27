@@ -51,7 +51,7 @@ const Profile = () => {
                 onError={(e) => (e.style.visibility = 'hidden')}
               />
             </div>
-            <h1 className='mt-3'>{name}</h1>
+            <h1 className='mt-3'>{user.data.name}</h1>
           </div>
 
           <div className='form-container'>
