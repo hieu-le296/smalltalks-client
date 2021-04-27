@@ -11,6 +11,7 @@ import {
 } from '../../../context/comment/commentState';
 
 import {useQuestions} from '../../../context/question/QuestionState';
+import { useAuth } from '../../../context/auth/AuthState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
@@ -26,6 +27,10 @@ const CommentItem = ({singleComment}) => {
 
   const [questionState, questionDispatch] = useQuestions();
   const { current } = questionState;
+
+
+  const authState = useAuth()[0];
+  const { isAuthenticated, user } = authState;
 
   // useEffect(() => {
   //  if ( error) {
@@ -100,7 +105,8 @@ const CommentItem = ({singleComment}) => {
     <textarea className="card-text" id={`comment-${singleComment.commentId}-input`}  readOnly={true} ref={comment} >
       {singleComment.content}
     </textarea>
-    {!isEdit ? (
+    { isAuthenticated && singleComment.postedBy.commentUserId == user.data.userId ?
+    !isEdit ? (
       <Fragment>
       <button type="button" className="btn btn-secondary btn-sm me-3" onClick={editComment}><i className="fas fa-pencil-alt"></i> Edit</button>
 
@@ -110,7 +116,10 @@ const CommentItem = ({singleComment}) => {
         <button type="button" className="btn btn-success btn-sm me-3" onClick={saveComment}><i className="fas fa-save"></i> Save</button>
       
       </Fragment>
-    ) }
+    ) 
+    :
+    ''
+}
     
   </div>
   <div className="card-footer">{singleComment.createdAt}</div>
