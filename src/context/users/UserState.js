@@ -2,7 +2,15 @@ import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import UserContext from './userContext';
 import userReducer from './userReducer';
-import { GET_USERS, GET_USER, CLEAR_USER, USER_ERROR } from '../types';
+import {
+  GET_USERS,
+  GET_USER,
+  CLEAR_USER,
+  USER_ERROR,
+  CREATE_USER,
+  UPDATE_USER,
+  DELETE_USER,
+} from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
 
@@ -13,17 +21,15 @@ export const useUsers = () => {
   return [state, dispatch];
 };
 
-// Get All Questions
+// Get All Users
 export const getUsers = async (dispatch) => {
   try {
     const res = await axios.get(`${API_URL}/users`);
     dispatch({ type: GET_USERS, payload: res.data.data });
   } catch (err) {
-    //dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }
 };
-
-// Get All Users
 
 // Get User
 export const getUser = async (dispatch, userName) => {
@@ -36,10 +42,48 @@ export const getUser = async (dispatch, userName) => {
 };
 
 // Create a User
+export const createUser = async (dispatch, formData) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.post(`${API_URL}/users`, formData, config);
+    dispatch({ type: CREATE_USER, payload: res.data.data });
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
 
 // Update User
+export const updateUser = async (dispatch, user) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.put(
+      `${API_URL}/users/${user.userId}`,
+      user,
+      config
+    );
+    dispatch({ type: UPDATE_USER, payload: res.data.data });
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
 
 // Delete user
+export const deleteUser = async (dispatch, userId) => {
+  try {
+    const res = await axios.delete(`${API_URL}/users/${userId}`);
+    dispatch({ type: DELETE_USER, payload: res.data.data });
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
 
 // Clear Current User
 

@@ -32,7 +32,6 @@ const Navbar = ({ icon }) => {
               height='25'
               alt=''
               loading='lazy'
-              onError={(e) => (e.style.visibility = 'hidden')}
             />{' '}
             {user && user.data.name}
           </Link>
