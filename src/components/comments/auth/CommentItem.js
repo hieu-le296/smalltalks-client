@@ -7,10 +7,12 @@ import {
   useComment,
   setCurrentComment,
   clearCurrentComment,
-  updateComment
+  updateComment,
+  deleteComment
 } from '../../../context/comment/commentState';
 
 import {useQuestions} from '../../../context/question/QuestionState';
+import { useAuth } from '../../../context/auth/AuthState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
@@ -27,6 +29,10 @@ const CommentItem = ({singleComment}) => {
   const [questionState, questionDispatch] = useQuestions();
   const { current } = questionState;
 
+
+  const authState = useAuth()[0];
+  const { isAuthenticated, user } = authState;
+
   // useEffect(() => {
   //  if ( error) {
   //    setIsEdit(false)
@@ -39,6 +45,17 @@ const CommentItem = ({singleComment}) => {
 
 
     const comment = useRef('')
+
+    const deleteSingleComment = async(e) => {
+
+      e.preventDefault();
+
+    const result =await deleteComment(commentDispatch,singleComment.commentId);
+
+    setAlert(result,'warning');
+
+  
+    }
 
     const editComment = (e) => {
       e.preventDefault();
@@ -100,17 +117,24 @@ const CommentItem = ({singleComment}) => {
     <textarea className="card-text" id={`comment-${singleComment.commentId}-input`}  readOnly={true} ref={comment} >
       {singleComment.content}
     </textarea>
-    {!isEdit ? (
+    { isAuthenticated && singleComment.postedBy.commentUserId == user.data.userId ?
+    !isEdit ? (
       <Fragment>
       <button type="button" className="btn btn-secondary btn-sm me-3" onClick={editComment}><i className="fas fa-pencil-alt"></i> Edit</button>
+      <button type="button" class="btn btn-danger btn-sm me-3" onClick={deleteSingleComment}><i class="fas fa-trash"></i> Delete</button>
+      
 
       </Fragment>
     ) : (
       <Fragment>
         <button type="button" className="btn btn-success btn-sm me-3" onClick={saveComment}><i className="fas fa-save"></i> Save</button>
+        <button type="button" class="btn btn-danger btn-sm me-3" onClick={deleteSingleComment}><i class="fas fa-trash"></i> Delete</button>
       
       </Fragment>
-    ) }
+    ) 
+    :
+    ''
+}
     
   </div>
   <div className="card-footer">{singleComment.createdAt}</div>

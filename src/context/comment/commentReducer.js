@@ -4,7 +4,9 @@ import {
     SET_CURRENT_COMMENT,
     CLEAR_CURRENT_COMMENT,
     COMMENT_ERROR,
-    UPDATE_COMMENT
+    UPDATE_COMMENT,
+    DELETE_COMMENT,
+    ADD_COMMENT
 } from '../types';
 
 const commentReducer = (state, action) => {
@@ -42,6 +44,20 @@ const commentReducer = (state, action) => {
             ? action.payload
             : comment
         ),
+      };
+
+      case DELETE_COMMENT:
+        return {
+          ...state,
+          comments: state.comments.filter(
+            (comment) => comment.commentId !== action.payload
+          ),
+        };
+
+        case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [action.payload, ...state.comments],
       };
         
             case COMMENT_ERROR:
