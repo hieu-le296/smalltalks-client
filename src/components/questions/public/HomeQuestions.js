@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import HomeQuestionItem from './HomeQuestionItem';
+import HomeQuestionItem from './QuestionItem';
 import {
   useQuestions,
   getQuestions,
