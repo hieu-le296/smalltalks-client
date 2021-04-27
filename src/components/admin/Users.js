@@ -37,7 +37,7 @@ const Users = () => {
         ) : (
           <Fragment>
             {users!== null ? (
-              <Fragment>
+              <div style={userItemStyle}>
                 {filtered !== null
                   ? filtered.map((userElement) => (
                  
@@ -56,7 +56,7 @@ const Users = () => {
                       />
                     ))
                     }
-              </Fragment>
+              </div>
             ) : (
               <Spinner />
             )}
@@ -65,5 +65,14 @@ const Users = () => {
       </Fragment>
     );
   };
+
+  const userItemStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)',
+    gridGap: '1rem',
+    marginTop: '2rem',
+    textAlign: 'center'
+  };
+  
   
   export default Users;

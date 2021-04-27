@@ -5,7 +5,10 @@ import { useAuth, logout } from '../../context/auth/AuthState';
 import {
   useQuestions,
   clearQuestions,
+  clearQuestion
 } from '../../context/question/QuestionState';
+
+import {useComment, clearCommentsWhenBack} from '../../context/comment/commentState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
@@ -16,9 +19,12 @@ const Navbar = ({ icon }) => {
   // We just need questionDispatch, so questionDispatch is at index 1
   const questionDispatch = useQuestions()[1];
 
+  const commentDispatch = useComment()[1];
+
   const onLogout = () => {
     logout(authDispatch);
     clearQuestions(questionDispatch);
+    
   };
 
   const authLinks = (
@@ -104,10 +110,16 @@ const Navbar = ({ icon }) => {
     </Fragment>
   );
 
+  const onClick = e => {
+    //e.preventDefault()
+    clearCommentsWhenBack(commentDispatch)
+    clearQuestion(questionDispatch);
+  }
+
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <div className='container-fluid '>
-        <Link to='/' className='navbar-brand text-white'>
+        <Link to='/' className='navbar-brand text-white' onClick={onClick}>
           <h4 className='ms-3'>
             <i className={icon} /> Small Talks
           </h4>

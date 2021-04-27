@@ -58,7 +58,7 @@ const Admin = () => {
                 Questions
               </a>
             </li>
-            <li className='nav-item' role='presentation'>
+            {/* <li className='nav-item' role='presentation'>
               <a
                 className='nav-link'
                 id='ex2-tab-3'
@@ -70,7 +70,7 @@ const Admin = () => {
               >
                 Comments
               </a>
-            </li>
+            </li> */}
             <li className='nav-item' role='presentation'>
               <a
                 className='nav-link'
@@ -144,14 +144,14 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className='tab-pane fade'
           id='ex2-tabs-3'
           role='tabpanel'
           aria-labelledby='ex2-tab-3'
         >
           Tab 3 content
-        </div>
+        </div> */}
         <div
           className='tab-pane fade'
           id='ex2-tabs-4'

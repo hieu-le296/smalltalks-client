@@ -7,7 +7,7 @@ import {
 
 import AlertContext from '../../../context/alert/alertContext';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
+const API_URL = 'http://datacomputation.com/uploads';
 
 
 const UserItem = ({user}) => {
@@ -15,7 +15,7 @@ const UserItem = ({user}) => {
     //Get user dispatch at index 1
     //const userDispatch = useUsers()[1];
 
-    const {userId, username, email,role, profilePic, createdAt, updatedAt} = user;
+    const {userId, name, username, email, role, profilePic, createdAt, updatedAt} = user;
 
 
   //  const alertContext = useContext(AlertContext);
@@ -25,9 +25,20 @@ const UserItem = ({user}) => {
 
 
   return (
-    <div className='card col-6'>
-    <div className='card-body'>
-      <h5 className='card-title fw-bold'>Username: {username}</h5>
+    <div className='card'>
+    <div className='card-body '>
+    <img
+                src={user && `${API_URL}/avatars/${profilePic}`}
+                className='rounded-circle shadow-2-strong profile-pic'
+                height='75'
+                alt=''
+                loading='lazy'
+                onError={(e) => (e.style.visibility = 'hidden')}
+              />
+    <h3 className='card-title fw-bold'>Name: {name}</h3>
+      <p className='lead'>Username: {username}</p>
+      <p className='lead'>Email: {email}</p>
+      <p className='lead'>Role: {role}</p>
       <p className='text-muted fs-6'>
         <strong>Created: </strong>
         {new Date(`${createdAt}`).toLocaleString()}
@@ -35,27 +46,10 @@ const UserItem = ({user}) => {
 
       <p className='card-text text-truncate'>{email}</p>
 
-      <div className='float-end'>
-          <button
-            type='button'
-            className='btn btn-secondary btn-sm me-3'
-            onClick={() => console.log('ok...')}
-          >
-            <i className='fas fa-pencil-alt'></i> Edit
-          </button>
-          <button
-            type='button'
-            className='btn btn-danger btn-sm me-3'
-            onClick={() => console.log(' I see ')}
-          >
-            <i className='fas fa-trash'></i> Delete
-          </button>
-        </div>
+      
 
     </div>
-    {/* <div>
-        <img src={`${API_URL}/${profilePic}`} />
-    </div> */}
+ 
     <div className='card-footer text-muted fs-6'>
       <p>
         <strong>Modified</strong>: {new Date(`${updatedAt}`).toLocaleString()}
@@ -67,7 +61,6 @@ const UserItem = ({user}) => {
   );
 
 }
-
 
 UserItem.propTypes = {
     user: PropTypes.object.isRequired,
