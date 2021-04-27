@@ -3,7 +3,8 @@ import {
     CLEAR_COMMENTS_WHEN_BACK,
     SET_CURRENT_COMMENT,
     CLEAR_CURRENT_COMMENT,
-    COMMENT_ERROR
+    COMMENT_ERROR,
+    UPDATE_COMMENT
 } from '../types';
 
 const commentReducer = (state, action) => {
@@ -32,6 +33,16 @@ const commentReducer = (state, action) => {
               ...state,
               current: null,
             };
+          
+            case UPDATE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.map((comment) =>
+          comment.commentId === action.payload.commentId
+            ? action.payload
+            : comment
+        ),
+      };
         
             case COMMENT_ERROR:
       return {

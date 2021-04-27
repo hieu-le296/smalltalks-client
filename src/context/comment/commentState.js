@@ -4,7 +4,7 @@ import CommentContext from './commentContext';
 import commentReducer from './commentReducer';
 
 import { GET_COMMENTS_OF_A_QUESTION, CLEAR_COMMENTS_WHEN_BACK,SET_CURRENT_COMMENT,
-  CLEAR_CURRENT_COMMENT } from '../types';
+  CLEAR_CURRENT_COMMENT, UPDATE_COMMENT, COMMENT_ERROR  } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
 
@@ -24,6 +24,28 @@ export const getCommentsOfAQuestion = async (dispatch,questionId) => {
     console.log(err);
   }
 };
+
+// Update Comment
+export const updateComment = async (dispatch, comment,commentId) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const res = await axios.put(
+      `${API_URL}/comments/${commentId}`,
+      comment,
+      config
+    );
+    dispatch({ type: UPDATE_COMMENT, payload: res.data.data });
+    return res.data.msg;
+  } catch (err) {
+    // console.log(err.response.data.error);
+    dispatch({ type: COMMENT_ERROR, payload: err.response.data.error });
+  }
+};
+
 
 export const clearCommentsWhenBack = (dispatch) => {
   dispatch({type : CLEAR_COMMENTS_WHEN_BACK})
