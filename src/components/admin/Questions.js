@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import QuestionItem from '../questions/auth/QuestionItem';
 import {
   useQuestions,
-  getQuestions
+  getQuestions,
 } from '../../context/question/QuestionState';
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';

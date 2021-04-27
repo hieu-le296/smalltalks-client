@@ -48,6 +48,7 @@ const PublicProfile = ({ username }) => {
                 src={user && `${API_URL}/avatars/${user.profilePic}`}
                 className='rounded-circle shadow-2-strong profile-pic'
                 height='150'
+                width='150'
                 alt=''
                 loading='lazy'
               />

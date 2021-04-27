@@ -93,6 +93,7 @@ const Profile = () => {
                 src={user && `${API_URL}/avatars/${user.data.profilePic}`}
                 className='rounded-circle shadow-2-strong profile-pic'
                 height='150'
+                width='150'
                 alt=''
                 loading='lazy'
               />

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import {
   useQuestions,
   getQuestion,
-  clearQuestion
+  clearQuestion,
 } from '../../../context/question/QuestionState';
 import Comments from '../../comments/auth/Comments';
 import Spinner from '../../layout/Spinner';
 
 import {
   useComment,
-  clearCommentsWhenBack
+  clearCommentsWhenBack,
 } from '../../../context/comment/commentState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
@@ -26,12 +26,19 @@ const QuestionPage = ({ match }) => {
 
   const { question } = questionState;
 
-  const {questionId, title, content, postedBy, createdAt, updatedAt } = question;
+  const {
+    questionId,
+    title,
+    content,
+    postedBy,
+    createdAt,
+    updatedAt,
+  } = question;
 
   const clearComments = () => {
     clearCommentsWhenBack(commentDisptach);
-    clearQuestion(questionDispatch)
-   }
+    clearQuestion(questionDispatch);
+  };
 
   return (
     <Fragment>
@@ -56,6 +63,7 @@ const QuestionPage = ({ match }) => {
                   alt='profile'
                   className='rounded-circle'
                   height='25'
+                  width='25'
                   loading='lazy'
                 />{' '}
                 <Link to={`/users/${postedBy.username}`}>
@@ -74,10 +82,9 @@ const QuestionPage = ({ match }) => {
               </p>
             </div>
           </div>
-        <Comments questionId={questionId}/>
+          <Comments questionId={questionId} />
         </Fragment>
       )}
-
     </Fragment>
   );
 };

@@ -4,9 +4,8 @@ import QuestionFilter from '../questions/QuestionFilter';
 import Questions from '../admin/Questions';
 import Users from '../admin/Users';
 import RouteStats from '../admin/RouteStats';
-import {useAuth} from '../../context/auth/AuthState'
-import Spinner from '../layout/Spinner'
-
+import { useAuth } from '../../context/auth/AuthState';
+import Spinner from '../layout/Spinner';
 
 import { useQuestions } from '../../context/question/QuestionState';
 
@@ -158,7 +157,7 @@ const Admin = () => {
           role='tabpanel'
           aria-labelledby='ex2-tab-4'
         >
-        <RouteStats />
+          <RouteStats />
         </div>
       </div>
     </Fragment>

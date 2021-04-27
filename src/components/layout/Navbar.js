@@ -5,10 +5,13 @@ import { useAuth, logout } from '../../context/auth/AuthState';
 import {
   useQuestions,
   clearQuestions,
-  clearQuestion
+  clearQuestion,
 } from '../../context/question/QuestionState';
 
-import {useComment, clearCommentsWhenBack} from '../../context/comment/commentState';
+import {
+  useComment,
+  clearCommentsWhenBack,
+} from '../../context/comment/commentState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
@@ -24,7 +27,6 @@ const Navbar = ({ icon }) => {
   const onLogout = () => {
     logout(authDispatch);
     clearQuestions(questionDispatch);
-    
   };
 
   const authLinks = (
@@ -36,6 +38,7 @@ const Navbar = ({ icon }) => {
               src={user && `${API_URL}/${user.data.profilePic}`}
               className='rounded-circle'
               height='25'
+              width='25'
               alt=''
               loading='lazy'
             />{' '}
@@ -109,11 +112,11 @@ const Navbar = ({ icon }) => {
     </Fragment>
   );
 
-  const onClick = e => {
+  const onClick = (e) => {
     //e.preventDefault()
-    clearCommentsWhenBack(commentDispatch)
+    clearCommentsWhenBack(commentDispatch);
     clearQuestion(questionDispatch);
-  }
+  };
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>

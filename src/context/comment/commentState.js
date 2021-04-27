@@ -3,8 +3,16 @@ import axios from 'axios';
 import CommentContext from './commentContext';
 import commentReducer from './commentReducer';
 
-import { GET_COMMENTS_OF_A_QUESTION, CLEAR_COMMENTS_WHEN_BACK,SET_CURRENT_COMMENT,
-  CLEAR_CURRENT_COMMENT, UPDATE_COMMENT, COMMENT_ERROR, DELETE_COMMENT, ADD_COMMENT  } from '../types';
+import {
+  GET_COMMENTS_OF_A_QUESTION,
+  CLEAR_COMMENTS_WHEN_BACK,
+  SET_CURRENT_COMMENT,
+  CLEAR_CURRENT_COMMENT,
+  UPDATE_COMMENT,
+  COMMENT_ERROR,
+  DELETE_COMMENT,
+  ADD_COMMENT,
+} from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
 
@@ -15,7 +23,7 @@ export const useComment = () => {
 };
 
 // Get All Questions
-export const getCommentsOfAQuestion = async (dispatch,questionId) => {
+export const getCommentsOfAQuestion = async (dispatch, questionId) => {
   try {
     const res = await axios.get(`${API_URL}/questions/${questionId}/comments`);
     dispatch({ type: GET_COMMENTS_OF_A_QUESTION, payload: res.data.data });
@@ -26,7 +34,7 @@ export const getCommentsOfAQuestion = async (dispatch,questionId) => {
 };
 
 // Update Comment
-export const updateComment = async (dispatch, comment,commentId) => {
+export const updateComment = async (dispatch, comment, commentId) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -49,7 +57,7 @@ export const updateComment = async (dispatch, comment,commentId) => {
 //   Delete Comment
 export const deleteComment = async (dispatch, commentId) => {
   try {
-     const res = await axios.delete(`${API_URL}/comments/${commentId}`);
+    const res = await axios.delete(`${API_URL}/comments/${commentId}`);
     dispatch({ type: DELETE_COMMENT, payload: commentId });
     return res.data.msg;
   } catch (err) {
@@ -58,14 +66,18 @@ export const deleteComment = async (dispatch, commentId) => {
 };
 
 //   Add Comment
-export const addComment = async (dispatch, questionId,commentData) => {
+export const addComment = async (dispatch, questionId, commentData) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
   try {
-    const res = await axios.post(`${API_URL}/questions/${questionId}/comments`, commentData, config);
+    const res = await axios.post(
+      `${API_URL}/questions/${questionId}/comments`,
+      commentData,
+      config
+    );
     dispatch({ type: ADD_COMMENT, payload: res.data.data });
     return res.data.msg;
   } catch (err) {
@@ -73,13 +85,9 @@ export const addComment = async (dispatch, questionId,commentData) => {
   }
 };
 
-
-
-
 export const clearCommentsWhenBack = (dispatch) => {
-  dispatch({type : CLEAR_COMMENTS_WHEN_BACK})
-}
-
+  dispatch({ type: CLEAR_COMMENTS_WHEN_BACK });
+};
 
 // Set Current Comment
 export const setCurrentComment = (dispatch, comment) => {
@@ -91,13 +99,12 @@ export const clearCurrentComment = (dispatch) => {
   dispatch({ type: CLEAR_CURRENT_COMMENT });
 };
 
-
 const CommentState = (props) => {
   const initState = {
     comments: [],
-    comment : {},
-    current : null,
-    error: null
+    comment: {},
+    current: null,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(commentReducer, initState);
