@@ -39,7 +39,7 @@ const RouteStats = () => {
           {statistics !== null ? (
             <Fragment>
               <div className='table-responsive'>
-                <table className='table table-hover table-borderless table-secondary '>
+                <table className='table table-hover table-secondary  '>
                   <thead>
                     <tr>
                       <th scope='col'>METHOD</th>

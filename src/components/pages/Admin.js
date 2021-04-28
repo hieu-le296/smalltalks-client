@@ -93,6 +93,10 @@ const Admin = () => {
           role='tabpanel'
           aria-labelledby='ex2-tab-1'
         >
+          <div className='card text-center' style={backgroundStyle}>
+            <i class='fas fa-users fa-3x mt-3' />
+            <h2 className='mt-3 mb-3'>User Administration</h2>
+          </div>
           <Users />
         </div>
         <div
@@ -102,6 +106,10 @@ const Admin = () => {
           aria-labelledby='ex2-tab-2'
         >
           <div className='row'>
+            <div className='card text-center' style={backgroundStyle}>
+              <i class='fas fa-question-circle fa-3x mt-3' />
+              <h2 className='mt-3 mb-3'>Question Administration</h2>
+            </div>
             {current !== null ? (
               <Fragment>
                 <div className='col-xl-6 col-md-6 mb-4'>
@@ -110,25 +118,35 @@ const Admin = () => {
               </Fragment>
             ) : (
               <div className='col-xl-6 col-md-6 mb-4'>
-                <h3 className='text-center mt-5'>Question Administration</h3>
+                <h3 className='text-center mt-5'>Instructions</h3>
                 <div className='card mt-5 form-outLine'>
                   <ul className='list-group list-group-flush'>
                     <li className='list-group-item'>
                       Edit a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-secondary btn-sm me-3'
+                        className='btn btn-outline-secondary btn-sm me-3'
                       >
-                        <i className='fas fa-pencil-alt'></i> Edit
+                        <i className='fas fa-pencil-alt' /> Edit
                       </button>{' '}
                     </li>
                     <li className='list-group-item'>
                       Delete a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-danger btn-sm me-3'
+                        className='btn btn-outline-danger btn-sm me-3'
                       >
-                        <i className='fas fa-trash'></i> Delete
+                        <i className='fas fa-trash' /> Delete
+                      </button>
+                    </li>
+
+                    <li className='list-group-item'>
+                      Reading more a question by clicking{' '}
+                      <button
+                        type='button'
+                        className='btn btn-outline-info btn-sm me-3'
+                      >
+                        More <i className='fas fa-arrow-circle-right' />
                       </button>
                     </li>
                   </ul>
@@ -157,6 +175,10 @@ const Admin = () => {
           role='tabpanel'
           aria-labelledby='ex2-tab-4'
         >
+          <div className='card text-center' style={backgroundStyle}>
+            <i class='fas fa-table fa-3x mt-3' />
+            <h2 className='mt-3 mb-3'>Route Statistics</h2>
+          </div>
           <RouteStats />
         </div>
       </div>
@@ -180,6 +202,13 @@ const Admin = () => {
       )}
     </Fragment>
   );
+};
+
+const backgroundStyle = {
+  background:
+    'linear-gradient(to left, rgba(106, 17, 203, 0.55), rgba(37, 117, 252, 0.55))',
+  borderRadius: '20px',
+  color: 'white',
 };
 
 export default Admin;

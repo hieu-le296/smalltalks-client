@@ -70,6 +70,7 @@ export const updateUser = async (dispatch, user) => {
       config
     );
     dispatch({ type: UPDATE_USER, payload: res.data.data });
+    return res.data.msg;
   } catch (err) {
     dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }
@@ -79,7 +80,8 @@ export const updateUser = async (dispatch, user) => {
 export const deleteUser = async (dispatch, userId) => {
   try {
     const res = await axios.delete(`${API_URL}/users/${userId}`);
-    dispatch({ type: DELETE_USER, payload: res.data.data });
+    dispatch({ type: DELETE_USER, payload: userId });
+    return res.data.msg;
   } catch (err) {
     dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }

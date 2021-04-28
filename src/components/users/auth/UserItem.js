@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useUsers, deleteUser } from '../../../context/users/UserState';
+import AlertContext from '../../../context/alert/alertContext';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
 const UserItem = ({ user }) => {
+  const [userState, userDispatch] = useUsers();
+  const { error } = userState;
+
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
+
   const {
     userId,
     name,
@@ -14,6 +23,18 @@ const UserItem = ({ user }) => {
     createdAt,
     updatedAt,
   } = user;
+
+  const onDelete = async (e) => {
+    if (window.confirm(`Are you sure to delete user ${name}`)) {
+      const msg = await deleteUser(userDispatch, userId);
+
+      setAlert(msg, 'warning');
+
+      if (error) {
+        setAlert(error, 'danger');
+      }
+    }
+  };
 
   return (
     <div className='card'>
@@ -37,6 +58,19 @@ const UserItem = ({ user }) => {
         <p className='lead'>
           <strong>Role:</strong> {role}
         </p>
+      </div>
+
+      <div className='mb-3'>
+        {/* <button type='button' className='btn btn-secondary btn-sm me-3'>
+          <i className='fas fa-pencil-alt' /> Edit
+        </button> */}
+        <button
+          type='button'
+          className='btn btn-outline-danger btn-sm'
+          onClick={onDelete}
+        >
+          <i className='fas fa-trash' /> Delete
+        </button>
       </div>
 
       <div className='card-footer text-muted fs-6'>

@@ -87,13 +87,12 @@ const CommentItem = ({ singleComment }) => {
           loading='lazy'
         />{' '}
         <div className='card comment-card'>
-          {/* <Link to={`/users/${singleComment.postedBy.username}`}>
-          <strong> {singleComment.postedBy.username}</strong>
-        </Link> */}
-          <div className='mx-3 mt-2'>
-            <strong>{singleComment.postedBy.name}</strong>
-          </div>
-
+          <Link
+            to={`/users/${singleComment.postedBy.username}`}
+            className='mx-3 mt-2'
+          >
+            <strong> {singleComment.postedBy.username}</strong>
+          </Link>
           <div className='card-body'>
             <textarea
               className='card-text'

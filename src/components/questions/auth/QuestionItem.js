@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   useQuestions,
@@ -12,14 +13,14 @@ const QuestionItem = ({ question }) => {
   // We just need questionDispatch, so questionDispatch is at index 1
   const questionDispatch = useQuestions()[1];
 
-  const { questionId, title, content, createdAt, updatedAt } = question;
+  const { questionId, title, slug, content, createdAt, updatedAt } = question;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (window.confirm('Are you sure?')) {
-      deleteQuestion(questionDispatch, questionId);
+      await deleteQuestion(questionDispatch, questionId);
       setAlert('Question deleted!', 'warning');
       clearCurrent(questionDispatch, questionDispatch);
     }
@@ -44,18 +45,24 @@ const QuestionItem = ({ question }) => {
         <div className='float-end'>
           <button
             type='button'
-            className='btn btn-secondary btn-sm me-3'
+            className='btn btn-outline-secondary btn-sm me-3'
             onClick={() => setCurrent(questionDispatch, question)}
           >
-            <i className='fas fa-pencil-alt'></i> Edit
+            <i className='fas fa-pencil-alt' /> Edit
           </button>
           <button
             type='button'
-            className='btn btn-danger btn-sm me-3'
+            className='btn btn-outline-danger btn-sm me-3'
             onClick={onDelete}
           >
-            <i className='fas fa-trash'></i> Delete
+            <i className='fas fa-trash' /> Delete
           </button>
+          <Link
+            to={`/questions/${slug}`}
+            className='btn btn-outline-info btn-sm float-end'
+          >
+            More <i className='fas fa-arrow-circle-right'></i>
+          </Link>
         </div>
       </div>
       <div className='card-footer text-muted fs-6'>
