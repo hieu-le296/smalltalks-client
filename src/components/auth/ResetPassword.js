@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AlertContext from '../../context/alert/alertContext';
 
-const API_URL = 'https//datacomputation.com/api/v1/auth/resetpassword';
+const API_URL = 'https://datacomputation.com/api/v1/auth/resetpassword';
 
 const ResetPassword = ({ match }) => {
   const alertContext = useContext(AlertContext);
