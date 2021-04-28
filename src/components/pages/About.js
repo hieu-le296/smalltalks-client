@@ -5,6 +5,9 @@ const About = () => {
     <Fragment>
       <header className='text-center py-5 mb-4 mt-5' style={backgroundStyle}>
         <div className='container'>
+          <p className='text-center'>
+            <i class='fas fa-users fa-3x text-white'></i>
+          </p>
           <h1 className='font-weight-light text-white'>Meet the Team</h1>
         </div>
       </header>

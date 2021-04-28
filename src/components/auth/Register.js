@@ -54,6 +54,9 @@ const Register = (props) => {
   return (
     <div className='card form-container'>
       <div className='form-container mt-5'>
+        <p className='text-center'>
+          <i className='fas fa-user-plus fa-3x'></i>
+        </p>
         <h1 className='text-center'>Account Register</h1>
         <form className='mt-5' onSubmit={onSubmit}>
           <div className=' mb-4'>
@@ -65,6 +68,7 @@ const Register = (props) => {
               className='form-control'
               name='name'
               value={name}
+              autoFocus={true}
               onChange={onChange}
             />
           </div>

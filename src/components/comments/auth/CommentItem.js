@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -86,8 +87,8 @@ const CommentItem = ({ singleComment }) => {
           loading='lazy'
         />{' '}
         {/* <Link to={`/users/${singleComment.postedBy.username}`}>
-                  <strong> {singleComment.postedBy.username}</strong>
-                </Link> */}
+          <strong> {singleComment.postedBy.username}</strong>
+        </Link> */}
         <strong>{singleComment.postedBy.name}</strong>
       </div>
       <div className='card-body'>
@@ -112,10 +113,10 @@ const CommentItem = ({ singleComment }) => {
               </button>
               <button
                 type='button'
-                class='btn btn-danger btn-sm me-3'
+                className='btn btn-danger btn-sm me-3'
                 onClick={deleteSingleComment}
               >
-                <i class='fas fa-trash'></i> Delete
+                <i className='fas fa-trash'></i> Delete
               </button>
             </Fragment>
           ) : (
@@ -129,10 +130,10 @@ const CommentItem = ({ singleComment }) => {
               </button>
               <button
                 type='button'
-                class='btn btn-danger btn-sm me-3'
+                className='btn btn-danger btn-sm me-3'
                 onClick={deleteSingleComment}
               >
-                <i class='fas fa-trash'></i> Delete
+                <i className='fas fa-trash'></i> Delete
               </button>
             </Fragment>
           )
@@ -140,7 +141,9 @@ const CommentItem = ({ singleComment }) => {
           ''
         )}
       </div>
-      <div className='card-footer'>{singleComment.createdAt}</div>
+      <div className='card-footer'>
+        {new Date(`${singleComment.updatedAt}`).toLocaleString()}
+      </div>
     </div>
   );
 };

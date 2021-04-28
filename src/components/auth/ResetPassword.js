@@ -56,6 +56,9 @@ const ResetPassword = ({ match }) => {
       {isSent ? (
         <div className='card form-container'>
           <div className='form-container mt-5'>
+            <p className='text-center'>
+              <i className='fas fa-unlock fa-3x'></i>
+            </p>
             <h1 className='text-center'>Reset Password</h1>
             <p className='text-center lead mt-3'>
               You have successfully reset password!
@@ -68,6 +71,9 @@ const ResetPassword = ({ match }) => {
       ) : (
         <div className='card form-container'>
           <div className='form-container mt-5'>
+            <p className='text-center'>
+              <i className='fas fa-unlock fa-3x'></i>
+            </p>
             <h1 className='text-center'>Reset Password</h1>
             <form className='mt-5' onSubmit={onSubmit}>
               <div className='mb-4'>
@@ -79,6 +85,7 @@ const ResetPassword = ({ match }) => {
                   className='form-control'
                   name='password'
                   value={password}
+                  autoFocus={true}
                   onChange={onChange}
                 />
               </div>

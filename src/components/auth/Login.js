@@ -52,6 +52,10 @@ const Login = (props) => {
   return (
     <div className='card form-container'>
       <div className='form-container mt-5'>
+        <p className='text-center'>
+          {' '}
+          <i className='fas fa-sign-in-alt fa-3x'></i>
+        </p>
         <h1 className='text-center'>Account Log in</h1>
         <form className='mt-5' onSubmit={onSubmit}>
           <div className=' mb-4'>
@@ -63,6 +67,7 @@ const Login = (props) => {
               className='form-control'
               name='email'
               value={email}
+              autoFocus={true}
               onChange={onChange}
             />
           </div>

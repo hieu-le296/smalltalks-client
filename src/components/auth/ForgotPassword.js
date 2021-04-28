@@ -37,6 +37,9 @@ const ForgotPassword = () => {
       {isSent ? (
         <div className='card form-container'>
           <div className='form-container mt-5'>
+            <p className='text-center'>
+              <i className='fas fa-lock fa-3x'></i>
+            </p>
             <h1 className='text-center'>Forgot Password?</h1>
             <p className='text-center lead mt-3'>{msg}</p>
             <Link to='/' className='btn btn-primary btn-block mt-3'>
@@ -47,6 +50,9 @@ const ForgotPassword = () => {
       ) : (
         <div className='card form-container'>
           <div className='form-container mt-5'>
+            <p className='text-center'>
+              <i className='fas fa-lock fa-3x'></i>
+            </p>
             <h1 className='text-center'>Forgot Password?</h1>
             <form className='mt-5' onSubmit={onSubmit}>
               <div className=' mb-4'>
