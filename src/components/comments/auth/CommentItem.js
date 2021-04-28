@@ -76,75 +76,81 @@ const CommentItem = ({ singleComment }) => {
   };
 
   return (
-    <div className='card '>
-      <div className='card-header'>
+    <Fragment>
+      <div className='mt-5'>
         <img
           src={`${API_URL}/${singleComment.postedBy.profilePic}`}
           alt='profile'
           className='rounded-circle'
-          height='25'
-          width='25'
+          height='40'
+          width='40'
           loading='lazy'
         />{' '}
-        {/* <Link to={`/users/${singleComment.postedBy.username}`}>
+        <div className='card comment-card'>
+          {/* <Link to={`/users/${singleComment.postedBy.username}`}>
           <strong> {singleComment.postedBy.username}</strong>
         </Link> */}
-        <strong>{singleComment.postedBy.name}</strong>
+          <div className='mx-3 mt-2'>
+            <strong>{singleComment.postedBy.name}</strong>
+          </div>
+
+          <div className='card-body'>
+            <textarea
+              className='card-text'
+              id={`comment-${singleComment.commentId}-input`}
+              readOnly={true}
+              ref={comment}
+            >
+              {singleComment.content}
+            </textarea>
+            {isAuthenticated &&
+            singleComment.postedBy.commentUserId === user.data.userId ? (
+              !isEdit ? (
+                <Fragment>
+                  <button
+                    type='button'
+                    className='btn btn-secondary btn-sm me-3'
+                    onClick={editComment}
+                  >
+                    <i className='fas fa-pencil-alt'></i> Edit
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-danger btn-sm me-3'
+                    onClick={deleteSingleComment}
+                  >
+                    <i className='fas fa-trash'></i> Delete
+                  </button>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <button
+                    type='button'
+                    className='btn btn-success btn-sm me-3'
+                    onClick={saveComment}
+                  >
+                    <i className='fas fa-save'></i> Save
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-danger btn-sm me-3'
+                    onClick={deleteSingleComment}
+                  >
+                    <i className='fas fa-trash'></i> Delete
+                  </button>
+                </Fragment>
+              )
+            ) : (
+              ''
+            )}
+          </div>
+          <div className='card-footer'>
+            <i className='fas fa-edit'></i>{' '}
+            {new Date(`${singleComment.updatedAt}`).toLocaleString()}
+          </div>
+        </div>
       </div>
-      <div className='card-body'>
-        <textarea
-          className='card-text'
-          id={`comment-${singleComment.commentId}-input`}
-          readOnly={true}
-          ref={comment}
-        >
-          {singleComment.content}
-        </textarea>
-        {isAuthenticated &&
-        singleComment.postedBy.commentUserId === user.data.userId ? (
-          !isEdit ? (
-            <Fragment>
-              <button
-                type='button'
-                className='btn btn-secondary btn-sm me-3'
-                onClick={editComment}
-              >
-                <i className='fas fa-pencil-alt'></i> Edit
-              </button>
-              <button
-                type='button'
-                className='btn btn-danger btn-sm me-3'
-                onClick={deleteSingleComment}
-              >
-                <i className='fas fa-trash'></i> Delete
-              </button>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <button
-                type='button'
-                className='btn btn-success btn-sm me-3'
-                onClick={saveComment}
-              >
-                <i className='fas fa-save'></i> Save
-              </button>
-              <button
-                type='button'
-                className='btn btn-danger btn-sm me-3'
-                onClick={deleteSingleComment}
-              >
-                <i className='fas fa-trash'></i> Delete
-              </button>
-            </Fragment>
-          )
-        ) : (
-          ''
-        )}
-      </div>
-      <div className='card-footer'>
-        {new Date(`${singleComment.updatedAt}`).toLocaleString()}
-      </div>
-    </div>
+    </Fragment>
   );
 };
 

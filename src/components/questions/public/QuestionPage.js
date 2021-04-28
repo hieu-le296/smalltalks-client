@@ -62,8 +62,8 @@ const QuestionPage = ({ match }) => {
                   src={`${API_URL}/${postedBy.profilePic}`}
                   alt='profile'
                   className='rounded-circle'
-                  height='25'
-                  width='25'
+                  height='35'
+                  width='35'
                   loading='lazy'
                 />{' '}
                 <Link to={`/users/${postedBy.username}`}>
@@ -82,6 +82,7 @@ const QuestionPage = ({ match }) => {
               </p>
             </div>
           </div>
+          <hr />
           <Comments questionId={questionId} />
         </Fragment>
       )}

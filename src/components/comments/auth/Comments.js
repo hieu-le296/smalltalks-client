@@ -29,7 +29,7 @@ const Comments = ({ questionId }) => {
     getCommentsOfAQuestion(commentDisptach, questionId);
 
     // eslint-disable-next-line
-  }, [user, isAuthenticated, setSpinner]);
+  }, [user, isAuthenticated, setSpinner, commentDisptach]);
 
   return (
     <Fragment>
@@ -38,7 +38,17 @@ const Comments = ({ questionId }) => {
       ) : (
         <Fragment>
           {isAuthenticated && <CommentForm />}
-          <h3>Comments</h3>
+
+          {comments.length === 0 ? (
+            <h3>
+              {' '}
+              <i className='far fa-comment' /> 0 Comment
+            </h3>
+          ) : (
+            <h3 className=''>
+              <i className='far fa-comment' /> {comments.length} Comments
+            </h3>
+          )}
           {comments.map((singleComment) => {
             return (
               <CommentItem

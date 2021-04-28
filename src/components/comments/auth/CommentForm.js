@@ -54,7 +54,7 @@ const CommentForm = () => {
       </div>
       <button
         type='button'
-        className='btn btn-success mb-3'
+        className='btn btn-primary mb-3'
         onClick={postComment}
       >
         Post
