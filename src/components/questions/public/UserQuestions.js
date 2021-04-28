@@ -12,7 +12,7 @@ const UserQuestions = ({ UserQuestionStyles, username }) => {
 
   useEffect(() => {
     getUserQuestions(questionDispatch, username);
-  }, [questionDispatch]);
+  }, [questionDispatch, username]);
 
   return (
     <Fragment>

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  Fragment,
-} from 'react';
+import React, { useContext, useState, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -14,7 +8,6 @@ import {
   deleteComment,
 } from '../../../context/comment/commentState';
 
-import { useQuestions } from '../../../context/question/QuestionState';
 import { useAuth } from '../../../context/auth/AuthState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
@@ -27,9 +20,6 @@ const CommentItem = ({ singleComment }) => {
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
-
-  const [questionState, questionDispatch] = useQuestions();
-  const { current } = questionState;
 
   const authState = useAuth()[0];
   const { isAuthenticated, user } = authState;
@@ -110,7 +100,7 @@ const CommentItem = ({ singleComment }) => {
           {singleComment.content}
         </textarea>
         {isAuthenticated &&
-        singleComment.postedBy.commentUserId == user.data.userId ? (
+        singleComment.postedBy.commentUserId === user.data.userId ? (
           !isEdit ? (
             <Fragment>
               <button

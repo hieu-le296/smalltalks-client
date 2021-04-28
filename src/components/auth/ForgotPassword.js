@@ -2,7 +2,7 @@ import React, { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5700/api/v1/auth/forgotpassword';
+const API_URL = 'https://datacomputation.com/api/v1/auth/forgotpassword';
 
 const ForgotPassword = () => {
   const [isSent, setIsSent] = useState(false);

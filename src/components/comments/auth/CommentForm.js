@@ -25,18 +25,13 @@ const CommentForm = () => {
 
     let newCommentValue = newComment.current.value.trim();
 
-    console.log('val is ----> ', newCommentValue);
-    if (newCommentValue == '') {
+    if (newCommentValue === '') {
       setAlert('Comment cannot be empty', 'danger');
     }
-
-    console.log('current question id is --> ', question.questionId);
 
     let response = await addComment(commentDispatch, question.questionId, {
       content: newCommentValue,
     });
-
-    console.log('res ---> ', response);
 
     if (response !== undefined) {
       setAlert(response, 'success');

@@ -25,11 +25,6 @@ const QuestionItem = ({ question }) => {
     }
   };
 
-  const auto_height = (e) => {
-    e.target.style.height = '1px';
-    e.target.style.height = e.target.scrollHeight + 'px';
-  };
-
   return (
     <div className='card'>
       <div className='card-body'>

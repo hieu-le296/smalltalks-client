@@ -129,7 +129,7 @@ export const updateBackground = async (dispatch, formData, userId) => {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const res = await axios.put(
+    await axios.put(
       `${API_URL}/users/${userId}/backgroundpic`,
       formData,
       config

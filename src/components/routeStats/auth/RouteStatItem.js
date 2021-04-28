@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const RouteStatItem = ({ route }) => {
   return (
@@ -9,10 +8,6 @@ const RouteStatItem = ({ route }) => {
       <td>{route.requestCount}</td>
     </tr>
   );
-};
-
-RouteStatItem.propTypes = {
-  user: PropTypes.object.isRequired,
 };
 
 export default RouteStatItem;

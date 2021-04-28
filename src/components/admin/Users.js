@@ -21,7 +21,7 @@ const Users = () => {
       setSpinner(false);
     }, 3000);
 
-    if (user && isAuthenticated && user.data.role == 'admin') {
+    if (user && isAuthenticated && user.data.role === 'admin') {
       getUsers(userDispatch);
     }
     // eslint-disable-next-line
@@ -38,15 +38,15 @@ const Users = () => {
               {filtered !== null
                 ? filtered.map((userElement) => (
                     <UserItem
-                      key={user.userId}
+                      key={userElement.userId}
                       id={user.userId}
                       user={userElement}
                     />
                   ))
                 : users.map((userElement) => (
                     <UserItem
-                      key={user.userId}
-                      id={user.userId}
+                      key={userElement.userId}
+                      id={userElement.userId}
                       user={userElement}
                     />
                   ))}

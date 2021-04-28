@@ -24,13 +24,11 @@ const RouteStats = () => {
       setSpinner(false);
     }, 3000);
 
-    if (user && isAuthenticated && user.data.role == 'admin') {
+    if (user && isAuthenticated && user.data.role === 'admin') {
       getRouteStats(routeStatsDispatch);
     }
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);
-
-  console.log(statistics);
 
   return (
     <Fragment>
