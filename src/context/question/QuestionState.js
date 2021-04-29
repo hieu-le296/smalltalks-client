@@ -73,7 +73,6 @@ export const addQuestion = async (dispatch, question) => {
     dispatch({ type: ADD_QUESTION, payload: res.data.data });
     return res.data.msg;
   } catch (err) {
-    console.log(err.response.data)
     dispatch({ type: QUESTION_ERROR, payload: err.response.data.error });
   }
 };

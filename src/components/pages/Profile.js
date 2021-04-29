@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   useAuth,
@@ -27,11 +27,24 @@ const Profile = () => {
     email: '',
   });
 
+  useEffect(() => {
+    if (user) {
+      setProfile({
+        ...profile,
+        name: user.data.name,
+        username: user.data.username,
+        email: user.data.email
+      })
+    }
+  }, [user])
+
   const { name, username, email } = profile;
 
   const onChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
+
+
 
   const onChangeAvatar = (e) => {
     setAvatar(e.target.files[0]);
@@ -151,7 +164,6 @@ const Profile = () => {
                       className='form-control'
                       value={name}
                       onChange={onChange}
-                      placeholder={user.data.name}
                     />
                   </div>
 
@@ -163,7 +175,6 @@ const Profile = () => {
                       name='username'
                       value={username}
                       onChange={onChange}
-                      placeholder={user.data.username}
                     />
                   </div>
 
@@ -175,7 +186,6 @@ const Profile = () => {
                       name='email'
                       value={email}
                       onChange={onChange}
-                      placeholder={user.data.email}
                     />
                   </div>
 
