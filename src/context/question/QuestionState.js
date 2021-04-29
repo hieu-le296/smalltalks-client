@@ -10,6 +10,7 @@ import {
   UPDATE_QUESTION,
   DELETE_QUESTION,
   QUESTION_ERROR,
+  CLEAR_QUESTION_ERROR,
   CLEAR_QUESTIONS,
   CLEAR_QUESTION,
   SET_CURRENT_QUESTION,
@@ -72,6 +73,7 @@ export const addQuestion = async (dispatch, question) => {
     dispatch({ type: ADD_QUESTION, payload: res.data.data });
     return res.data.msg;
   } catch (err) {
+    console.log(err.response.data)
     dispatch({ type: QUESTION_ERROR, payload: err.response.data.error });
   }
 };
@@ -134,6 +136,11 @@ export const clearQuestions = (dispatch) => {
 // Clear single question
 export const clearQuestion = (dispatch) => {
   dispatch({ type: CLEAR_QUESTION });
+}
+
+// Clear question error
+export const clearQuestionError = (dispatch) => {
+  dispatch({type: CLEAR_QUESTION_ERROR})
 }
 
 const QuestionState = (props) => {

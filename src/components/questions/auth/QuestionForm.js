@@ -4,6 +4,7 @@ import {
   addQuestion,
   updateQuestion,
   clearCurrent,
+  clearQuestionError
 } from '../../../context/question/QuestionState';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -30,7 +31,11 @@ const QuestionForm = () => {
         content: '',
       });
     }
-  }, [current]);
+    if (error) {
+      setAlert(error, 'danger');
+      clearQuestionError(questionDispatch)
+    }
+  }, [error, questionDispatch, setAlert, current]);
 
   const onChange = (e) =>
     setQuestion({ ...question, [e.target.name]: e.target.value });
@@ -40,13 +45,22 @@ const QuestionForm = () => {
     let msg;
     if (current === null) {
       msg = await addQuestion(questionDispatch, question);
-      setAlert(msg, 'success');
+      if (msg) {
+        setAlert(msg, 'success');
+
+      }
     } else {
       msg = await updateQuestion(questionDispatch, question);
-      setAlert(msg, 'success');
+
+      if (msg) {
+        setAlert(msg, 'success');
+      }
     }
-    if (error) {
+    console.log(error)
+
+    if (error !== null) {
       setAlert(error, 'danger');
+      clearQuestionError(questionDispatch)
     }
     clearAll();
   };
@@ -63,7 +77,7 @@ const QuestionForm = () => {
   return (
     <form
       id='question-form'
-      className='form-outLine mt-5'
+      className='form-outLine w-75 mx-auto mt-5'
       style={{ marginRight: '5rem' }}
       onSubmit={onSubmit}
     >

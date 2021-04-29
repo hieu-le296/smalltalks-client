@@ -12,6 +12,7 @@ import {
   FILTER_QUESTIONS,
   CLEAR_FILTER,
   QUESTION_ERROR,
+  CLEAR_QUESTION_ERROR,
 } from '../types';
 
 const questionReducer = (state, action) => {
@@ -103,6 +104,12 @@ const questionReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+
+      case CLEAR_QUESTION_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
