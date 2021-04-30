@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import React, {useState, useContext, Fragment } from 'react';
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { useUsers, deleteUser } from '../../../context/users/UserState';
 import AlertContext from '../../../context/alert/alertContext';
+
+import Modal from '../../layout/Modal'
 
 const API_URL = 'http://datacomputation.com/uploads';
 
 const UserItem = ({ user }) => {
   const [userState, userDispatch] = useUsers();
   const { error } = userState;
+
+  const [show, setShow] = useState(false);
+
 
   const alertContext = useContext(AlertContext);
 
@@ -37,7 +43,8 @@ const UserItem = ({ user }) => {
   };
 
   return (
-    <div className='card'>
+    <Fragment>
+<div className='card'>
       <div className='card-body '>
         <img
           src={user && `${API_URL}/avatars/${profilePic}`}
@@ -48,7 +55,7 @@ const UserItem = ({ user }) => {
           loading='lazy'
           onError={(e) => (e.style.visibility = 'hidden')}
         />
-        <h3 className='card-title fw-bold'>{name}</h3>
+        <Link to={`/users/${username}`}><h3  className='card-title fw-bold'>{name}</h3> </Link>
         <p className='lead'>
           <strong>Username</strong>: {username}
         </p>
@@ -61,9 +68,9 @@ const UserItem = ({ user }) => {
       </div>
 
       <div className='mb-3'>
-        {/* <button type='button' className='btn btn-secondary btn-sm me-3'>
+        <button type='button' className='btn btn-outline-secondary btn-sm me-3' onClick={() => setShow(true)}>
           <i className='fas fa-pencil-alt' /> Edit
-        </button> */}
+        </button>
         <button
           type='button'
           className='btn btn-outline-danger btn-sm'
@@ -83,6 +90,11 @@ const UserItem = ({ user }) => {
         </p>
       </div>
     </div>
+    <Modal title="My Modal" onClose={() => setShow(false)} show={show}>
+        <p>This is modal body</p>
+      </Modal>
+    </Fragment>
+    
   );
 };
 

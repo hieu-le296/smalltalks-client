@@ -94,7 +94,7 @@ const Admin = () => {
           aria-labelledby='ex2-tab-1'
         >
           <div className='card text-center' style={backgroundStyle}>
-            <i class='fas fa-users fa-3x mt-3' />
+            <i className='fas fa-users fa-3x mt-3' />
             <h2 className='mt-3 mb-3'>User Administration</h2>
           </div>
           <Users />
@@ -107,7 +107,7 @@ const Admin = () => {
         >
           <div className='row'>
             <div className='card text-center' style={backgroundStyle}>
-              <i class='fas fa-question-circle fa-3x mt-3' />
+              <i className='fas fa-question-circle fa-3x mt-3' />
               <h2 className='mt-3 mb-3'>Question Administration</h2>
             </div>
             {current !== null ? (
@@ -176,7 +176,7 @@ const Admin = () => {
           aria-labelledby='ex2-tab-4'
         >
           <div className='card text-center' style={backgroundStyle}>
-            <i class='fas fa-table fa-3x mt-3' />
+            <i className='fas fa-table fa-3x mt-3' />
             <h2 className='mt-3 mb-3'>Route Statistics</h2>
           </div>
           <RouteStats />
