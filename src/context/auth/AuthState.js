@@ -10,6 +10,7 @@ import {
   USER_LOADED,
   USER_ERROR,
   AUTH_ERROR,
+  DELETE_AUTH_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
@@ -93,8 +94,19 @@ export const updateUser = async (dispatch, user, userId) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.put(`${API_URL}/users/${userId}`, user, config);
+    const res = await axios.put(`${API_URL}/auth/${userId}`, user, config);
     await loadUser(dispatch);
+    return res.data.msg;
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
+
+// Delete user
+export const deleteUser = async (dispatch, userId) => {
+  try {
+    const res = await axios.delete(`${API_URL}/auth/${userId}`);
+    dispatch({ type: DELETE_AUTH_USER });
     return res.data.msg;
   } catch (err) {
     dispatch({ type: USER_ERROR, payload: err.response.data.msg });
@@ -110,7 +122,7 @@ export const updateAvatar = async (dispatch, formData, userId) => {
       },
     };
     const res = await axios.put(
-      `${API_URL}/users/${userId}/profilepic`,
+      `${API_URL}/auth/${userId}/profilepic`,
       formData,
       config
     );
@@ -130,7 +142,7 @@ export const updateBackground = async (dispatch, formData, userId) => {
       },
     };
     await axios.put(
-      `${API_URL}/users/${userId}/backgroundpic`,
+      `${API_URL}/auth/${userId}/backgroundpic`,
       formData,
       config
     );

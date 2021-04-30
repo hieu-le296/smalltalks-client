@@ -4,6 +4,7 @@ import {
   USER_LOADED,
   USER_ERROR,
   AUTH_ERROR,
+  DELETE_AUTH_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
@@ -52,6 +53,7 @@ const authReducer = (state, action) => {
 
     case AUTH_ERROR:
     case LOGOUT:
+    case DELETE_AUTH_USER:
       localStorage.removeItem('token');
       return {
         ...state,

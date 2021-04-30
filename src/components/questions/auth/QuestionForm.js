@@ -4,7 +4,7 @@ import {
   addQuestion,
   updateQuestion,
   clearCurrent,
-  clearQuestionError
+  clearQuestionError,
 } from '../../../context/question/QuestionState';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -33,7 +33,7 @@ const QuestionForm = () => {
     }
     if (error) {
       setAlert(error, 'danger');
-      clearQuestionError(questionDispatch)
+      clearQuestionError(questionDispatch);
     }
   }, [error, questionDispatch, setAlert, current]);
 
@@ -47,7 +47,6 @@ const QuestionForm = () => {
       msg = await addQuestion(questionDispatch, question);
       if (msg) {
         setAlert(msg, 'success');
-
       }
     } else {
       msg = await updateQuestion(questionDispatch, question);
@@ -56,11 +55,10 @@ const QuestionForm = () => {
         setAlert(msg, 'success');
       }
     }
-    console.log(error)
 
     if (error !== null) {
       setAlert(error, 'danger');
-      clearQuestionError(questionDispatch)
+      clearQuestionError(questionDispatch);
     }
     clearAll();
   };

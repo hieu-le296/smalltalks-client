@@ -5,6 +5,7 @@ import {
   updateUser,
   updateAvatar,
   updateBackground,
+  clearErrors,
 } from '../../context/auth/AuthState';
 import AlertContext from '../../context/alert/alertContext';
 import Spinner from '../layout/Spinner';
@@ -33,18 +34,20 @@ const Profile = () => {
         ...profile,
         name: user.data.name,
         username: user.data.username,
-        email: user.data.email
-      })
+        email: user.data.email,
+      });
     }
-  }, [user])
+
+    if (error) {
+      setAlert(error, 'danger');
+    }
+  }, [user, error]);
 
   const { name, username, email } = profile;
 
   const onChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
-
-
 
   const onChangeAvatar = (e) => {
     setAvatar(e.target.files[0]);
@@ -57,29 +60,59 @@ const Profile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await updateUser(authDispatch, profile, user.data.userId);
+    if (name === '' || username === '' || email === '') {
+      setAlert('Please input all the fields', 'danger');
+    } else {
+      const result = await updateUser(authDispatch, profile, user.data.userId);
+      setAlert(result, 'success');
+    }
 
-    setAlert(result, 'success');
+    if (error !== null) {
+      setAlert(error, 'danger');
+      clearErrors(authDispatch);
+    }
   };
 
   const onSubmitAvatar = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', avatar);
+    if (avatar === '') {
+      setAlert('Please select an image', 'danger');
+    } else {
+      const formData = new FormData();
+      formData.append('file', avatar);
 
-    await updateAvatar(authDispatch, formData, user.data.userId);
-    setAlert('Profile Image successfully updated!', 'success');
+      try {
+        await updateAvatar(authDispatch, formData, user.data.userId);
+        setAlert('Profile Image successfully updated!', 'success');
+      } catch (err) {
+        if (error !== null) {
+          setAlert(error, 'danger');
+          clearErrors(authDispatch);
+        }
+      }
+    }
   };
 
   const onSubmitBackground = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('file', background);
+    if (background === '') {
+      setAlert('Please select an image', 'danger');
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append('file', background);
 
-    await updateBackground(authDispatch, formData, user.data.userId);
+        await updateBackground(authDispatch, formData, user.data.userId);
 
-    setAlert('Background Image successfully updated!', 'success');
+        setAlert('Background Image successfully updated!', 'success');
+      } catch (err) {
+        if (error !== null) {
+          setAlert(error, 'danger');
+          clearErrors(authDispatch);
+        }
+      }
+    }
   };
 
   return (
