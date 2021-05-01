@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const HomeQuestionItem = ({ question }) => {
+const QuestionItem = ({ question }) => {
   const { slug, title, content, createdAt, updatedAt } = question;
 
   return (
@@ -28,8 +28,8 @@ const HomeQuestionItem = ({ question }) => {
   );
 };
 
-HomeQuestionItem.propTypes = {
+QuestionItem.propTypes = {
   question: PropTypes.object.isRequired,
 };
 
-export default HomeQuestionItem;
+export default QuestionItem;

@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import QuestionItem from './QuestionItem';
 import {
   useQuestions,
@@ -7,16 +7,29 @@ import {
 import Spinner from '../../layout/Spinner';
 
 const UserQuestions = ({ UserQuestionStyles, username }) => {
+  const [spinner, setSpinner] = useState(true);
+
   const [questionState, questionDispatch] = useQuestions();
   const { questions, filtered } = questionState;
 
   useEffect(() => {
+    setTimeout(() => {
+      setSpinner(false);
+    }, 3000);
     getUserQuestions(questionDispatch, username);
-  }, [questionDispatch, username]);
+  }, [questionDispatch, username, setSpinner]);
+
+  if (questions.length === 0 || questions === null) {
+    return (
+      <p className='lead text-center mt-5'>
+        User <strong>{username}</strong> did not post any question yet.
+      </p>
+    );
+  }
 
   return (
     <Fragment>
-      {questions.length === 0 ? (
+      {spinner ? (
         <Spinner />
       ) : (
         <Fragment>

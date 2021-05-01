@@ -67,7 +67,7 @@ const QuestionPage = ({ match }) => {
                   loading='lazy'
                 />{' '}
                 <Link to={`/users/${postedBy.username}`}>
-                  <strong> {postedBy.username}</strong>
+                  <strong> {postedBy.name}</strong>
                 </Link>
               </p>
 

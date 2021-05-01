@@ -45,23 +45,23 @@ const QuestionItem = ({ question }) => {
         <div className='float-end'>
           <button
             type='button'
-            className='btn btn-outline-secondary btn-sm me-3'
+            className='btn btn-secondary btn-sm me-3'
             onClick={() => setCurrent(questionDispatch, question)}
           >
             <i className='fas fa-pencil-alt' /> Edit
           </button>
           <button
             type='button'
-            className='btn btn-outline-danger btn-sm me-3'
+            className='btn btn-danger btn-sm me-3'
             onClick={onDelete}
           >
             <i className='fas fa-trash' /> Delete
           </button>
           <Link
             to={`/questions/${slug}`}
-            className='btn btn-outline-info btn-sm float-end'
+            className='btn btn-info btn-sm float-end'
           >
-            More <i className='fas fa-arrow-circle-right'></i>
+            More <i className='fas fa-arrow-circle-right' />
           </Link>
         </div>
       </div>

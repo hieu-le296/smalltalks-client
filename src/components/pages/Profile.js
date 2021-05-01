@@ -41,7 +41,7 @@ const Profile = () => {
     if (error) {
       setAlert(error, 'danger');
     }
-  }, [user, error]);
+  }, [user, setAlert, error]);
 
   const { name, username, email } = profile;
 

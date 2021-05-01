@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import HomeQuestionItem from './QuestionItem';
+import QuestionItem from './QuestionItem';
 import {
   useQuestions,
   getQuestions,
@@ -36,14 +36,14 @@ const HomeQuestions = ({ questionHomeStyles }) => {
             <div style={questionHomeStyles}>
               {filtered !== null
                 ? filtered.map((question) => (
-                    <HomeQuestionItem
+                    <QuestionItem
                       key={question.questionId}
                       id={question.questionId}
                       question={question}
                     />
                   ))
                 : questions.map((question) => (
-                    <HomeQuestionItem
+                    <QuestionItem
                       key={question.questionId}
                       id={question.questionId}
                       question={question}

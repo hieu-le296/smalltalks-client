@@ -41,10 +41,6 @@ const CommentItem = ({ singleComment }) => {
   const editComment = (e) => {
     e.preventDefault();
 
-    let commentContent = comment.current.value.trim();
-
-    console.log(commentContent);
-
     document.getElementById(`comment-${singleComment.commentId}-input`).focus();
     document.getElementById(
       `comment-${singleComment.commentId}-input`
@@ -91,7 +87,7 @@ const CommentItem = ({ singleComment }) => {
             to={`/users/${singleComment.postedBy.username}`}
             className='mx-3 mt-2'
           >
-            <strong> {singleComment.postedBy.username}</strong>
+            <strong> {singleComment.postedBy.name}</strong>
           </Link>
           <div className='card-body'>
             <textarea
@@ -102,8 +98,9 @@ const CommentItem = ({ singleComment }) => {
             >
               {singleComment.content}
             </textarea>
-            {isAuthenticated &&
-            singleComment.postedBy.commentUserId === user.data.userId ? (
+            {(isAuthenticated &&
+              singleComment.postedBy.commentUserId === user.data.userId) ||
+            (isAuthenticated && user.data.role === 'admin') ? (
               !isEdit ? (
                 <Fragment>
                   <button

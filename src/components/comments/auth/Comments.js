@@ -15,7 +15,7 @@ const Comments = ({ questionId }) => {
 
   // We just need authState, so autState is at index 0
   const authState = useAuth()[0];
-  const { isAuthenticated, user } = authState;
+  const { isAuthenticated } = authState;
 
   const [commentState, commentDisptach] = useComment();
   const { comments } = commentState;
@@ -26,10 +26,12 @@ const Comments = ({ questionId }) => {
       setSpinner(false);
     }, 1000);
 
-    getCommentsOfAQuestion(commentDisptach, questionId);
-
     // eslint-disable-next-line
-  }, [user, isAuthenticated, setSpinner, commentDisptach]);
+  }, [setSpinner]);
+
+  useEffect(() => {
+    getCommentsOfAQuestion(commentDisptach, questionId);
+  }, [comments, questionId, commentDisptach]);
 
   return (
     <Fragment>

@@ -121,15 +121,10 @@ export const updateAvatar = async (dispatch, formData, userId) => {
         'Content-Type': 'multipart/form-data',
       },
     };
-    const res = await axios.put(
-      `${API_URL}/auth/${userId}/profilepic`,
-      formData,
-      config
-    );
-    console.log(res);
+    await axios.put(`${API_URL}/auth/${userId}/profilepic`, formData, config);
     await loadUser(dispatch);
   } catch (err) {
-    console.log(err.response);
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }
 };
 
@@ -147,9 +142,8 @@ export const updateBackground = async (dispatch, formData, userId) => {
       config
     );
     await loadUser(dispatch);
-    // dispatch({ type: UPDATE_AVATAR });
   } catch (err) {
-    console.log(err.response);
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }
 };
 
