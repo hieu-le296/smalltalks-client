@@ -31,16 +31,17 @@ const PublicProfile = ({ username }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/' className='btn btn-light mt-5' onClick={onBackHome}>
+          <Link to='/' className='btn btn-light mt-5 mb-5' onClick={onBackHome}>
             <i className='fas fa-angle-double-left'></i> Back to Home
           </Link>
-          <div className=' d-flex flex-column justify-content-start align-items-center'>
-            <div className='align-self-center' style={{ maxWidth: '50%' }}>
+          <div className='container-fluid text-center'>
+            <div>
               <img
                 src={user && `${API_URL}/backgrounds/${user.backgroundPic}`}
                 className='img-fluid shadow-2-strong background-pic'
                 alt='...'
                 loading='lazy'
+                style={{ maxWidth: '75%' }}
               />
             </div>
             <div>

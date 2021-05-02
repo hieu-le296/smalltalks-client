@@ -121,17 +121,18 @@ const Profile = () => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/' className='btn btn-light mt-5'>
+          <Link to='/' className='btn btn-light mt-5 mb-5'>
             <i className='fas fa-angle-double-left'></i> Back to Home
           </Link>
-          <div className=' d-flex flex-column justify-content-start align-items-center'>
-            <div className='align-self-center' style={{ maxWidth: '50%' }}>
+          <div className='container-fluid text-center'>
+            <div>
               <img
                 src={
                   user && `${API_URL}/backgrounds/${user.data.backgroundPic}`
                 }
                 className='img-fluid shadow-2-strong background-pic'
                 alt='...'
+                style={{ maxWidth: '75%' }}
               />
             </div>
             <div>
@@ -222,8 +223,11 @@ const Profile = () => {
                     />
                   </div>
 
-                  <button type='submit' className='btn btn-info btn-block mb-4'>
-                    Update Profile
+                  <button
+                    type='submit'
+                    className=' btn btn-success btn-lg btn-block mb-4'
+                  >
+                    <i className='fas fa-save' /> Update Profile
                   </button>
                 </form>
               </div>
@@ -242,9 +246,11 @@ const Profile = () => {
                       id='profilePic'
                       onChange={onChangeAvatar}
                     />
-                    <button className='btn btn-info mt-3' type='submit'>
-                      Update
-                    </button>
+                    <div className='text-center'>
+                      <button className='btn btn-success mt-3' type='submit'>
+                        <i className='fas fa-save' /> Update
+                      </button>
+                    </div>
                   </form>
                 </div>
 
@@ -257,9 +263,11 @@ const Profile = () => {
                       id='backgroundPic'
                       onChange={onChangeBackGround}
                     />
-                    <button className='btn btn-info mt-3' type='submit'>
-                      Update
-                    </button>
+                    <div className='text-center'>
+                      <button className='btn btn-success mt-3' type='submit'>
+                        <i className='fas fa-save' /> Update
+                      </button>
+                    </div>
                   </form>
                 </div>
 

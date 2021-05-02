@@ -88,7 +88,11 @@ const Navbar = ({ icon }) => {
           )}
 
           <li className='nav-item '>
-            <a onClick={onLogout} href='#!' className='nav-link text-black '>
+            <a
+              onClick={onLogout}
+              href='#!'
+              className='nav-link logout text-black '
+            >
               <i className='fas fa-sign-out-alt' /> <span>Logout</span>
             </a>
           </li>

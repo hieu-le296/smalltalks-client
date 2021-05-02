@@ -61,6 +61,13 @@ textarea {
   margin-left: -5rem !important;
 }
 
+.dropdown-item {
+  margin-left: 1rem !important;
+}
+.nav-link.logout {
+  margin-left: 1rem !important;
+}
+
 @media (min-width: 768px) {
   #question-form {
     z-index: 4;
@@ -73,6 +80,20 @@ textarea {
 @media (max-width: 992px) {
   #dropDown {
     margin-left: 0rem !important;
+  }
+  .dropdown-item {
+    margin-left: 1rem !important;
+  }
+  .nav-link.logout {
+    margin-left: 1rem !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-pic {
+    width: 75px;
+    height: 75px;
+    margin-top: -2.5rem !important;
   }
 }
 

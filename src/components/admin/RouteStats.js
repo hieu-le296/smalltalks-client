@@ -6,7 +6,7 @@ import {
 } from '../../context/routeStats/routeStatsState';
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
-import RouteStatItem from '../routeStats/auth/RouteStatItem';
+import RouteStatItem from './routestats/RouteStatItem';
 
 const RouteStats = () => {
   const [spinner, setSpinner] = useState(true);

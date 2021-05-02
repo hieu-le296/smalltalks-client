@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 
 import { getUsers, useUsers } from '../../context/users/UserState';
 import { useAuth } from '../../context/auth/AuthState';
-import UserItem from '../users/auth/UserItem';
+import UserItem from './users/UserItem';
 import Spinner from '../layout/Spinner';
 
 const Users = () => {
