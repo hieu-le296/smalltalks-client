@@ -80,7 +80,7 @@ const Navbar = ({ icon }) => {
             <li className='dropdown-item nav-link text-black '>
               <i className='fas fa-lock'></i>{' '}
               <Link to='/admin' className='text-black'>
-                Admin Page
+                Admin Panel
               </Link>
             </li>
           ) : (

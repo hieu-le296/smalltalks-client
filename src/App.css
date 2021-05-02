@@ -105,3 +105,33 @@ textarea {
   margin-top: -5rem;
   border: solid lightgray;
 }
+
+.nav-tabs {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.nav-tabs .nav-link {
+  color: black;
+  font-size: 15px;
+}
+
+.nav-tabs .nav-link.active {
+  background: linear-gradient(
+    to left,
+    rgba(106, 17, 203, 0.55),
+    rgba(37, 117, 252, 0.55)
+  );
+  color: white;
+  border-color: white;
+  border-radius: 20px;
+}
+
+.nav-tabs .nav-link:hover {
+  border-radius: 20px;
+  background: linear-gradient(
+    to left,
+    rgba(106, 17, 203, 0.55),
+    rgba(37, 117, 252, 0.55)
+  );
+}

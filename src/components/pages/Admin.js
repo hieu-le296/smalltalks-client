@@ -28,6 +28,7 @@ const Admin = () => {
 
   const adminPage = (
     <Fragment>
+      <h1 className='text-center mt-5'>Admin Panel</h1>
       <div className='row mt-5'>
         <div className='col'>
           <ul className='nav nav-tabs nav-fill mb-3' id='ex1' role='tablist'>
