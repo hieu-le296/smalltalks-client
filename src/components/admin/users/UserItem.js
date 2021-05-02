@@ -94,8 +94,8 @@ const UserItem = ({ user }) => {
           <img
             src={user && `${API_URL}/avatars/${user.profilePic}`}
             className='rounded-circle shadow-2-strong profile-pic'
-            height='150'
-            width='150'
+            height='125'
+            width='125'
             alt=''
             loading='lazy'
           />
@@ -144,7 +144,7 @@ const UserItem = ({ user }) => {
             role='tabpanel'
             aria-labelledby='tab-details'
           >
-            <form className=''>
+            <form>
               <div className='mb-4'>
                 <label htmlFor='name'>Name</label>
                 <input
@@ -266,14 +266,14 @@ const UserItem = ({ user }) => {
         <div className='mb-3'>
           {/* <button
             type='button'
-            className='btn btn-secondary btn-sm me-3'
+            className='btn btn-secondary btn-rounded btn-sm me-3'
             onClick={() => setShow(true)}
           >
             <i className='fas fa-pencil-alt' /> Edit
           </button> */}
           <button
             type='button'
-            className='btn btn-danger btn-sm'
+            className='btn btn-danger btn-sm btn-rounded'
             onClick={onDelete}
           >
             <i className='fas fa-trash' /> Delete

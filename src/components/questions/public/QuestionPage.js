@@ -42,7 +42,11 @@ const QuestionPage = ({ match }) => {
 
   return (
     <Fragment>
-      <Link to='/' className='btn btn-light mt-5' onClick={clearComments}>
+      <Link
+        to='/'
+        className='btn btn-light btn-rounded mt-5'
+        onClick={clearComments}
+      >
         <i className='fas fa-angle-double-left'></i> Back to Home
       </Link>
       {isEmpty(question) ? (

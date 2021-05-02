@@ -31,7 +31,11 @@ const PublicProfile = ({ username }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/' className='btn btn-light mt-5 mb-5' onClick={onBackHome}>
+          <Link
+            to='/'
+            className='btn btn-light btn-rounded mt-5 mb-5'
+            onClick={onBackHome}
+          >
             <i className='fas fa-angle-double-left'></i> Back to Home
           </Link>
           <div className='container-fluid text-center'>

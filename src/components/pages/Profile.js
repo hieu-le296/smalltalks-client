@@ -121,7 +121,7 @@ const Profile = () => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/' className='btn btn-light mt-5 mb-5'>
+          <Link to='/' className='btn btn-light btn-rounded mt-5 mb-5'>
             <i className='fas fa-angle-double-left'></i> Back to Home
           </Link>
           <div className='container-fluid text-center'>
@@ -189,47 +189,49 @@ const Profile = () => {
                 role='tabpanel'
                 aria-labelledby='tab-details'
               >
-                <form onSubmit={onSubmit}>
-                  <div className='mb-4'>
-                    <label htmlFor='name'>Name</label>
-                    <input
-                      type='text'
-                      name='name'
-                      className='form-control'
-                      value={name}
-                      onChange={onChange}
-                    />
-                  </div>
+                <div className='card form-container '>
+                  <form className='mt-5' onSubmit={onSubmit}>
+                    <div className='mb-4'>
+                      <label htmlFor='name'>Name</label>
+                      <input
+                        type='text'
+                        name='name'
+                        className='form-control'
+                        value={name}
+                        onChange={onChange}
+                      />
+                    </div>
 
-                  <div className=' mb-4'>
-                    <label htmlFor='username'>Username</label>
-                    <input
-                      type='text'
-                      className='form-control'
-                      name='username'
-                      value={username}
-                      onChange={onChange}
-                    />
-                  </div>
+                    <div className=' mb-4'>
+                      <label htmlFor='username'>Username</label>
+                      <input
+                        type='text'
+                        className='form-control'
+                        name='username'
+                        value={username}
+                        onChange={onChange}
+                      />
+                    </div>
 
-                  <div className='mb-4'>
-                    <label htmlFor='email'>Email</label>
-                    <input
-                      type='email'
-                      className='form-control'
-                      name='email'
-                      value={email}
-                      onChange={onChange}
-                    />
-                  </div>
+                    <div className='mb-4'>
+                      <label htmlFor='email'>Email</label>
+                      <input
+                        type='email'
+                        className='form-control'
+                        name='email'
+                        value={email}
+                        onChange={onChange}
+                      />
+                    </div>
 
-                  <button
-                    type='submit'
-                    className=' btn btn-success btn-lg btn-block mb-4'
-                  >
-                    <i className='fas fa-save' /> Update Profile
-                  </button>
-                </form>
+                    <button
+                      type='submit'
+                      className=' btn btn-success btn-rounded btn-lg btn-block mb-4'
+                    >
+                      <i className='fas fa-save' /> Update Profile
+                    </button>
+                  </form>
+                </div>
               </div>
               <div
                 className='tab-pane fade'
@@ -237,43 +239,51 @@ const Profile = () => {
                 role='tabpanel'
                 aria-labelledby='tab-other'
               >
-                <div className='mb-4'>
-                  <form onSubmit={onSubmitAvatar}>
-                    <label htmlFor='customFile'>Profile Image</label>
-                    <input
-                      type='file'
-                      className='form-control'
-                      id='profilePic'
-                      onChange={onChangeAvatar}
-                    />
-                    <div className='text-center'>
-                      <button className='btn btn-success mt-3' type='submit'>
-                        <i className='fas fa-save' /> Update
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                <div className='card form-container'>
+                  <div className='mt-5 mb-4'>
+                    <form onSubmit={onSubmitAvatar}>
+                      <label htmlFor='customFile'>Profile Image</label>
+                      <input
+                        type='file'
+                        className='form-control'
+                        id='profilePic'
+                        onChange={onChangeAvatar}
+                      />
+                      <div className='text-center'>
+                        <button
+                          className='btn btn-success btn-rounded mt-3'
+                          type='submit'
+                        >
+                          <i className='fas fa-save' /> Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
 
-                <div className='mb-4'>
-                  <form onSubmit={onSubmitBackground}>
-                    <label htmlFor='customFile'>Background Image</label>
-                    <input
-                      type='file'
-                      className='form-control'
-                      id='backgroundPic'
-                      onChange={onChangeBackGround}
-                    />
-                    <div className='text-center'>
-                      <button className='btn btn-success mt-3' type='submit'>
-                        <i className='fas fa-save' /> Update
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                  <div className='mb-4'>
+                    <form onSubmit={onSubmitBackground}>
+                      <label htmlFor='customFile'>Background Image</label>
+                      <input
+                        type='file'
+                        className='form-control'
+                        id='backgroundPic'
+                        onChange={onChangeBackGround}
+                      />
+                      <div className='text-center'>
+                        <button
+                          className='btn btn-success btn-rounded mt-3'
+                          type='submit'
+                        >
+                          <i className='fas fa-save' /> Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
 
-                <div className='text-center mb-5'>
-                  To change the password, click{' '}
-                  <Link to='/forgotpassword'>here</Link>
+                  <div className='text-center mb-5'>
+                    To change the password, click{' '}
+                    <Link to='/forgotpassword'>here</Link>
+                  </div>
                 </div>
               </div>
             </div>

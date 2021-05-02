@@ -68,10 +68,12 @@ const Navbar = ({ icon }) => {
           id='dropDown'
           aria-labelledby='navbarDropdownMenuLink'
         >
-          <li className='dropdown-item'>Hello {user && user.data.name}</li>
+          <li className='dropdown-item'>
+            Hello <strong>{user && user.data.name}</strong>
+          </li>
           <li className='dropdown-item nav-link text-black '>
             <i className='fas fa-user-alt ' />{' '}
-            <Link to='/profile' className='text-black'>
+            <Link to='/profile' className='text-black ms-1'>
               My Profile
             </Link>
           </li>
@@ -79,7 +81,7 @@ const Navbar = ({ icon }) => {
           {user && user.data.role === 'admin' ? (
             <li className='dropdown-item nav-link text-black '>
               <i className='fas fa-lock'></i>{' '}
-              <Link to='/admin' className='text-black'>
+              <Link to='/admin' className='text-black ms-1'>
                 Admin Panel
               </Link>
             </li>
@@ -93,7 +95,8 @@ const Navbar = ({ icon }) => {
               href='#!'
               className='nav-link logout text-black '
             >
-              <i className='fas fa-sign-out-alt' /> <span>Logout</span>
+              <i className='fas fa-sign-out-alt' />{' '}
+              <span className='ms-1'>Logout</span>
             </a>
           </li>
         </ul>

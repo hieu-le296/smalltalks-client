@@ -64,6 +64,11 @@ textarea {
 .dropdown-item {
   margin-left: 1rem !important;
 }
+
+.dropdown-item.nav-link:hover {
+  width: 100% !important;
+}
+
 .nav-link.logout {
   margin-left: 1rem !important;
 }
