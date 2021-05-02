@@ -10,6 +10,8 @@ import {
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
+  SET_CURRENT_USER,
+  CLEAR_CURRENT_USER,
 } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
@@ -87,7 +89,47 @@ export const deleteUser = async (dispatch, userId) => {
   }
 };
 
+// Set Current User
+export const setCurrentUser = (dispatch, user) => {
+  dispatch({ type: SET_CURRENT_USER, payload: user });
+};
+
+// Update Picture Profile
+export const updateAvatar = async (dispatch, formData, userId) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    await axios.put(`${API_URL}/auth/${userId}/profilepic`, formData, config);
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
+
+// Update Background image
+export const updateBackground = async (dispatch, formData, userId) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    await axios.put(
+      `${API_URL}/auth/${userId}/backgroundpic`,
+      formData,
+      config
+    );
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
+
 // Clear Current User
+export const clearCurrentUser = (dispatch) => {
+  dispatch({ type: CLEAR_CURRENT_USER });
+};
 
 // Clear User
 export const clearUser = (dispatch) => {
@@ -97,7 +139,7 @@ export const clearUser = (dispatch) => {
 const UserState = (props) => {
   const initState = {
     users: [],
-    user: null,
+    user: {},
     current: null,
     filtered: null,
     error: null,

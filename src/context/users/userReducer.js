@@ -5,7 +5,9 @@ import {
   CLEAR_USER,
   UPDATE_USER,
   CREATE_USER,
+  SET_CURRENT_USER,
   DELETE_USER,
+  CLEAR_CURRENT_USER,
 } from '../types';
 
 const userReducer = (state, action) => {
@@ -36,6 +38,18 @@ const userReducer = (state, action) => {
           user.userId === action.payload.userId ? action.payload : user
         ),
         user: action.payload,
+      };
+
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        current: action.payload,
+      };
+
+    case CLEAR_CURRENT_USER:
+      return {
+        ...state,
+        current: null,
       };
 
     case DELETE_USER:

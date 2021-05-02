@@ -45,6 +45,7 @@ export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_COMMENTS_OF_A_USER = 'GET_COMMENTS_OF_A_USER';
 export const GET_QUESTIONS_OF_A_USER = 'GET_QUESTIONS_OF_A_USER';
 export const SET_PASSWORD = 'SET_PASSWORD';
