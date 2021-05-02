@@ -134,4 +134,21 @@ textarea {
     rgba(106, 17, 203, 0.55),
     rgba(37, 117, 252, 0.55)
   );
+  color: white;
+}
+
+.nav-pills .nav-link {
+  background-color: white;
+  border-radius: 20px;
+  color: black;
+  font-size: 12px;
+}
+
+.nav-pills .nav-link.active {
+  border-radius: 20px;
+  background: linear-gradient(
+    to left,
+    rgba(106, 17, 203, 0.55),
+    rgba(37, 117, 252, 0.55)
+  );
 }
