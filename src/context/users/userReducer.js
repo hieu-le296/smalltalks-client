@@ -8,6 +8,7 @@ import {
   SET_CURRENT_USER,
   DELETE_USER,
   CLEAR_CURRENT_USER,
+  CLEAR_USER_ERRORS,
 } from '../types';
 
 const userReducer = (state, action) => {
@@ -68,6 +69,12 @@ const userReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case CLEAR_USER_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

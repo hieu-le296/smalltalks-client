@@ -5,10 +5,13 @@ import '../../layout/Modal.css';
 
 import {
   useUsers,
+  getUsers,
   updateUser,
   updateAvatar,
   updateBackground,
   clearCurrentUser,
+  clearUser,
+  clearUserErrors,
 } from '../../../context/users/UserState';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -33,7 +36,17 @@ const UserModal = (props) => {
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
       props.onClose();
+      clearCurrentUser(userDispatch);
+      clearUser(userDispatch);
+      getUsers(userDispatch);
     }
+  };
+
+  const onClose = (e) => {
+    props.onClose();
+    clearCurrentUser(userDispatch);
+    clearUser(userDispatch);
+    getUsers(userDispatch);
   };
 
   useEffect(() => {
@@ -65,9 +78,18 @@ const UserModal = (props) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    let msg = await updateUser(userDispatch, user);
+    console.log(msg);
+    if (msg) {
+      setAlert(msg, 'success');
+    }
+
+    if (error !== null) {
+      setAlert(error, 'danger');
+      clearUserErrors(userDispatch);
+    }
   };
 
   const onChangeAvatar = (e) => {
@@ -76,6 +98,48 @@ const UserModal = (props) => {
 
   const onChangeBackGround = (e) => {
     setBackground(e.target.files[0]);
+  };
+
+  const onSubmitAvatar = async (e) => {
+    e.preventDefault();
+    if (avatar === '') {
+      setAlert('Please select an image', 'danger');
+    } else {
+      const formData = new FormData();
+      formData.append('file', avatar);
+
+      try {
+        await updateAvatar(userDispatch, formData, current.userId);
+        setAlert('Profile Image successfully updated!', 'success');
+        onClose();
+      } catch (err) {
+        if (error !== null) {
+          setAlert(error, 'danger');
+          clearUserErrors(userDispatch);
+        }
+      }
+    }
+  };
+
+  const onSubmitBackground = async (e) => {
+    e.preventDefault();
+
+    if (background === '') {
+      setAlert('Please select an image', 'danger');
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append('file', background);
+        await updateBackground(userDispatch, formData, current.userId);
+        onClose();
+        setAlert('Background Image successfully updated!', 'success');
+      } catch (err) {
+        if (error !== null) {
+          setAlert(error, 'danger');
+          clearUserErrors(userDispatch);
+        }
+      }
+    }
   };
 
   const form = (
@@ -222,7 +286,7 @@ const UserModal = (props) => {
             aria-labelledby='tab-other'
           >
             <div className='mb-4'>
-              <form>
+              <form onSubmit={onSubmitAvatar}>
                 <label htmlFor='customFile'>Profile Image</label>
                 <input
                   type='file'
@@ -242,7 +306,7 @@ const UserModal = (props) => {
             </div>
 
             <div className='mb-4'>
-              <form>
+              <form onSubmit={onSubmitBackground}>
                 <label htmlFor='customFile'>Background Image</label>
                 <input
                   type='file'
@@ -272,14 +336,14 @@ const UserModal = (props) => {
       unmountOnExit
       timeout={{ enter: 0, exit: 300 }}
     >
-      <div className='modal' onClick={props.onClose}>
+      <div className='modal' onClick={onClose}>
         <div className='modal-content' onClick={(e) => e.stopPropagation()}>
           <div className='modal-header'>
             <h4 className='modal-title'>{props.title}</h4>
           </div>
           <div className='modal-body'>{form}</div>
           <div className='modal-footer'>
-            <button onClick={props.onClose} className='btn btn-warning'>
+            <button onClick={onClose} className='btn btn-warning'>
               <i className='fas fa-times' /> Cancel
             </button>
           </div>

@@ -12,6 +12,7 @@ import {
   DELETE_USER,
   SET_CURRENT_USER,
   CLEAR_CURRENT_USER,
+  CLEAR_USER_ERRORS,
 } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
@@ -134,6 +135,11 @@ export const clearCurrentUser = (dispatch) => {
 // Clear User
 export const clearUser = (dispatch) => {
   dispatch({ type: CLEAR_USER });
+};
+
+// Clear User Errors
+export const clearUserErrors = (dispatch) => {
+  dispatch({ type: CLEAR_USER_ERRORS });
 };
 
 const UserState = (props) => {

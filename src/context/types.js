@@ -52,6 +52,7 @@ export const SET_PASSWORD = 'SET_PASSWORD';
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
 export const CLEAR_USER = 'CLEAR_USER';
 export const USER_ERROR = 'USER_ERROR';
+export const CLEAR_USER_ERRORS = 'CLEAR_USER_ERRORS';
 
 //types for route Stats
 export const GET_ROUTE_STATS = 'GET_ROUTE_STATS';

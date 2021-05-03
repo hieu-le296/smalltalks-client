@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import {
   useUsers,
   setCurrentUser,
-  updateUser,
   deleteUser,
-  clearCurrentUser,
 } from '../../../context/users/UserState';
 import AlertContext from '../../../context/alert/alertContext';
 
@@ -60,7 +58,6 @@ const UserItem = ({ user }) => {
 
   const onClose = () => {
     setShow(false);
-    clearCurrentUser(userDispatch);
   };
 
   return (
@@ -91,13 +88,13 @@ const UserItem = ({ user }) => {
         </div>
 
         <div className='mb-3'>
-          {/* <button
+          <button
             type='button'
             className='btn btn-secondary btn-rounded btn-sm me-3'
             onClick={onClickEditUser}
           >
             <i className='fas fa-pencil-alt' /> Edit User
-          </button> */}
+          </button>
           <button
             type='button'
             className='btn btn-danger btn-sm btn-rounded'

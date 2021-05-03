@@ -13,7 +13,7 @@ const Users = () => {
   const { isAuthenticated, user } = authState;
 
   const [usersState, userDispatch] = useUsers();
-  const { users, filtered } = usersState;
+  const { users, current, filtered } = usersState;
 
   // Run once when re-render
   useEffect(() => {
@@ -25,7 +25,7 @@ const Users = () => {
       getUsers(userDispatch);
     }
     // eslint-disable-next-line
-  }, [user, isAuthenticated, setSpinner]);
+  }, [user, current, isAuthenticated, setSpinner]);
 
   return (
     <Fragment>
