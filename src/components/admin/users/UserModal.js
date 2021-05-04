@@ -9,6 +9,7 @@ import {
   updateUser,
   updateAvatar,
   updateBackground,
+  setPassword,
   clearCurrentUser,
   clearUser,
   clearUserErrors,
@@ -31,14 +32,18 @@ const UserModal = (props) => {
     role: '',
   });
 
+  const [passwords, setPasswords] = useState({
+    password: '',
+    password2: '',
+  });
+
   const { name, username, email, role } = user;
+
+  const { password, password2 } = passwords;
 
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
       props.onClose();
-      clearCurrentUser(userDispatch);
-      clearUser(userDispatch);
-      getUsers(userDispatch);
     }
   };
 
@@ -47,12 +52,15 @@ const UserModal = (props) => {
     clearCurrentUser(userDispatch);
     clearUser(userDispatch);
     getUsers(userDispatch);
+    setPasswords({
+      password: '',
+      password2: '',
+    });
   };
 
   useEffect(() => {
     if (current !== null) {
       setUser(current);
-      console.log(current);
     } else {
       setUser({
         name: '',
@@ -78,10 +86,13 @@ const UserModal = (props) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const onChangePassword = (e) => {
+    setPasswords({ ...passwords, [e.target.name]: e.target.value });
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     let msg = await updateUser(userDispatch, user);
-    console.log(msg);
     if (msg) {
       setAlert(msg, 'success');
     }
@@ -138,6 +149,28 @@ const UserModal = (props) => {
           setAlert(error, 'danger');
           clearUserErrors(userDispatch);
         }
+      }
+    }
+  };
+
+  const onSubmitPassword = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert('Passwords does not match', 'danger');
+    } else {
+      const user = {
+        userId: current.userId,
+        password: password,
+      };
+      const msg = await setPassword(userDispatch, user);
+
+      if (msg) {
+        setAlert(msg, 'success');
+      }
+
+      if (error !== null) {
+        setAlert(error, 'danger');
+        clearUserErrors(userDispatch);
       }
     }
   };
@@ -238,7 +271,7 @@ const UserModal = (props) => {
                   onChange={onChange}
                 />
               </div>
-              <p className='mb-4'>
+              <div className='mb-4'>
                 Role:
                 <div className='form-check form-check-inline mx-3'>
                   <input
@@ -251,7 +284,7 @@ const UserModal = (props) => {
                     onChange={onChange}
                   />
 
-                  <label className='form-check-label' for='inlineRadio1'>
+                  <label className='form-check-label' htmlFor='inlineRadio1'>
                     User
                   </label>
                 </div>
@@ -265,11 +298,11 @@ const UserModal = (props) => {
                     value='admin'
                     onChange={onChange}
                   />
-                  <label className='form-check-label' for='inlineRadio2'>
+                  <label className='form-check-label' htmlFor='inlineRadio2'>
                     Admin
                   </label>
                 </div>
-              </p>
+              </div>
 
               <button
                 type='submit'
@@ -320,6 +353,55 @@ const UserModal = (props) => {
                     type='submit'
                   >
                     <i className='fas fa-save' /> Update
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <form onSubmit={onSubmitPassword}>
+                {/* <label className='form-label' htmlFor='password'>
+                  Set User Password
+                </label>
+                <input
+                  type='password'
+                  className='form-control'
+                  name='password'
+                  value={password}
+                  onChange={onChangePassword}
+                /> */}
+
+                <p>Set User Password</p>
+
+                <div className='row'>
+                  <div className='col'>
+                    <input
+                      type='password'
+                      className='form-control'
+                      name='password'
+                      value={password}
+                      onChange={onChangePassword}
+                      placeholder='New Password'
+                    />
+                  </div>
+                  <div className='col'>
+                    <input
+                      type='password'
+                      className='form-control'
+                      name='password2'
+                      value={password2}
+                      onChange={onChangePassword}
+                      placeholder='Confirm Password'
+                    />
+                  </div>
+                </div>
+
+                <div className='text-center'>
+                  <button
+                    className='btn btn-success btn-rounded mt-3'
+                    type='submit'
+                  >
+                    <i className='fas fa-lock' /> Set Password
                   </button>
                 </div>
               </form>

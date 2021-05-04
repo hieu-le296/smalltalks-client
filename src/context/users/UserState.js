@@ -13,6 +13,7 @@ import {
   SET_CURRENT_USER,
   CLEAR_CURRENT_USER,
   CLEAR_USER_ERRORS,
+  SET_PASSWORD,
 } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
@@ -122,6 +123,26 @@ export const updateBackground = async (dispatch, formData, userId) => {
       formData,
       config
     );
+  } catch (err) {
+    dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+  }
+};
+
+// Set User Password
+export const setPassword = async (dispatch, user) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(
+      `${API_URL}/users/${user.userId}/password`,
+      user,
+      config
+    );
+    return res.data.msg;
   } catch (err) {
     dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }
