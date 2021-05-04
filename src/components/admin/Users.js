@@ -4,6 +4,7 @@ import { getUsers, useUsers } from '../../context/users/UserState';
 import { useAuth } from '../../context/auth/AuthState';
 import UserItem from './users/UserItem';
 import Spinner from '../layout/Spinner';
+import UserModalAdd from './users/UserModalAdd';
 
 const Users = () => {
   const [spinner, setSpinner] = useState(true);
@@ -14,6 +15,16 @@ const Users = () => {
 
   const [usersState, userDispatch] = useUsers();
   const { users, current, filtered } = usersState;
+
+  const [show, setShow] = useState(false);
+
+  const onClickAddUser = () => {
+    setShow(true);
+  };
+
+  const onClose = () => {
+    setShow(false);
+  };
 
   // Run once when re-render
   useEffect(() => {
@@ -33,6 +44,13 @@ const Users = () => {
         <Spinner />
       ) : (
         <Fragment>
+          <button
+            type='button'
+            className='btn btn-primary btn-floating float-btn'
+            onClick={onClickAddUser}
+          >
+            <i className='fas fa-plus fa-lg' />
+          </button>
           {users !== null ? (
             <div style={userItemStyle}>
               {filtered !== null
@@ -56,6 +74,7 @@ const Users = () => {
           )}
         </Fragment>
       )}
+      <UserModalAdd title='Create A User' onClose={onClose} show={show} />
     </Fragment>
   );
 };

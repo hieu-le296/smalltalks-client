@@ -49,12 +49,7 @@ export const register = async (dispatch, formData) => {
   };
   try {
     const res = await axios.post(`${API_URL}/auth/register`, formData, config);
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: res.data,
-    });
-
-    loadUser(dispatch);
+    return res.data.msg;
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
@@ -160,7 +155,7 @@ export const clearErrors = (dispatch) => {
 const AuthState = (props) => {
   const initState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: true,
     user: null,
     error: null,

@@ -8,7 +8,7 @@ import {
 } from '../../../context/users/UserState';
 import AlertContext from '../../../context/alert/alertContext';
 
-import UserModal from './UserModal';
+import UserModalEdit from './UserModalEdit';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
@@ -115,7 +115,7 @@ const UserItem = ({ user }) => {
           </p>
         </div>
       </div>
-      <UserModal
+      <UserModalEdit
         title='Update User'
         user={user}
         onClose={onClose}

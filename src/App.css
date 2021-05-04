@@ -157,3 +157,13 @@ textarea {
     rgba(37, 117, 252, 0.55)
   );
 }
+
+.float-btn {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  color: #fff;
+  z-index: 4;
+}

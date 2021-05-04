@@ -13,7 +13,6 @@ import {
   SET_CURRENT_USER,
   CLEAR_CURRENT_USER,
   CLEAR_USER_ERRORS,
-  SET_PASSWORD,
 } from '../types';
 
 const API_URL = 'https://datacomputation.com/api/v1';
@@ -55,6 +54,7 @@ export const createUser = async (dispatch, formData) => {
     };
     const res = await axios.post(`${API_URL}/users`, formData, config);
     dispatch({ type: CREATE_USER, payload: res.data.data });
+    return res.data.msg;
   } catch (err) {
     dispatch({ type: USER_ERROR, payload: err.response.data.msg });
   }

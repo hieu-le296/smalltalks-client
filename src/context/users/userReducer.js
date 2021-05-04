@@ -29,7 +29,7 @@ const userReducer = (state, action) => {
     case CREATE_USER:
       return {
         ...state,
-        users: [action.payload, ...state.users],
+        users: [...state.users, action.payload],
       };
 
     case UPDATE_USER:

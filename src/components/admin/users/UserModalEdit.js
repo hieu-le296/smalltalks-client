@@ -18,7 +18,7 @@ import AlertContext from '../../../context/alert/alertContext';
 
 const API_URL = 'http://datacomputation.com/uploads';
 
-const UserModal = (props) => {
+const UserModalEdit = (props) => {
   const [userState, userDispatch] = useUsers();
   const { current, error } = userState;
 
@@ -43,7 +43,9 @@ const UserModal = (props) => {
 
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
-      props.onClose();
+      onClose();
+
+      document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
     }
   };
 
@@ -74,9 +76,9 @@ const UserModal = (props) => {
     }
 
     document.body.addEventListener('keydown', closeOnEscapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
-    };
+    // return function cleanup() {
+    //   document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
+    // };
   }, [current, error]);
 
   const [avatar, setAvatar] = useState('');
@@ -306,7 +308,7 @@ const UserModal = (props) => {
 
               <button
                 type='submit'
-                className='btn btn-success btn-rounded btn-lg btn-block'
+                className='btn btn-success btn-rounded btn-block'
               >
                 <i className='fas fa-save' /> Update Profile
               </button>
@@ -425,7 +427,7 @@ const UserModal = (props) => {
           </div>
           <div className='modal-body'>{form}</div>
           <div className='modal-footer'>
-            <button onClick={onClose} className='btn btn-warning'>
+            <button onClick={onClose} className='btn btn-warning btn-rounded'>
               <i className='fas fa-times' /> Cancel
             </button>
           </div>
@@ -436,4 +438,4 @@ const UserModal = (props) => {
   );
 };
 
-export default UserModal;
+export default UserModalEdit;

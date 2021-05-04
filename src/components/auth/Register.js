@@ -15,7 +15,7 @@ const Register = (props) => {
       props.history.push('/dashboard');
     }
     if (error !== null) {
-      setAlert('User already Exits!', 'danger');
+      setAlert(error, 'danger');
       clearErrors(authDispatch);
     }
     // eslint-disable-next-line
@@ -35,19 +35,33 @@ const Register = (props) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (name === '' || username === '' || password === '') {
       setAlert('Please enter all the fields', 'danger');
     } else if (password !== password2) {
       setAlert('Passwords does not match', 'danger');
     } else {
-      register(authDispatch, {
+      const msg = await register(authDispatch, {
         name,
         username,
         email,
         password,
       });
+
+      if (msg) {
+        setAlert(msg, 'success');
+      }
+
+      setUser({
+        name: '',
+        username: '',
+        email: '',
+        password: '',
+        password2: '',
+      });
+
+      props.history.push('/login');
     }
   };
 

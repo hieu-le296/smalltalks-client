@@ -33,12 +33,12 @@ const Login = (props) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (email === '' || password === '') {
       setAlert('Please fill in all fields', 'danger');
     } else {
-      login(authDispatch, {
+      await login(authDispatch, {
         email,
         password,
       });
