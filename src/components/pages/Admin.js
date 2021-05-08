@@ -126,7 +126,7 @@ const Admin = () => {
                       Edit a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-secondary btn-sm me-3'
+                        className='btn btn-outline-secondary btn-rounded btn-sm me-3'
                       >
                         <i className='fas fa-pencil-alt' /> Edit
                       </button>{' '}
@@ -135,7 +135,7 @@ const Admin = () => {
                       Delete a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-danger btn-sm me-3'
+                        className='btn btn-outline-danger btn-rounded btn-sm me-3'
                       >
                         <i className='fas fa-trash' /> Delete
                       </button>
@@ -145,7 +145,7 @@ const Admin = () => {
                       Reading more a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-info btn-sm me-3'
+                        className='btn btn-outline-info btn-rounded btn-sm me-3'
                       >
                         More <i className='fas fa-arrow-circle-right' />
                       </button>

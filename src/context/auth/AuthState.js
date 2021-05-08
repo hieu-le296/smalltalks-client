@@ -5,7 +5,6 @@ import authReducer from '../auth/authReducer';
 import setAuthToken from '../../utils/setAuthToken';
 
 import {
-  REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
   USER_ERROR,

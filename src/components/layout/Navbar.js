@@ -27,6 +27,7 @@ const Navbar = ({ icon }) => {
   const onLogout = () => {
     logout(authDispatch);
     clearQuestions(questionDispatch);
+    window.location.reload();
   };
 
   const authLinks = (
