@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+
 import {
   useQuestions,
   addQuestion,
@@ -7,6 +11,8 @@ import {
   clearQuestionError,
 } from '../../../context/question/QuestionState';
 import AlertContext from '../../../context/alert/alertContext';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
 const QuestionForm = () => {
   const [questionState, questionDispatch] = useQuestions();
@@ -15,21 +21,37 @@ const QuestionForm = () => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
-  const [question, setQuestion] = useState({
-    title: '',
-    content: '',
-  });
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-  const { title, content } = question;
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   useEffect(() => {
     if (current !== null) {
-      setQuestion(current);
+      setTitle(current.title);
+
+      let contentState;
+
+      if (!current.content.startsWith('<p>')) {
+        contentState = ContentState.createFromText(current.content);
+        setEditorState(() => EditorState.createWithContent(contentState));
+        setContent(current.content);
+      } else {
+        const contentBlock = htmlToDraft(current.content);
+        if (contentBlock) {
+          contentState = ContentState.createFromBlockArray(
+            contentBlock.contentBlocks
+          );
+          setEditorState(() => EditorState.createWithContent(contentState));
+          setContent(current.content);
+        }
+      }
     } else {
-      setQuestion({
-        title: '',
-        content: '',
-      });
+      setTitle('');
+      setEditorState(() => EditorState.createEmpty());
+      setContent('');
     }
     if (error) {
       setAlert(error, 'danger');
@@ -37,30 +59,52 @@ const QuestionForm = () => {
     }
   }, [error, questionDispatch, setAlert, current]);
 
-  const onChange = (e) =>
-    setQuestion({ ...question, [e.target.name]: e.target.value });
+  const onChangeTitle = (e) => setTitle(e.target.value);
+
+  const onEditorStateChange = (state) => {
+    setEditorState(state);
+    convertContentToHTML();
+  };
+
+  const convertContentToHTML = () => {
+    let currentContentAsHTML = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    setContent(currentContentAsHTML);
+    if (!editorState.getCurrentContent().hasText()) {
+      setContent('');
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let msg;
-    if (current === null) {
-      msg = await addQuestion(questionDispatch, question);
-      if (msg) {
-        setAlert(msg, 'success');
-      }
+
+    if (title === '' || content === '') {
+      setAlert('Please fill all the fields', 'warning');
     } else {
-      msg = await updateQuestion(questionDispatch, question);
+      let question = { title, content };
+      let msg;
+      if (current === null) {
+        msg = await addQuestion(questionDispatch, question);
+        if (msg) {
+          setAlert(msg, 'success');
+        }
+      } else {
+        const questionId = current.questionId;
+        question = { questionId, title, content };
+        msg = await updateQuestion(questionDispatch, question);
 
-      if (msg) {
-        setAlert(msg, 'success');
+        if (msg) {
+          setAlert(msg, 'success');
+        }
       }
-    }
 
-    if (error !== null) {
-      setAlert(error, 'danger');
-      clearQuestionError(questionDispatch);
+      if (error !== null) {
+        setAlert(error, 'danger');
+        clearQuestionError(questionDispatch);
+      }
+      clearAll();
     }
-    clearAll();
   };
 
   const clearAll = () => {
@@ -73,12 +117,7 @@ const QuestionForm = () => {
   };
 
   return (
-    <form
-      id='question-form'
-      className='form-outLine w-75 mx-auto mt-5'
-      style={{ marginRight: '5rem' }}
-      onSubmit={onSubmit}
-    >
+    <form id='question-form' className='form-outLine mt-5' onSubmit={onSubmit}>
       <h2 className='text-center'>
         {current ? 'Edit question' : 'Ask a question'}
       </h2>
@@ -89,10 +128,9 @@ const QuestionForm = () => {
         <textarea
           className='form-control'
           id='title'
-          name='title'
           onInput={auto_height}
           value={title}
-          onChange={onChange}
+          onChange={onChangeTitle}
         ></textarea>
       </div>
 
@@ -100,15 +138,17 @@ const QuestionForm = () => {
         <label className='form-label' htmlFor='content'>
           Content
         </label>
-        <textarea
-          className='form-control'
-          id='content'
-          name='content'
-          row='1'
-          onInput={auto_height}
-          value={content}
-          onChange={onChange}
-        ></textarea>
+        <div>
+          <Editor
+            editorState={editorState}
+            onEditorStateChange={onEditorStateChange}
+            editorClassName='editor-class form-control'
+            toolbarClassName='form-control'
+            toolbar={{
+              image: { defaultSize: { height: '512px', width: '1024px' } },
+            }}
+          />
+        </div>
       </div>
       <div className='mt-5 text-center'>
         {current ? (

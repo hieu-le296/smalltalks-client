@@ -126,18 +126,18 @@ const Admin = () => {
                       Edit a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-secondary btn-rounded btn-sm me-3'
+                        className='btn btn-secondary btn-rounded btn-sm me-3'
                       >
-                        <i className='fas fa-pencil-alt' /> Edit
+                        <i className='fas fa-pencil-alt' />
                       </button>{' '}
                     </li>
                     <li className='list-group-item'>
                       Delete a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-danger btn-rounded btn-sm me-3'
+                        className='btn btn-danger btn-rounded btn-sm me-3'
                       >
-                        <i className='fas fa-trash' /> Delete
+                        <i className='fas fa-trash' />
                       </button>
                     </li>
 
@@ -145,9 +145,9 @@ const Admin = () => {
                       Reading more a question by clicking{' '}
                       <button
                         type='button'
-                        className='btn btn-outline-info btn-rounded btn-sm me-3'
+                        className='btn btn-info btn-rounded btn-sm me-3'
                       >
-                        More <i className='fas fa-arrow-circle-right' />
+                        <i className='fas fa-arrow-circle-right' />
                       </button>
                     </li>
                   </ul>

@@ -8,6 +8,7 @@ import {
   clearCurrent,
 } from '../../../context/question/QuestionState';
 import AlertContext from '../../../context/alert/alertContext';
+import DOMPurify from 'dompurify';
 
 const QuestionItem = ({ question }) => {
   // We just need questionDispatch, so questionDispatch is at index 1
@@ -18,6 +19,12 @@ const QuestionItem = ({ question }) => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
+  const createMarkup = (html) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  };
+
   const onDelete = async () => {
     if (window.confirm('Are you sure?')) {
       await deleteQuestion(questionDispatch, questionId);
@@ -27,41 +34,37 @@ const QuestionItem = ({ question }) => {
   };
 
   return (
-    <div className='card'>
+    <div className='card' onClick={(e) => e.stopPropagation()}>
       <div className='card-body'>
         <h5 className='card-title fw-bold'>{title}</h5>
         <p className='text-muted fs-6'>
           <strong>Created: </strong>
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
-        <div className='card-text'>
-          {/* <textarea
-            readOnly={true}
-            value={content}
-            onInput={auto_height}
-          ></textarea> */}
-          <p className='article-content'>{content}</p>
-        </div>
+        <div
+          dangerouslySetInnerHTML={createMarkup(content)}
+          className='card-text text-truncate mb-3'
+        ></div>
         <div className='float-end'>
           <button
             type='button'
-            className='btn btn-outline-secondary btn-rounded btn-sm me-3'
+            className='btn btn-secondary btn-rounded me-3'
             onClick={() => setCurrent(questionDispatch, question)}
           >
-            <i className='fas fa-pencil-alt' /> Edit
+            <i className='fas fa-pencil-alt' />
           </button>
           <button
             type='button'
-            className='btn btn-outline-danger btn-rounded btn-sm me-3'
+            className='btn btn-danger btn-rounded me-3'
             onClick={onDelete}
           >
-            <i className='fas fa-trash' /> Delete
+            <i className='fas fa-trash' />
           </button>
           <Link
             to={`/questions/${slug}`}
-            className='btn btn-outline-info btn-sm btn-rounded float-end'
+            className='btn btn-info btn-rounded float-end'
           >
-            More <i className='fas fa-arrow-circle-right' />
+            <i className='fas fa-arrow-circle-right' />
           </Link>
         </div>
       </div>

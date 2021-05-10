@@ -105,34 +105,34 @@ const CommentItem = ({ singleComment }) => {
                 <Fragment>
                   <button
                     type='button'
-                    className='btn btn-secondary btn-rounded btn-sm me-3'
+                    className='btn btn-secondary btn-rounded me-3'
                     onClick={editComment}
                   >
-                    <i className='fas fa-pencil-alt'></i> Edit
+                    <i className='fas fa-pencil-alt'></i>
                   </button>
                   <button
                     type='button'
-                    className='btn btn-danger btn-rounded btn-sm me-3'
+                    className='btn btn-danger btn-rounded me-3'
                     onClick={deleteSingleComment}
                   >
-                    <i className='fas fa-trash'></i> Delete
+                    <i className='fas fa-trash'></i>
                   </button>
                 </Fragment>
               ) : (
                 <Fragment>
                   <button
                     type='button'
-                    className='btn btn-success btn-rounded btn-sm me-3'
+                    className='btn btn-success btn-rounded me-3'
                     onClick={saveComment}
                   >
-                    <i className='fas fa-save'></i> Save
+                    <i className='fas fa-save'></i>
                   </button>
                   <button
                     type='button'
-                    className='btn btn-danger btn-rounded btn-sm me-3'
+                    className='btn btn-danger btn-rounded me-3'
                     onClick={deleteSingleComment}
                   >
-                    <i className='fas fa-trash'></i> Delete
+                    <i className='fas fa-trash'></i>
                   </button>
                 </Fragment>
               )

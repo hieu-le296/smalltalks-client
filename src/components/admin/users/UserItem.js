@@ -90,17 +90,17 @@ const UserItem = ({ user }) => {
         <div className='mb-3'>
           <button
             type='button'
-            className='btn btn-outline-secondary btn-rounded btn-sm me-3'
+            className='btn btn-secondary btn-rounded me-3'
             onClick={onClickEditUser}
           >
-            <i className='fas fa-pencil-alt' /> Edit User
+            <i className='fas fa-pencil-alt' />
           </button>
           <button
             type='button'
-            className='btn btn-outline-danger btn-sm btn-rounded'
+            className='btn btn-danger btn-rounded'
             onClick={onDelete}
           >
-            <i className='fas fa-trash' /> Delete
+            <i className='fas fa-trash' />
           </button>
         </div>
 

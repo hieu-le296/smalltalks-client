@@ -15,8 +15,11 @@ const UserQuestions = ({ UserQuestionStyles, username }) => {
   useEffect(() => {
     setTimeout(() => {
       setSpinner(false);
-    }, 3000);
-    getUserQuestions(questionDispatch, username);
+    }, 2000);
+    async function fetchData() {
+      await getUserQuestions(questionDispatch, username);
+    }
+    fetchData();
   }, [questionDispatch, username, setSpinner]);
 
   if (questions.length === 0 || questions === null) {

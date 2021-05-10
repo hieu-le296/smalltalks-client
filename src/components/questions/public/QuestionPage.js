@@ -7,6 +7,7 @@ import {
 } from '../../../context/question/QuestionState';
 import Comments from '../../comments/auth/Comments';
 import Spinner from '../../layout/Spinner';
+import DOMPurify from 'dompurify';
 
 import {
   useComment,
@@ -38,6 +39,12 @@ const QuestionPage = ({ match }) => {
   const clearComments = () => {
     clearCommentsWhenBack(commentDisptach);
     clearQuestion(questionDispatch);
+  };
+
+  const createMarkup = (html) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
   };
 
   return (
@@ -74,10 +81,10 @@ const QuestionPage = ({ match }) => {
                   <strong> {postedBy.name}</strong>
                 </Link>
               </p>
-
-              <div className='card-text'>
-                <p className='article-content'>{content}</p>
-              </div>
+              <div
+                className='card-text'
+                dangerouslySetInnerHTML={createMarkup(content)}
+              ></div>
             </div>
             <div className='card-footer text-muted fs-6'>
               <p>

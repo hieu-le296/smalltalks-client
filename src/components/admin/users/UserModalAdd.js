@@ -27,6 +27,7 @@ const UserModalAdd = (props) => {
     return function cleanup() {
       document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
     };
+    // eslint-disable-next-line
   }, [error]);
 
   const onClose = (e) => {

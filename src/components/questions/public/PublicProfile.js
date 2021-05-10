@@ -17,7 +17,10 @@ const PublicProfile = ({ username }) => {
   const questionDispatch = useQuestions()[1];
 
   useEffect(() => {
-    getUser(userDispatch, username);
+    async function fetchUser() {
+      await getUser(userDispatch, username);
+    }
+    fetchUser();
   }, [username, userDispatch]);
 
   const onBackHome = () => {
@@ -42,7 +45,7 @@ const PublicProfile = ({ username }) => {
             <div>
               <img
                 src={user && `${API_URL}/backgrounds/${user.backgroundPic}`}
-                className='img-fluid shadow-2-strong background-pic'
+                className='img-fluid shadow-2-strong rounded img-thumbnail background-pic'
                 alt='...'
                 loading='lazy'
                 style={{ maxWidth: '75%' }}
