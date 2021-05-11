@@ -1,3 +1,4 @@
+import React from 'react';
 import Questions from '../questions/auth/Questions';
 import QuestionForm from '../questions/auth/QuestionForm';
 import QuestionFilter from '../questions/QuestionFilter';
