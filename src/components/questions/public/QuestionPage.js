@@ -27,14 +27,8 @@ const QuestionPage = ({ match }) => {
 
   const { question } = questionState;
 
-  const {
-    questionId,
-    title,
-    content,
-    postedBy,
-    createdAt,
-    updatedAt,
-  } = question;
+  const { questionId, title, content, postedBy, createdAt, updatedAt } =
+    question;
 
   const clearComments = () => {
     clearCommentsWhenBack(commentDisptach);
@@ -82,7 +76,7 @@ const QuestionPage = ({ match }) => {
                 </Link>
               </p>
               <div
-                className='card-text'
+                className='card-text article-content'
                 dangerouslySetInnerHTML={createMarkup(content)}
               ></div>
             </div>

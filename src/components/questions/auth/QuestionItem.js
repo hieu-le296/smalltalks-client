@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../../context/question/QuestionState';
 import AlertContext from '../../../context/alert/alertContext';
 import DOMPurify from 'dompurify';
+import trimText from '../../../utils/trimText';
 
 const QuestionItem = ({ question }) => {
   // We just need questionDispatch, so questionDispatch is at index 1
@@ -19,11 +20,27 @@ const QuestionItem = ({ question }) => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
+  const [state, setState] = useState({
+    showOriginalHTML: false,
+  });
+
   const createMarkup = (html) => {
+    const sanitizedHtml = DOMPurify.sanitize(html);
     return {
-      __html: DOMPurify.sanitize(html),
+      __html: `${
+        !state.showOriginalHTML
+          ? trimText(sanitizedHtml, 20, 50)[0]
+          : sanitizedHtml
+      }`,
     };
   };
+
+  const handleShowText = useCallback(() => {
+    setState((prevState) => ({
+      ...prevState,
+      showOriginalHTML: !prevState.showOriginalHTML,
+    }));
+  }, [setState]);
 
   const onDelete = async () => {
     if (window.confirm('Are you sure?')) {
@@ -41,10 +58,16 @@ const QuestionItem = ({ question }) => {
           <strong>Created: </strong>
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
-        <div
-          dangerouslySetInnerHTML={createMarkup(content)}
-          className='card-text text-truncate mb-3'
-        ></div>
+        <div className='mb-3'>
+          <div
+            dangerouslySetInnerHTML={createMarkup(content)}
+            className='card-text article-content'
+          ></div>
+          <button className='read-more' onClick={handleShowText}>
+            {!state.showOriginalHTML ? 'read more' : 'show less'}
+          </button>
+        </div>
+
         <div className='float-end'>
           <button
             type='button'

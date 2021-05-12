@@ -178,3 +178,22 @@ textarea {
   color: #fff;
   z-index: 4;
 }
+
+.read-more {
+  display: inline;
+  margin-left: 3px;
+  color: #286da8;
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.read-more:hover {
+  color: #4591d3;
+}
+
+.read-more:focus {
+  outline: 0;
+}
