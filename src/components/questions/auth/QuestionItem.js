@@ -11,11 +11,14 @@ import AlertContext from '../../../context/alert/alertContext';
 import DOMPurify from 'dompurify';
 import trimText from '../../../utils/trimText';
 
+const API_URL = 'http://datacomputation.com/uploads/avatars';
+
 const QuestionItem = ({ question }) => {
   // We just need questionDispatch, so questionDispatch is at index 1
   const questionDispatch = useQuestions()[1];
 
-  const { questionId, title, slug, content, createdAt, updatedAt } = question;
+  const { questionId, postedBy, title, slug, content, createdAt, updatedAt } =
+    question;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -58,6 +61,22 @@ const QuestionItem = ({ question }) => {
           <strong>Created: </strong>
           {new Date(`${createdAt}`).toLocaleString()}
         </p>
+        {postedBy && (
+          <p className='text-muted'>
+            Posted by:{' '}
+            <img
+              src={`${API_URL}/${postedBy.profilePic}`}
+              alt='profile'
+              className='rounded-circle'
+              height='35'
+              width='35'
+              loading='lazy'
+            />{' '}
+            <Link to={`/users/${postedBy.username}`}>
+              <strong> {postedBy.name}</strong>
+            </Link>
+          </p>
+        )}
         <div className='mb-3'>
           <div
             dangerouslySetInnerHTML={createMarkup(content)}
