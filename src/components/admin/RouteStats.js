@@ -24,9 +24,14 @@ const RouteStats = () => {
       setSpinner(false);
     }, 3000);
 
-    if (user && isAuthenticated && user.data.role === 'admin') {
-      getRouteStats(routeStatsDispatch);
+    async function getAllRouteStats() {
+      if (user && isAuthenticated && user.data.role === 'admin') {
+        await getRouteStats(routeStatsDispatch);
+      }
     }
+
+    getAllRouteStats();
+
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);
 

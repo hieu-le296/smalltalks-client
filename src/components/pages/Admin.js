@@ -192,17 +192,9 @@ const Admin = () => {
     </Fragment>
   );
 
-  return (
-    <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          {user && user.data.role !== 'admin' ? noAdminPage : adminPage}
-        </Fragment>
-      )}
-    </Fragment>
-  );
+  const showPage = user && user.data.role !== 'admin' ? noAdminPage : adminPage;
+
+  return <Fragment>{spinner ? <Spinner /> : showPage}</Fragment>;
 };
 
 const backgroundStyle = {

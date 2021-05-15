@@ -28,21 +28,38 @@ const Users = () => {
 
   // Run once when re-render
   useEffect(() => {
-    setTimeout(() => {
-      setSpinner(false);
-    }, 3000);
-
-    if (user && isAuthenticated && user.data.role === 'admin') {
-      getUsers(userDispatch);
+    async function getAllUsers() {
+      if (user && isAuthenticated && user.data.role === 'admin') {
+        await getUsers(userDispatch);
+        setSpinner(false);
+      }
     }
+    getAllUsers();
+
     // eslint-disable-next-line
   }, [user, current, isAuthenticated, setSpinner]);
 
+  const showFilterdUsers =
+    filtered &&
+    filtered.map((filter) => (
+      <UserItem key={filter.userId} id={user.userId} user={filter} />
+    ));
+
+  const showUsers =
+    user &&
+    users.map((userElement) => (
+      <UserItem
+        key={userElement.userId}
+        id={userElement.userId}
+        user={userElement}
+      />
+    ));
+
+  if (spinner) return <Spinner />;
+
   return (
     <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
+      {
         <Fragment>
           <button
             type='button'
@@ -51,29 +68,13 @@ const Users = () => {
           >
             <i className='fas fa-plus fa-lg' />
           </button>
-          {users !== null ? (
+          {users && (
             <div style={userItemStyle}>
-              {filtered !== null
-                ? filtered.map((userElement) => (
-                    <UserItem
-                      key={userElement.userId}
-                      id={user.userId}
-                      user={userElement}
-                    />
-                  ))
-                : users.map((userElement) => (
-                    <UserItem
-                      key={userElement.userId}
-                      id={userElement.userId}
-                      user={userElement}
-                    />
-                  ))}
+              {filtered !== null ? showFilterdUsers : showUsers}
             </div>
-          ) : (
-            <Spinner />
           )}
         </Fragment>
-      )}
+      }
       <UserModalAdd title='Create A User' onClose={onClose} show={show} />
     </Fragment>
   );

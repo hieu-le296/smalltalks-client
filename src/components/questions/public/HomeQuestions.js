@@ -14,46 +14,46 @@ const HomeQuestions = ({ questionHomeStyles }) => {
 
   // Run once when re-render
   useEffect(() => {
-    setTimeout(() => {
+    async function getAllQuestions() {
+      await getQuestions(questionDispatch);
       setSpinner(false);
-    }, 3000);
+    }
 
-    getQuestions(questionDispatch);
+    getAllQuestions();
     // eslint-disable-next-line
   }, [setSpinner, questionDispatch]);
 
-  if (questions.length === 0 || questions === null) {
+  const showFilteredQuestions =
+    filtered &&
+    filtered.map((filter) => (
+      <QuestionItem
+        key={filter.questionId}
+        id={filter.questionId}
+        question={filter}
+      />
+    ));
+
+  const showAllQuestions =
+    questions &&
+    questions.map((question) => (
+      <QuestionItem
+        key={question.questionId}
+        id={question.questionId}
+        question={question}
+      />
+    ));
+
+  if (spinner) return <Spinner />;
+
+  if (questions.length === 0 || questions === null)
     return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;
-  }
 
   return (
     <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          {questions !== null ? (
-            <div style={questionHomeStyles}>
-              {filtered !== null
-                ? filtered.map((question) => (
-                    <QuestionItem
-                      key={question.questionId}
-                      id={question.questionId}
-                      question={question}
-                    />
-                  ))
-                : questions.map((question) => (
-                    <QuestionItem
-                      key={question.questionId}
-                      id={question.questionId}
-                      question={question}
-                    />
-                  ))}
-            </div>
-          ) : (
-            <Spinner />
-          )}
-        </Fragment>
+      {questions && (
+        <div style={questionHomeStyles}>
+          {filtered !== null ? showFilteredQuestions : showAllQuestions}
+        </div>
       )}
     </Fragment>
   );

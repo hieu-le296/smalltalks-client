@@ -22,7 +22,10 @@ const QuestionPage = ({ match }) => {
   const commentDisptach = useComment()[1];
 
   useEffect(() => {
-    getQuestion(questionDispatch, match.params.slug);
+    async function showQuestion() {
+      await getQuestion(questionDispatch, match.params.slug);
+    }
+    showQuestion();
   }, [questionDispatch, match.params.slug]);
 
   const { question } = questionState;

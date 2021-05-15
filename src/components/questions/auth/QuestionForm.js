@@ -151,12 +151,15 @@ const QuestionForm = () => {
   // Button states
   const AddState = (
     <Fragment>
-      <button type='submit' className='btn btn-primary btn-rounded mx-5 btn-lg'>
+      <button
+        type='submit'
+        className='btn btn-primary btn-rounded mx-lg-5 mx-md-5 mx-sm-auto btn-lg'
+      >
         <i className='fas fa-plus' /> Post question
       </button>
 
       <button
-        className='btn btn-secondary btn-rounded btn-lg'
+        className='btn btn-secondary btn-rounded btn-lg mt-3'
         disabled={isPreviewDisabled}
         onClick={onPreview}
       >
@@ -167,12 +170,15 @@ const QuestionForm = () => {
 
   const EditState = (
     <Fragment>
-      <button type='submit' className='btn btn-success btn-rounded btn-lg'>
+      <button
+        type='submit'
+        className='btn btn-success btn-rounded btn-lg mx-lg-5 mx-md-5 mx-sm-auto'
+      >
         <i className='fas fa-save'></i> Update
       </button>
 
       <button
-        className='btn btn-secondary btn-rounded mx-5 btn-lg'
+        className='btn btn-secondary btn-rounded btn-lg mt-3'
         disabled={isPreviewDisabled}
         onClick={onPreview}
       >
@@ -180,7 +186,7 @@ const QuestionForm = () => {
       </button>
 
       <button
-        className='btn btn-light btn-rounded btn-lg mt-3'
+        className='btn btn-light btn-rounded  mx-lg-5  mx-md-5 btn-lg mt-3'
         onClick={clearAll}
       >
         <i className='fas fa-times'></i> Cancel

@@ -19,15 +19,38 @@ const Questions = () => {
 
   // Run once when re-render
   useEffect(() => {
-    setTimeout(() => {
-      setSpinner(false);
-    }, 3000);
-
-    if (user && isAuthenticated && user.data.role === 'admin') {
-      getQuestions(questionDispatch);
+    async function getAllQuestion() {
+      if (user && isAuthenticated && user.data.role === 'admin') {
+        await getQuestions(questionDispatch);
+        setSpinner(false);
+      }
     }
+
+    getAllQuestion();
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);
+
+  const showFilteredQuestions =
+    filtered &&
+    filtered.map((filter) => (
+      <QuestionItem
+        key={filter.questionId}
+        id={filter.questionId}
+        question={filter}
+      />
+    ));
+
+  const showAllQuestions =
+    questions &&
+    questions.map((question) => (
+      <QuestionItem
+        key={question.questionId}
+        id={question.questionId}
+        question={question}
+      />
+    ));
+
+  if (spinner) return <Spinner />;
 
   if (questions.length === 0 || questions === null) {
     return <h4 className='text-center mt-5'>Wanna ask a question?</h4>;
@@ -35,33 +58,7 @@ const Questions = () => {
 
   return (
     <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          {questions !== null ? (
-            <Fragment>
-              {filtered !== null
-                ? filtered.map((question) => (
-                    <QuestionItem
-                      key={question.questionId}
-                      id={question.questionId}
-                      question={question}
-                    />
-                  ))
-                : questions.map((question) => (
-                    <QuestionItem
-                      key={question.questionId}
-                      id={question.questionId}
-                      question={question}
-                    />
-                  ))}
-            </Fragment>
-          ) : (
-            <Spinner />
-          )}
-        </Fragment>
-      )}
+      {filtered !== null ? showFilteredQuestions : showAllQuestions}
     </Fragment>
   );
 };

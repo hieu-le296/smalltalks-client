@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import {useQuestions, filterQuestions, clearFilter} from '../../context/question/QuestionState'
-
+import {
+  useQuestions,
+  filterQuestions,
+  clearFilter,
+} from '../../context/question/QuestionState';
 
 const QuestionFilter = () => {
- 
   const [questionState, questionDispatch] = useQuestions();
-  const {filtered} = questionState
+  const { filtered } = questionState;
 
   const text = useRef('');
 
@@ -24,7 +26,7 @@ const QuestionFilter = () => {
   };
 
   return (
-    <form className='form-outLine mt-5'>
+    <div className='form-outLine mt-5'>
       <input
         type='text'
         ref={text}
@@ -32,7 +34,7 @@ const QuestionFilter = () => {
         className='form-control'
         onChange={onChange}
       />
-    </form>
+    </div>
   );
 };
 

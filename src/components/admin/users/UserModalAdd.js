@@ -200,7 +200,7 @@ const UserModalAdd = (props) => {
         </div>
       </div>
     </CSSTransition>,
-    document.getElementById('root')
+    document.getElementById('portal')
   );
 };
 

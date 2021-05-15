@@ -13,14 +13,34 @@ const UserQuestions = ({ UserQuestionStyles, username }) => {
   const { questions, filtered } = questionState;
 
   useEffect(() => {
-    setTimeout(() => {
-      setSpinner(false);
-    }, 2000);
-    async function fetchData() {
+    async function showUserQuestions() {
       await getUserQuestions(questionDispatch, username);
+      setSpinner(false);
     }
-    fetchData();
+    showUserQuestions();
   }, [questionDispatch, username, setSpinner]);
+
+  const showFilteredQuestions =
+    filtered &&
+    filtered.map((filter) => (
+      <QuestionItem
+        key={filter.questionId}
+        id={filter.questionId}
+        question={filter}
+      />
+    ));
+
+  const showAllQuestions =
+    questions &&
+    questions.map((question) => (
+      <QuestionItem
+        key={question.questionId}
+        id={question.questionId}
+        question={question}
+      />
+    ));
+
+  if (spinner) return <Spinner />;
 
   if (questions.length === 0 || questions === null) {
     return (
@@ -32,29 +52,9 @@ const UserQuestions = ({ UserQuestionStyles, username }) => {
 
   return (
     <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          <div style={UserQuestionStyles}>
-            {filtered !== null
-              ? filtered.map((question) => (
-                  <QuestionItem
-                    key={question.questionId}
-                    id={question.questionId}
-                    question={question}
-                  />
-                ))
-              : questions.map((question) => (
-                  <QuestionItem
-                    key={question.questionId}
-                    id={question.questionId}
-                    question={question}
-                  />
-                ))}
-          </div>
-        </Fragment>
-      )}
+      <div style={UserQuestionStyles}>
+        {filtered !== null ? showFilteredQuestions : showAllQuestions}
+      </div>
     </Fragment>
   );
 };

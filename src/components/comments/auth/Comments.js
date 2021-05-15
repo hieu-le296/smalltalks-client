@@ -20,47 +20,38 @@ const Comments = ({ questionId }) => {
   const [commentState, commentDisptach] = useComment();
   const { comments } = commentState;
 
-  // Run once when re-render
   useEffect(() => {
-    setTimeout(() => {
+    async function showComments() {
+      await getCommentsOfAQuestion(commentDisptach, questionId);
       setSpinner(false);
-    }, 1000);
-
-    // eslint-disable-next-line
-  }, [setSpinner]);
-
-  useEffect(() => {
-    getCommentsOfAQuestion(commentDisptach, questionId);
+    }
+    showComments();
   }, [comments, questionId, commentDisptach]);
+
+  if (spinner) return <Spinner />;
 
   return (
     <Fragment>
-      {spinner ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          {isAuthenticated && <CommentForm />}
+      {isAuthenticated && <CommentForm />}
 
-          {comments.length === 0 ? (
-            <h3>
-              {' '}
-              <i className='far fa-comment' /> 0 Comment
-            </h3>
-          ) : (
-            <h3 className=''>
-              <i className='far fa-comment' /> {comments.length} Comments
-            </h3>
-          )}
-          {comments.map((singleComment) => {
-            return (
-              <CommentItem
-                singleComment={singleComment}
-                key={singleComment.commentId}
-              />
-            );
-          })}
-        </Fragment>
+      {comments.length === 0 ? (
+        <h3>
+          {' '}
+          <i className='far fa-comment' /> 0 Comment
+        </h3>
+      ) : (
+        <h3 className=''>
+          <i className='far fa-comment' /> {comments.length} Comments
+        </h3>
       )}
+      {comments.map((singleComment) => {
+        return (
+          <CommentItem
+            singleComment={singleComment}
+            key={singleComment.commentId}
+          />
+        );
+      })}
     </Fragment>
   );
 };
