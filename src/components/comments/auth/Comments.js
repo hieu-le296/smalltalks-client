@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import {
   useComment,
-  getCommentsOfAQuestion,
+  getCommentsOfAPost,
 } from '../../../context/comment/commentState';
 
 import CommentItem from './CommentItem';
@@ -10,7 +10,7 @@ import CommentForm from './CommentForm';
 import { useAuth } from '../../../context/auth/AuthState';
 import Spinner from '../../layout/Spinner';
 
-const Comments = ({ questionId }) => {
+const Comments = ({ postId }) => {
   const [spinner, setSpinner] = useState(true);
 
   // We just need authState, so autState is at index 0
@@ -22,11 +22,11 @@ const Comments = ({ questionId }) => {
 
   useEffect(() => {
     async function showComments() {
-      await getCommentsOfAQuestion(commentDisptach, questionId);
+      await getCommentsOfAPost(commentDisptach, postId);
       setSpinner(false);
     }
     showComments();
-  }, [comments, questionId, commentDisptach]);
+  }, [comments, postId, commentDisptach]);
 
   if (spinner) return <Spinner />;
 

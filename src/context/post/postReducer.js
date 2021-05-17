@@ -15,49 +15,45 @@ import {
   CLEAR_QUESTION_ERROR,
 } from '../types';
 
-const questionReducer = (state, action) => {
+const postReducer = (state, action) => {
   switch (action.type) {
     case GET_QUESTIONS:
     case GET_USER_QUESTIONS:
       return {
         ...state,
-        questions: action.payload,
+        posts: action.payload,
       };
 
     case GET_QUESTION:
       return {
         ...state,
-        question: action.payload,
+        post: action.payload,
       };
 
     case ADD_QUESTION:
       return {
         ...state,
-        questions: [action.payload, ...state.questions],
+        posts: [action.payload, ...state.posts],
       };
 
     case UPDATE_QUESTION:
       return {
         ...state,
-        questions: state.questions.map((question) =>
-          question.questionId === action.payload.questionId
-            ? action.payload
-            : question
+        posts: state.posts.map((post) =>
+          post.postId === action.payload.postId ? action.payload : post
         ),
       };
 
     case DELETE_QUESTION:
       return {
         ...state,
-        questions: state.questions.filter(
-          (question) => question.questionId !== action.payload
-        ),
+        posts: state.posts.filter((post) => post.postId !== action.payload),
       };
 
     case CLEAR_QUESTIONS:
       return {
         ...state,
-        questions: [],
+        posts: [],
         filtered: null,
         error: null,
         current: null,
@@ -66,8 +62,8 @@ const questionReducer = (state, action) => {
     case CLEAR_QUESTION:
       return {
         ...state,
-        questions: [],
-        question: {},
+        posts: [],
+        post: {},
         filtered: null,
         error: null,
         current: null,
@@ -88,9 +84,9 @@ const questionReducer = (state, action) => {
     case FILTER_QUESTIONS:
       return {
         ...state,
-        filtered: state.questions.filter((question) => {
+        filtered: state.posts.filter((post) => {
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return question.title.match(regex) || question.content.match(regex);
+          return post.title.match(regex) || post.content.match(regex);
         }),
       };
 
@@ -106,7 +102,7 @@ const questionReducer = (state, action) => {
         error: action.payload,
       };
 
-      case CLEAR_QUESTION_ERROR:
+    case CLEAR_QUESTION_ERROR:
       return {
         ...state,
         error: null,
@@ -116,4 +112,4 @@ const questionReducer = (state, action) => {
   }
 };
 
-export default questionReducer;
+export default postReducer;

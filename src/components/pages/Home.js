@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
-import QuestionFilter from '../questions/QuestionFilter';
-import HomeQuestions from '../questions/public/HomeQuestions';
+import PostFilter from '../posts/PostFilter';
+import HomePosts from '../posts/public/HomePosts';
 
 const Home = () => {
   return (
     <Fragment>
-      <QuestionFilter />
-      <HomeQuestions questionHomeStyles={questionHomeStyles} />
+      <PostFilter />
+      <HomePosts postHomeStyles={postHomeStyles} />
     </Fragment>
   );
 };
 
-const questionHomeStyles = {
+const postHomeStyles = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)',
   gridGap: '1rem',

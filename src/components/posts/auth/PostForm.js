@@ -12,19 +12,19 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
 import {
-  useQuestions,
-  addQuestion,
-  updateQuestion,
+  usePosts,
+  addPost,
+  updatePost,
   clearCurrent,
-  clearQuestionError,
-} from '../../../context/question/QuestionState';
+  clearPostError,
+} from '../../../context/post/PostState';
 import AlertContext from '../../../context/alert/alertContext';
 
 import PreviewModal from './PreviewModal';
 
-const QuestionForm = () => {
-  const [questionState, questionDispatch] = useQuestions();
-  const { current, error } = questionState;
+const PostForm = () => {
+  const [postState, postDispatch] = usePosts();
+  const { current, error } = postState;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -50,9 +50,9 @@ const QuestionForm = () => {
   useEffect(() => {
     if (error) {
       setAlert(error, 'danger');
-      clearQuestionError(questionDispatch);
+      clearPostError(postDispatch);
     }
-  }, [error, questionDispatch, setAlert]);
+  }, [error, postDispatch, setAlert]);
 
   useEffect(() => {
     if (title !== '' && content !== '') {
@@ -87,7 +87,7 @@ const QuestionForm = () => {
     } else {
       emptyFields();
     }
-  }, [questionDispatch, current, emptyFields]);
+  }, [postDispatch, current, emptyFields]);
 
   const onEditorStateChange = (state) => {
     setEditorState(state);
@@ -115,14 +115,14 @@ const QuestionForm = () => {
     if (title === '' || content === '') {
       setAlert('Please fill all the fields', 'warning');
     } else {
-      let question = { title, content };
+      let post = { title, content };
       let msg;
       if (current === null) {
-        msg = await addQuestion(questionDispatch, question);
+        msg = await addPost(postDispatch, post);
       } else {
-        const questionId = current.questionId;
-        question = { questionId, title, content };
-        msg = await updateQuestion(questionDispatch, question);
+        const postId = current.postId;
+        post = { postId, title, content };
+        msg = await updatePost(postDispatch, post);
       }
       if (msg) {
         setAlert(msg, 'success');
@@ -134,7 +134,7 @@ const QuestionForm = () => {
 
   const clearAll = (e) => {
     e.preventDefault();
-    clearCurrent(questionDispatch);
+    clearCurrent(postDispatch);
     setIsPreviewDisabled(true);
   };
 
@@ -155,7 +155,7 @@ const QuestionForm = () => {
         type='submit'
         className='btn btn-primary btn-rounded mx-lg-5 mx-md-5 mx-sm-auto btn-lg'
       >
-        <i className='fas fa-plus' /> Post question
+        <i className='fas fa-plus' /> Post post
       </button>
 
       <button
@@ -196,14 +196,8 @@ const QuestionForm = () => {
 
   return (
     <Fragment>
-      <form
-        id='question-form'
-        className='form-outLine mt-5'
-        onSubmit={onSubmit}
-      >
-        <h2 className='text-center'>
-          {current ? 'Edit question' : 'Ask a question'}
-        </h2>
+      <form id='post-form' className='form-outLine mt-5' onSubmit={onSubmit}>
+        <h2 className='text-center'>{current ? 'Edit post' : 'Ask a post'}</h2>
         <div>
           <button
             className='btn-outline-danger btn-rounded btn-sm float-end mb-3'
@@ -246,10 +240,10 @@ const QuestionForm = () => {
         onClose={() => setIsOpen(false)}
         title={title}
         content={content}
-        currentQuestion={current}
+        currentPost={current}
       />
     </Fragment>
   );
 };
 
-export default QuestionForm;
+export default PostForm;

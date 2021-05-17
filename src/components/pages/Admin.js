@@ -1,13 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import QuestionForm from '../questions/auth/QuestionForm';
-import QuestionFilter from '../questions/QuestionFilter';
-import Questions from '../admin/Questions';
+import PostForm from '../posts/auth/PostForm';
+import PostFilter from '../posts/PostFilter';
+import Posts from '../admin/Posts';
 import Users from '../admin/Users';
-import RouteStats from '../admin/RouteStats';
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
 
-import { useQuestions } from '../../context/question/QuestionState';
+import { usePosts } from '../../context/post/PostState';
 
 const Admin = () => {
   const [spinner, setSpinner] = useState(true);
@@ -16,9 +15,9 @@ const Admin = () => {
   const authState = useAuth()[0];
   const { user } = authState;
 
-  const questionState = useQuestions()[0];
+  const postState = usePosts()[0];
 
-  const { current } = questionState;
+  const { current } = postState;
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,7 +54,7 @@ const Admin = () => {
                 aria-controls='ex2-tabs-2'
                 aria-selected='false'
               >
-                Questions
+                Posts
               </a>
             </li>
             {/* <li className='nav-item' role='presentation'>
@@ -108,13 +107,13 @@ const Admin = () => {
         >
           <div className='row'>
             <div className='card text-center' style={backgroundStyle}>
-              <i className='fas fa-question-circle fa-3x mt-3' />
-              <h2 className='mt-3 mb-3'>Question Administration</h2>
+              <i className='fas fa-post-circle fa-3x mt-3' />
+              <h2 className='mt-3 mb-3'>Post Administration</h2>
             </div>
             {current !== null ? (
               <Fragment>
                 <div className='col-xl-6 col-md-6 mb-4'>
-                  <QuestionForm />
+                  <PostForm />
                 </div>
               </Fragment>
             ) : (
@@ -123,7 +122,7 @@ const Admin = () => {
                 <div className='card mt-5 form-outLine'>
                   <ul className='list-group list-group-flush'>
                     <li className='list-group-item'>
-                      Edit a question by clicking{' '}
+                      Edit a post by clicking{' '}
                       <button
                         type='button'
                         className='btn btn-secondary btn-rounded btn-sm me-3'
@@ -132,7 +131,7 @@ const Admin = () => {
                       </button>{' '}
                     </li>
                     <li className='list-group-item'>
-                      Delete a question by clicking{' '}
+                      Delete a post by clicking{' '}
                       <button
                         type='button'
                         className='btn btn-danger btn-rounded btn-sm me-3'
@@ -142,7 +141,7 @@ const Admin = () => {
                     </li>
 
                     <li className='list-group-item'>
-                      Reading more a question by clicking{' '}
+                      Reading more a post by clicking{' '}
                       <button
                         type='button'
                         className='btn btn-info btn-rounded btn-sm me-3'
@@ -156,31 +155,11 @@ const Admin = () => {
             )}
 
             <div className='col-xl-6 col-md-6 mb-4'>
-              <h3 className='text-center mt-5'>Posted Questions</h3>
-              <QuestionFilter />
-              <Questions />
+              <h3 className='text-center mt-5'>Posted Posts</h3>
+              <PostFilter />
+              <Posts />
             </div>
           </div>
-        </div>
-        {/* <div
-          className='tab-pane fade'
-          id='ex2-tabs-3'
-          role='tabpanel'
-          aria-labelledby='ex2-tab-3'
-        >
-          Tab 3 content
-        </div> */}
-        <div
-          className='tab-pane fade'
-          id='ex2-tabs-4'
-          role='tabpanel'
-          aria-labelledby='ex2-tab-4'
-        >
-          <div className='card text-center' style={backgroundStyle}>
-            <i className='fas fa-table fa-3x mt-3' />
-            <h2 className='mt-3 mb-3'>Route Statistics</h2>
-          </div>
-          <RouteStats />
         </div>
       </div>
     </Fragment>

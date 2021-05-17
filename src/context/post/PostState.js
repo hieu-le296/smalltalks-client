@@ -1,7 +1,7 @@
 import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
-import QuestionContext from './questionContext';
-import questionReducer from './questionReducer';
+import PostContext from './postContext';
+import postReducer from './postReducer';
 import {
   GET_QUESTIONS,
   GET_QUESTION,
@@ -23,53 +23,53 @@ const API_URL = 'https://datacomputation.com/api/v1';
 
 // Create a custom hook to use the contact context
 
-export const useQuestions = () => {
-  const { state, dispatch } = useContext(QuestionContext);
+export const usePosts = () => {
+  const { state, dispatch } = useContext(PostContext);
   return [state, dispatch];
 };
 
 // Action creator
 
-// Get All Questions
-export const getQuestions = async (dispatch) => {
+// Get All Posts
+export const getPosts = async (dispatch) => {
   try {
-    const res = await axios.get(`${API_URL}/questions`);
+    const res = await axios.get(`${API_URL}/posts`);
     dispatch({ type: GET_QUESTIONS, payload: res.data.data });
   } catch (err) {
     dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
   }
 };
 
-// Get single question
-export const getQuestion = async (dispatch, slug) => {
+// Get single post
+export const getPost = async (dispatch, slug) => {
   try {
-    const res = await axios.get(`${API_URL}/questions/${slug}`);
+    const res = await axios.get(`${API_URL}/posts/${slug}`);
     dispatch({ type: GET_QUESTION, payload: res.data.data });
   } catch (err) {
     //dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
   }
 };
 
-// Get User Question
-export const getUserQuestions = async (dispatch, username) => {
+// Get User Post
+export const getUserPosts = async (dispatch, username) => {
   try {
-    const res = await axios.get(`${API_URL}/users/${username}/questions`);
+    const res = await axios.get(`${API_URL}/users/${username}/posts`);
 
-    dispatch({ type: GET_USER_QUESTIONS, payload: res.data.questions });
+    dispatch({ type: GET_USER_QUESTIONS, payload: res.data.posts });
   } catch (err) {
     dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
   }
 };
 
-//   Add Question
-export const addQuestion = async (dispatch, question) => {
+//   Add Post
+export const addPost = async (dispatch, post) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
   try {
-    const res = await axios.post(`${API_URL}/questions`, question, config);
+    const res = await axios.post(`${API_URL}/posts`, post, config);
     dispatch({ type: ADD_QUESTION, payload: res.data.data });
     return res.data.msg;
   } catch (err) {
@@ -77,8 +77,8 @@ export const addQuestion = async (dispatch, question) => {
   }
 };
 
-// Update Question
-export const updateQuestion = async (dispatch, question) => {
+// Update Post
+export const updatePost = async (dispatch, post) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -86,8 +86,8 @@ export const updateQuestion = async (dispatch, question) => {
   };
   try {
     const res = await axios.put(
-      `${API_URL}/questions/${question.questionId}`,
-      question,
+      `${API_URL}/posts/${post.postId}`,
+      post,
       config
     );
     dispatch({ type: UPDATE_QUESTION, payload: res.data.data });
@@ -97,28 +97,28 @@ export const updateQuestion = async (dispatch, question) => {
   }
 };
 
-//   Delete Question
-export const deleteQuestion = async (dispatch, questionId) => {
+//   Delete Post
+export const deletePost = async (dispatch, postId) => {
   try {
-    await axios.delete(`${API_URL}/questions/${questionId}`);
-    dispatch({ type: DELETE_QUESTION, payload: questionId });
+    await axios.delete(`${API_URL}/posts/${postId}`);
+    dispatch({ type: DELETE_QUESTION, payload: postId });
   } catch (err) {
     dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
   }
 };
 
-// Set Current Question
-export const setCurrent = (dispatch, question) => {
-  dispatch({ type: SET_CURRENT_QUESTION, payload: question });
+// Set Current Post
+export const setCurrent = (dispatch, post) => {
+  dispatch({ type: SET_CURRENT_QUESTION, payload: post });
 };
 
-// Clear Current Question
+// Clear Current Post
 export const clearCurrent = (dispatch) => {
   dispatch({ type: CLEAR_CURRENT_QUESTION });
 };
 
-// Filter Question
-export const filterQuestions = (dispatch, text) => {
+// Filter Post
+export const filterPosts = (dispatch, text) => {
   dispatch({ type: FILTER_QUESTIONS, payload: text });
 };
 
@@ -127,37 +127,37 @@ export const clearFilter = (dispatch) => {
   dispatch({ type: CLEAR_FILTER });
 };
 
-// Clear questions
-export const clearQuestions = (dispatch) => {
+// Clear posts
+export const clearPosts = (dispatch) => {
   dispatch({ type: CLEAR_QUESTIONS });
 };
 
-// Clear single question
-export const clearQuestion = (dispatch) => {
+// Clear single post
+export const clearPost = (dispatch) => {
   dispatch({ type: CLEAR_QUESTION });
-}
+};
 
-// Clear question error
-export const clearQuestionError = (dispatch) => {
-  dispatch({type: CLEAR_QUESTION_ERROR})
-}
+// Clear post error
+export const clearPostError = (dispatch) => {
+  dispatch({ type: CLEAR_QUESTION_ERROR });
+};
 
-const QuestionState = (props) => {
+const PostState = (props) => {
   const initState = {
-    questions: [],
-    question: {},
+    posts: [],
+    post: {},
     current: null,
     filtered: null,
     error: null,
   };
 
-  const [state, dispatch] = useReducer(questionReducer, initState);
+  const [state, dispatch] = useReducer(postReducer, initState);
 
   return (
-    <QuestionContext.Provider value={{ state, dispatch }}>
+    <PostContext.Provider value={{ state, dispatch }}>
       {props.children}
-    </QuestionContext.Provider>
+    </PostContext.Provider>
   );
 };
 
-export default QuestionState;
+export default PostState;

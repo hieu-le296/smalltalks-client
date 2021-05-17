@@ -2,23 +2,22 @@ import React, { useState, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  useQuestions,
-  deleteQuestion,
+  usePosts,
+  deletePost,
   setCurrent,
   clearCurrent,
-} from '../../../context/question/QuestionState';
+} from '../../../context/post/PostState';
 import AlertContext from '../../../context/alert/alertContext';
 import DOMPurify from 'dompurify';
 import trimText from '../../../utils/trimText';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
-const QuestionItem = ({ question }) => {
-  // We just need questionDispatch, so questionDispatch is at index 1
-  const questionDispatch = useQuestions()[1];
+const PostItem = ({ post }) => {
+  // We just need postDispatch, so postDispatch is at index 1
+  const postDispatch = usePosts()[1];
 
-  const { questionId, postedBy, title, slug, content, createdAt, updatedAt } =
-    question;
+  const { postId, postedBy, title, slug, content, createdAt, updatedAt } = post;
 
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
@@ -47,9 +46,9 @@ const QuestionItem = ({ question }) => {
 
   const onDelete = async () => {
     if (window.confirm('Are you sure?')) {
-      await deleteQuestion(questionDispatch, questionId);
-      setAlert('Question deleted!', 'warning');
-      clearCurrent(questionDispatch, questionDispatch);
+      await deletePost(postDispatch, postId);
+      setAlert('Post deleted!', 'warning');
+      clearCurrent(postDispatch, postDispatch);
     }
   };
 
@@ -91,7 +90,7 @@ const QuestionItem = ({ question }) => {
           <button
             type='button'
             className='btn btn-secondary btn-rounded me-3'
-            onClick={() => setCurrent(questionDispatch, question)}
+            onClick={() => setCurrent(postDispatch, post)}
           >
             <i className='fas fa-pencil-alt' />
           </button>
@@ -103,7 +102,7 @@ const QuestionItem = ({ question }) => {
             <i className='fas fa-trash' />
           </button>
           <Link
-            to={`/questions/${slug}`}
+            to={`/posts/${slug}`}
             className='btn btn-info btn-rounded float-end'
           >
             <i className='fas fa-arrow-circle-right' />
@@ -119,8 +118,8 @@ const QuestionItem = ({ question }) => {
   );
 };
 
-QuestionItem.propTypes = {
-  question: PropTypes.object.isRequired,
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired,
 };
 
-export default QuestionItem;
+export default PostItem;

@@ -2,11 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useAuth, logout } from '../../context/auth/AuthState';
-import {
-  useQuestions,
-  clearQuestions,
-  clearQuestion,
-} from '../../context/question/QuestionState';
+import { usePosts, clearPosts, clearPost } from '../../context/post/PostState';
 
 import {
   useComment,
@@ -19,14 +15,14 @@ const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
   const { isAuthenticated, user } = authState;
 
-  // We just need questionDispatch, so questionDispatch is at index 1
-  const questionDispatch = useQuestions()[1];
+  // We just need postDispatch, so postDispatch is at index 1
+  const postDispatch = usePosts()[1];
 
   const commentDispatch = useComment()[1];
 
   const onLogout = () => {
     logout(authDispatch);
-    clearQuestions(questionDispatch);
+    clearPosts(postDispatch);
     window.location.reload();
   };
 
@@ -123,7 +119,7 @@ const Navbar = ({ icon }) => {
   const onClick = (e) => {
     //e.preventDefault()
     clearCommentsWhenBack(commentDispatch);
-    clearQuestion(questionDispatch);
+    clearPost(postDispatch);
   };
 
   return (

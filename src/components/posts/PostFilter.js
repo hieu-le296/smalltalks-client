@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  useQuestions,
-  filterQuestions,
+  usePosts,
+  filterPosts,
   clearFilter,
-} from '../../context/question/QuestionState';
+} from '../../context/post/PostState';
 
-const QuestionFilter = () => {
-  const [questionState, questionDispatch] = useQuestions();
-  const { filtered } = questionState;
+const PostFilter = () => {
+  const [postState, postDispatch] = usePosts();
+  const { filtered } = postState;
 
   const text = useRef('');
 
@@ -19,9 +19,9 @@ const QuestionFilter = () => {
 
   const onChange = (e) => {
     if (text.current.value !== '') {
-      filterQuestions(questionDispatch, e.target.value);
+      filterPosts(postDispatch, e.target.value);
     } else {
-      clearFilter(questionDispatch);
+      clearFilter(postDispatch);
     }
   };
 
@@ -30,7 +30,7 @@ const QuestionFilter = () => {
       <input
         type='text'
         ref={text}
-        placeholder='Search Questions...'
+        placeholder='Search Posts...'
         className='form-control'
         onChange={onChange}
       />
@@ -38,4 +38,4 @@ const QuestionFilter = () => {
   );
 };
 
-export default QuestionFilter;
+export default PostFilter;

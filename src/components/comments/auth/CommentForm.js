@@ -1,13 +1,13 @@
 import React, { useRef, useContext, Fragment } from 'react';
 import { useComment, addComment } from '../../../context/comment/commentState';
 
-import { useQuestions } from '../../../context/question/QuestionState';
+import { usePosts } from '../../../context/post/PostState';
 import AlertContext from '../../../context/alert/alertContext';
 
 const CommentForm = () => {
-  const questionState = useQuestions()[0];
+  const postState = usePosts()[0];
 
-  const { question } = questionState;
+  const { post } = postState;
 
   // const commentDispatch = useComment()[1];
 
@@ -29,7 +29,7 @@ const CommentForm = () => {
       setAlert('Comment cannot be empty', 'danger');
     }
 
-    let response = await addComment(commentDispatch, question.questionId, {
+    let response = await addComment(commentDispatch, post.postId, {
       content: newCommentValue,
     });
 

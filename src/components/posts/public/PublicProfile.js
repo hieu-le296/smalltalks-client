@@ -2,10 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
 import { useUsers, getUser, clearUser } from '../../../context/users/UserState';
-import {
-  useQuestions,
-  clearQuestions,
-} from '../../../context/question/QuestionState';
+import { usePosts, clearPosts } from '../../../context/post/PostState';
 
 const API_URL = 'https://datacomputation.com/uploads';
 
@@ -16,7 +13,7 @@ const PublicProfile = ({ username }) => {
 
   const { user } = userState;
 
-  const questionDispatch = useQuestions()[1];
+  const postDispatch = usePosts()[1];
 
   useEffect(() => {
     async function fetchUser() {
@@ -28,7 +25,7 @@ const PublicProfile = ({ username }) => {
 
   const onBackHome = () => {
     clearUser(userDispatch);
-    clearQuestions(questionDispatch);
+    clearPosts(postDispatch);
   };
 
   if (spinner) return <Spinner />;

@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/auth/AuthState';
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
-const PreviewModal = ({ open, currentQuestion, title, content, onClose }) => {
+const PreviewModal = ({ open, currentPost, title, content, onClose }) => {
   const authState = useAuth()[0];
   const { user } = authState;
 
@@ -27,19 +27,19 @@ const PreviewModal = ({ open, currentQuestion, title, content, onClose }) => {
             <p className='text-muted fs-6'>
               <i className='fas fa-clock'></i> {new Date().toLocaleString()}
             </p>
-            {currentQuestion !== null ? (
+            {currentPost !== null ? (
               <p className='text-muted'>
                 Posted by:{' '}
                 <img
-                  src={`${API_URL}/${currentQuestion.postedBy.profilePic}`}
+                  src={`${API_URL}/${currentPost.postedBy.profilePic}`}
                   alt='profile'
                   className='rounded-circle'
                   height='35'
                   width='35'
                   loading='lazy'
                 />{' '}
-                <Link to={`/users/${currentQuestion.postedBy.username}`}>
-                  <strong> {currentQuestion.postedBy.name}</strong>
+                <Link to={`/users/${currentPost.postedBy.username}`}>
+                  <strong> {currentPost.postedBy.name}</strong>
                 </Link>
               </p>
             ) : (

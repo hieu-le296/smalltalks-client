@@ -22,10 +22,10 @@ export const useComment = () => {
   return [state, dispatch];
 };
 
-// Get All Questions
-export const getCommentsOfAQuestion = async (dispatch, questionId) => {
+// Get All Posts
+export const getCommentsOfAPost = async (dispatch, postId) => {
   try {
-    const res = await axios.get(`${API_URL}/questions/${questionId}/comments`);
+    const res = await axios.get(`${API_URL}/posts/${postId}/comments`);
     dispatch({ type: GET_COMMENTS_OF_A_QUESTION, payload: res.data.data });
   } catch (err) {
     //dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
@@ -66,7 +66,7 @@ export const deleteComment = async (dispatch, commentId) => {
 };
 
 //   Add Comment
-export const addComment = async (dispatch, questionId, commentData) => {
+export const addComment = async (dispatch, postId, commentData) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const addComment = async (dispatch, questionId, commentData) => {
   };
   try {
     const res = await axios.post(
-      `${API_URL}/questions/${questionId}/comments`,
+      `${API_URL}/posts/${postId}/comments`,
       commentData,
       config
     );

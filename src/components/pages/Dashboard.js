@@ -1,19 +1,19 @@
 import React from 'react';
-import Questions from '../questions/auth/Questions';
-import QuestionForm from '../questions/auth/QuestionForm';
-import QuestionFilter from '../questions/QuestionFilter';
+import Posts from '../posts/auth/Posts';
+import PostForm from '../posts/auth/PostForm';
+import PostFilter from '../posts/PostFilter';
 
 const Dashboard = () => {
   return (
     <div className='row'>
       <div className='mb-5'>
-        <QuestionForm />
+        <PostForm />
       </div>
       <hr />
       <div>
-        <h3 className='text-center mt-5'>Your Posted Questions</h3>
-        <QuestionFilter />
-        <Questions />
+        <h3 className='text-center mt-5'>Your Posted Posts</h3>
+        <PostFilter />
+        <Posts />
       </div>
     </div>
   );

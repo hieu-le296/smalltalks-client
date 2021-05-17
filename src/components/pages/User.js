@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react';
-import PublicProfile from '../questions/public/PublicProfile';
-import QuestionFilter from '../questions/QuestionFilter';
-import UserQuestions from '../questions/public/UserQuestions';
+import PublicProfile from '../posts/public/PublicProfile';
+import PostFilter from '../posts/PostFilter';
+import UserPosts from '../posts/public/UserPosts';
 
 const User = ({ match }) => {
   return (
     <Fragment>
       <PublicProfile username={match.params.username} />
       <hr />
-      <QuestionFilter />
-      <UserQuestions
-        UserQuestionStyles={UserQuestionStyles}
+      <PostFilter />
+      <UserPosts
+        UserPostStyles={UserPostStyles}
         username={match.params.username}
       />
     </Fragment>
   );
 };
 
-const UserQuestionStyles = {
+const UserPostStyles = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)',
   gridGap: '1rem',

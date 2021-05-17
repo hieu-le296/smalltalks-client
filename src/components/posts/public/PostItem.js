@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const QuestionItem = ({ question }) => {
-  const { slug, title, postedBy, createdAt } = question;
+const PostItem = ({ post }) => {
+  const { slug, title, postedBy, createdAt } = post;
 
   return (
     <div className='card'>
       <div className='card-body'>
         <h5>
-          <Link to={`/questions/${slug}`} className='card-title fw-bold'>
+          <Link to={`/posts/${slug}`} className='card-title fw-bold'>
             {title}
           </Link>
         </h5>
@@ -29,7 +29,7 @@ const QuestionItem = ({ question }) => {
         </p>
       </div>
       <div className='text-center mb-3'>
-        <Link to={`/questions/${slug}`} className='btn btn-info btn-floating'>
+        <Link to={`/posts/${slug}`} className='btn btn-info btn-floating'>
           <i className='fas fa-arrow-circle-right' />
         </Link>
       </div>
@@ -37,8 +37,8 @@ const QuestionItem = ({ question }) => {
   );
 };
 
-QuestionItem.propTypes = {
-  question: PropTypes.object.isRequired,
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired,
 };
 
-export default QuestionItem;
+export default PostItem;

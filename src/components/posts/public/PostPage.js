@@ -1,10 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  useQuestions,
-  getQuestion,
-  clearQuestion,
-} from '../../../context/question/QuestionState';
+import { usePosts, getPost, clearPost } from '../../../context/post/PostState';
 import Comments from '../../comments/auth/Comments';
 import Spinner from '../../layout/Spinner';
 import DOMPurify from 'dompurify';
@@ -16,26 +12,25 @@ import {
 
 const API_URL = 'http://datacomputation.com/uploads/avatars';
 
-const QuestionPage = ({ match }) => {
-  const [questionState, questionDispatch] = useQuestions();
+const PostPage = ({ match }) => {
+  const [postState, postDispatch] = usePosts();
 
   const commentDisptach = useComment()[1];
 
   useEffect(() => {
-    async function showQuestion() {
-      await getQuestion(questionDispatch, match.params.slug);
+    async function showPost() {
+      await getPost(postDispatch, match.params.slug);
     }
-    showQuestion();
-  }, [questionDispatch, match.params.slug]);
+    showPost();
+  }, [postDispatch, match.params.slug]);
 
-  const { question } = questionState;
+  const { post } = postState;
 
-  const { questionId, title, content, postedBy, createdAt, updatedAt } =
-    question;
+  const { postId, title, content, postedBy, createdAt, updatedAt } = post;
 
   const clearComments = () => {
     clearCommentsWhenBack(commentDisptach);
-    clearQuestion(questionDispatch);
+    clearPost(postDispatch);
   };
 
   const createMarkup = (html) => {
@@ -53,7 +48,7 @@ const QuestionPage = ({ match }) => {
       >
         <i className='fas fa-angle-double-left'></i> Back to Home
       </Link>
-      {isEmpty(question) ? (
+      {isEmpty(post) ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -91,7 +86,7 @@ const QuestionPage = ({ match }) => {
             </div>
           </div>
           <hr />
-          <Comments questionId={questionId} />
+          <Comments postId={postId} />
         </Fragment>
       )}
     </Fragment>
@@ -105,4 +100,4 @@ const isEmpty = (obj) => {
   return true;
 };
 
-export default QuestionPage;
+export default PostPage;
