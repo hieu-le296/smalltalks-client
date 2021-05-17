@@ -10,8 +10,6 @@ import AlertContext from '../../../context/alert/alertContext';
 
 import UserModalEdit from './UserModalEdit';
 
-const API_URL = 'http://datacomputation.com/uploads';
-
 const UserItem = ({ user }) => {
   const [userState, userDispatch] = useUsers();
   const { error } = userState;
@@ -65,7 +63,10 @@ const UserItem = ({ user }) => {
       <div className='card'>
         <div className='card-body '>
           <img
-            src={user && `${API_URL}/avatars/${profilePic}`}
+            src={
+              user &&
+              `${process.env.REACT_APP_API_URL}/uploads/avatars/${profilePic}`
+            }
             className='rounded-circle shadow-2-strong profile-pic'
             height='75'
             width='75'

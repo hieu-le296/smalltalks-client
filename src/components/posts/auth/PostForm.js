@@ -155,7 +155,7 @@ const PostForm = () => {
         type='submit'
         className='btn btn-primary btn-rounded mx-lg-5 mx-md-5 mx-sm-auto btn-lg'
       >
-        <i className='fas fa-plus' /> Post post
+        <i className='fas fa-plus' /> Create Post
       </button>
 
       <button
@@ -197,7 +197,17 @@ const PostForm = () => {
   return (
     <Fragment>
       <form id='post-form' className='form-outLine mt-5' onSubmit={onSubmit}>
-        <h2 className='text-center'>{current ? 'Edit post' : 'Ask a post'}</h2>
+        <h2 className='text-center'>
+          {current ? (
+            <div>
+              <i class='fas fa-edit fa-lg' /> Edit Post
+            </div>
+          ) : (
+            <div>
+              <i className='fas fa-blog fa-lg' /> New Post
+            </div>
+          )}
+        </h2>
         <div>
           <button
             className='btn-outline-danger btn-rounded btn-sm float-end mb-3'

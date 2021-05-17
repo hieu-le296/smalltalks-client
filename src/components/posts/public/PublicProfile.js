@@ -4,8 +4,6 @@ import Spinner from '../../layout/Spinner';
 import { useUsers, getUser, clearUser } from '../../../context/users/UserState';
 import { usePosts, clearPosts } from '../../../context/post/PostState';
 
-const API_URL = 'https://datacomputation.com/uploads';
-
 const PublicProfile = ({ username }) => {
   const [spinner, setSpinner] = useState(true);
 
@@ -42,7 +40,10 @@ const PublicProfile = ({ username }) => {
       <div className='container-fluid text-center'>
         <div>
           <img
-            src={user && `${API_URL}/backgrounds/${user.backgroundPic}`}
+            src={
+              user &&
+              `${process.env.REACT_APP_API_URL}/uploads/backgrounds/${user.backgroundPic}`
+            }
             className='img-fluid shadow-2-strong rounded img-thumbnail background-pic'
             alt='...'
             loading='lazy'
@@ -51,7 +52,10 @@ const PublicProfile = ({ username }) => {
         </div>
         <div>
           <img
-            src={user && `${API_URL}/avatars/${user.profilePic}`}
+            src={
+              user &&
+              `${process.env.REACT_APP_API_URL}/uploads/avatars/${user.profilePic}`
+            }
             className='rounded-circle shadow-2-strong profile-pic'
             height='150'
             width='150'

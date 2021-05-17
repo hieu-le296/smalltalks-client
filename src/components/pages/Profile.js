@@ -10,8 +10,6 @@ import {
 import AlertContext from '../../context/alert/alertContext';
 import Spinner from '../layout/Spinner';
 
-const API_URL = 'http://datacomputation.com/uploads';
-
 const Profile = () => {
   const [authState, authDispatch] = useAuth();
   const { user, error } = authState;
@@ -128,7 +126,8 @@ const Profile = () => {
             <div>
               <img
                 src={
-                  user && `${API_URL}/backgrounds/${user.data.backgroundPic}`
+                  user &&
+                  `${process.env.REACT_APP_API_URL}/uploads/backgrounds/${user.data.backgroundPic}`
                 }
                 className='img-fluid shadow-2-strong background-pic'
                 alt='...'
@@ -137,7 +136,10 @@ const Profile = () => {
             </div>
             <div>
               <img
-                src={user && `${API_URL}/avatars/${user.data.profilePic}`}
+                src={
+                  user &&
+                  `${process.env.REACT_APP_API_URL}/uploads/avatars/${user.data.profilePic}`
+                }
                 className='rounded-circle shadow-2-strong profile-pic'
                 height='150'
                 width='150'

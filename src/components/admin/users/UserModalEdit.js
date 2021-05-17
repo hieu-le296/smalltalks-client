@@ -16,8 +16,6 @@ import {
 } from '../../../context/users/UserState';
 import AlertContext from '../../../context/alert/alertContext';
 
-const API_URL = 'http://datacomputation.com/uploads';
-
 const UserModalEdit = (props) => {
   const [userState, userDispatch] = useUsers();
   const { current, error } = userState;
@@ -160,11 +158,11 @@ const UserModalEdit = (props) => {
     if (password !== password2) {
       setAlert('Passwords does not match', 'danger');
     } else {
-      const user = {
+      const editedUser = {
         userId: current.userId,
         password: password,
       };
-      const msg = await setPassword(userDispatch, user);
+      const msg = await setPassword(userDispatch, editedUser);
 
       if (msg) {
         setAlert(msg, 'success');
@@ -182,7 +180,10 @@ const UserModalEdit = (props) => {
       <div className='container-fluid text-center'>
         <div>
           <img
-            src={current && `${API_URL}/backgrounds/${current.backgroundPic}`}
+            src={
+              current &&
+              `${process.env.REACT_APP_API_URL}/uploads/backgrounds/${current.backgroundPic}`
+            }
             className='img-fluid shadow-2-strong background-pic'
             alt='...'
             style={{ maxWidth: '75%' }}
@@ -190,7 +191,10 @@ const UserModalEdit = (props) => {
         </div>
         <div>
           <img
-            src={current && `${API_URL}/avatars/${current.profilePic}`}
+            src={
+              current &&
+              `${process.env.REACT_APP_API_URL}/uploads/avatars/${current.profilePic}`
+            }
             className='rounded-circle shadow-2-strong profile-pic'
             height='125'
             width='125'

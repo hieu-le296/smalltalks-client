@@ -5,8 +5,6 @@ import DOMPurify from 'dompurify';
 import './Modal.css';
 import { useAuth } from '../../../context/auth/AuthState';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
-
 const PreviewModal = ({ open, currentPost, title, content, onClose }) => {
   const authState = useAuth()[0];
   const { user } = authState;
@@ -31,7 +29,7 @@ const PreviewModal = ({ open, currentPost, title, content, onClose }) => {
               <p className='text-muted'>
                 Posted by:{' '}
                 <img
-                  src={`${API_URL}/${currentPost.postedBy.profilePic}`}
+                  src={`${process.env.REACT_APP_API_URL}/uploads/avatars/${currentPost.postedBy.profilePic}`}
                   alt='profile'
                   className='rounded-circle'
                   height='35'
@@ -47,7 +45,7 @@ const PreviewModal = ({ open, currentPost, title, content, onClose }) => {
                 <p className='text-muted'>
                   Posted by:{' '}
                   <img
-                    src={`${API_URL}/${user.data.profilePic}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/avatars/${user.data.profilePic}`}
                     alt='profile'
                     className='rounded-circle'
                     height='35'

@@ -10,8 +10,6 @@ import {
   clearCommentsWhenBack,
 } from '../../../context/comment/commentState';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
-
 const PostPage = ({ match }) => {
   const [postState, postDispatch] = usePosts();
 
@@ -62,7 +60,7 @@ const PostPage = ({ match }) => {
               <p className='text-muted'>
                 Posted by:{' '}
                 <img
-                  src={`${API_URL}/${postedBy.profilePic}`}
+                  src={`${process.env.REACT_APP_API_URL}/uploads/avatars/${postedBy.profilePic}`}
                   alt='profile'
                   className='rounded-circle'
                   height='35'

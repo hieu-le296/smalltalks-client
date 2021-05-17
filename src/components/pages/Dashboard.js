@@ -11,7 +11,7 @@ const Dashboard = () => {
       </div>
       <hr />
       <div>
-        <h3 className='text-center mt-5'>Your Posted Posts</h3>
+        <h3 className='text-center mt-5'>Your Posts</h3>
         <PostFilter />
         <Posts />
       </div>

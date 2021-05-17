@@ -11,8 +11,6 @@ import {
 
 import { useAuth } from '../../../context/auth/AuthState';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
-
 const CommentItem = ({ singleComment }) => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -75,7 +73,7 @@ const CommentItem = ({ singleComment }) => {
     <Fragment>
       <div className='mt-5'>
         <img
-          src={`${API_URL}/${singleComment.postedBy.profilePic}`}
+          src={`${process.env.REACT_APP_API_URL}/uploads/avatars/${singleComment.postedBy.profilePic}`}
           alt='profile'
           className='rounded-circle'
           height='40'

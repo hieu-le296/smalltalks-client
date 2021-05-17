@@ -11,8 +11,6 @@ import AlertContext from '../../../context/alert/alertContext';
 import DOMPurify from 'dompurify';
 import trimText from '../../../utils/trimText';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
-
 const PostItem = ({ post }) => {
   // We just need postDispatch, so postDispatch is at index 1
   const postDispatch = usePosts()[1];
@@ -64,7 +62,7 @@ const PostItem = ({ post }) => {
           <p className='text-muted'>
             Posted by:{' '}
             <img
-              src={`${API_URL}/${postedBy.profilePic}`}
+              src={`${process.env.REACT_APP_API_URL}/uploads/avatars/${postedBy.profilePic}`}
               alt='profile'
               className='rounded-circle'
               height='35'

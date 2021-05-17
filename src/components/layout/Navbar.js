@@ -9,8 +9,6 @@ import {
   clearCommentsWhenBack,
 } from '../../context/comment/commentState';
 
-const API_URL = 'http://datacomputation.com/uploads/avatars';
-
 const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
   const { isAuthenticated, user } = authState;
@@ -32,7 +30,10 @@ const Navbar = ({ icon }) => {
         <li className='nav-item'>
           <Link to={`/users/${user.data.username}`} className='nav-link'>
             <img
-              src={user && `${API_URL}/${user.data.profilePic}`}
+              src={
+                user &&
+                `${process.env.REACT_APP_API_URL}/uploads/avatars/${user.data.profilePic}`
+              }
               className='rounded-circle'
               height='25'
               width='25'

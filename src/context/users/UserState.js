@@ -15,7 +15,7 @@ import {
   CLEAR_USER_ERRORS,
 } from '../types';
 
-const API_URL = 'https://datacomputation.com/api/v1';
+const API_URL = `${process.env.REACT_APP_API_URL}/api/v1`;
 
 // Create a custom hook to use the contact context
 

@@ -35,7 +35,7 @@ const HomePosts = ({ postHomeStyles }) => {
   if (spinner) return <Spinner />;
 
   if (posts.length === 0 || posts === null)
-    return <h4 className='text-center mt-5'>Wanna ask a post?</h4>;
+    return <h4 className='text-center mt-5'>Wanna share something?</h4>;
 
   return (
     <Fragment>
