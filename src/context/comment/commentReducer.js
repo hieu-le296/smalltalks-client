@@ -1,8 +1,9 @@
 import {
-  GET_COMMENTS_OF_A_QUESTION,
+  GET_COMMENTS_OF_A_POST,
   CLEAR_COMMENTS_WHEN_BACK,
   SET_CURRENT_COMMENT,
   CLEAR_CURRENT_COMMENT,
+  GET_COMMENTS_ERROR,
   COMMENT_ERROR,
   UPDATE_COMMENT,
   DELETE_COMMENT,
@@ -11,7 +12,7 @@ import {
 
 const commentReducer = (state, action) => {
   switch (action.type) {
-    case GET_COMMENTS_OF_A_QUESTION:
+    case GET_COMMENTS_OF_A_POST:
       return {
         ...state,
         comments: action.payload,
@@ -21,6 +22,7 @@ const commentReducer = (state, action) => {
       return {
         ...state,
         comments: [],
+        comment: {},
       };
 
     case SET_CURRENT_COMMENT:
@@ -64,6 +66,16 @@ const commentReducer = (state, action) => {
         ...state,
         error: action.payload,
       };
+
+    case GET_COMMENTS_ERROR: {
+      return {
+        ...state,
+        error: action.payload,
+        comments: [],
+        comment: {},
+        current: null,
+      };
+    }
 
     default:
       return state;

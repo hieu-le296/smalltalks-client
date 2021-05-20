@@ -1,42 +1,42 @@
 import {
-  GET_QUESTIONS,
-  GET_QUESTION,
-  GET_USER_QUESTIONS,
-  ADD_QUESTION,
-  UPDATE_QUESTION,
-  DELETE_QUESTION,
-  CLEAR_QUESTIONS,
-  CLEAR_QUESTION,
-  SET_CURRENT_QUESTION,
-  CLEAR_CURRENT_QUESTION,
-  FILTER_QUESTIONS,
+  GET_POSTS,
+  GET_POST,
+  GET_USER_POSTS,
+  ADD_POST,
+  UPDATE_POST,
+  DELETE_POST,
+  CLEAR_POSTS,
+  CLEAR_POST,
+  SET_CURRENT_POST,
+  CLEAR_CURRENT_POST,
+  FILTER_POSTS,
   CLEAR_FILTER,
-  QUESTION_ERROR,
-  CLEAR_QUESTION_ERROR,
+  POST_ERROR,
+  CLEAR_POST_ERROR,
 } from '../types';
 
 const postReducer = (state, action) => {
   switch (action.type) {
-    case GET_QUESTIONS:
-    case GET_USER_QUESTIONS:
+    case GET_POSTS:
+    case GET_USER_POSTS:
       return {
         ...state,
         posts: action.payload,
       };
 
-    case GET_QUESTION:
+    case GET_POST:
       return {
         ...state,
         post: action.payload,
       };
 
-    case ADD_QUESTION:
+    case ADD_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts],
       };
 
-    case UPDATE_QUESTION:
+    case UPDATE_POST:
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -44,13 +44,13 @@ const postReducer = (state, action) => {
         ),
       };
 
-    case DELETE_QUESTION:
+    case DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter((post) => post.postId !== action.payload),
       };
 
-    case CLEAR_QUESTIONS:
+    case CLEAR_POSTS:
       return {
         ...state,
         posts: [],
@@ -59,7 +59,7 @@ const postReducer = (state, action) => {
         current: null,
       };
 
-    case CLEAR_QUESTION:
+    case CLEAR_POST:
       return {
         ...state,
         posts: [],
@@ -69,19 +69,19 @@ const postReducer = (state, action) => {
         current: null,
       };
 
-    case SET_CURRENT_QUESTION:
+    case SET_CURRENT_POST:
       return {
         ...state,
         current: action.payload,
       };
 
-    case CLEAR_CURRENT_QUESTION:
+    case CLEAR_CURRENT_POST:
       return {
         ...state,
         current: null,
       };
 
-    case FILTER_QUESTIONS:
+    case FILTER_POSTS:
       return {
         ...state,
         filtered: state.posts.filter((post) => {
@@ -96,13 +96,13 @@ const postReducer = (state, action) => {
         filtered: null,
       };
 
-    case QUESTION_ERROR:
+    case POST_ERROR:
       return {
         ...state,
         error: action.payload,
       };
 
-    case CLEAR_QUESTION_ERROR:
+    case CLEAR_POST_ERROR:
       return {
         ...state,
         error: null,

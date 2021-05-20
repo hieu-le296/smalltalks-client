@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import axios from 'axios';
 import {
   useComment,
   getCommentsOfAPost,
@@ -21,12 +22,17 @@ const Comments = ({ postId }) => {
   const { comments } = commentState;
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     async function showComments() {
-      await getCommentsOfAPost(commentDisptach, postId);
+      await getCommentsOfAPost(commentDisptach, postId, source.token);
       setSpinner(false);
     }
     showComments();
-  }, [comments, postId, commentDisptach]);
+
+    return () => {
+      source.cancel();
+    };
+  }, [postId, commentDisptach]);
 
   if (spinner) return <Spinner />;
 

@@ -1,35 +1,30 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { usePosts, getPost, clearPost } from '../../../context/post/PostState';
+import axios from 'axios';
+import { usePosts, getPost } from '../../../context/post/PostState';
 import Comments from '../../comments/auth/Comments';
 import Spinner from '../../layout/Spinner';
 import DOMPurify from 'dompurify';
 
-import {
-  useComment,
-  clearCommentsWhenBack,
-} from '../../../context/comment/commentState';
-
 const PostPage = ({ match }) => {
   const [postState, postDispatch] = usePosts();
 
-  const commentDisptach = useComment()[1];
-
   useEffect(() => {
+    const source = axios.CancelToken.source();
+
     async function showPost() {
-      await getPost(postDispatch, match.params.slug);
+      await getPost(postDispatch, match.params.slug, source.token);
     }
     showPost();
+
+    return () => {
+      source.cancel();
+    };
   }, [postDispatch, match.params.slug]);
 
   const { post } = postState;
 
   const { postId, title, content, postedBy, createdAt, updatedAt } = post;
-
-  const clearComments = () => {
-    clearCommentsWhenBack(commentDisptach);
-    clearPost(postDispatch);
-  };
 
   const createMarkup = (html) => {
     return {
@@ -39,11 +34,7 @@ const PostPage = ({ match }) => {
 
   return (
     <Fragment>
-      <Link
-        to='/'
-        className='btn btn-light btn-rounded mt-5'
-        onClick={clearComments}
-      >
+      <Link to='/' className='btn btn-light btn-rounded mt-5'>
         <i className='fas fa-angle-double-left'></i> Back to Home
       </Link>
       {isEmpty(post) ? (
@@ -72,7 +63,7 @@ const PostPage = ({ match }) => {
                 </Link>
               </p>
               <div
-                className='card-text article-content'
+                className='card-text dynamic-content-div'
                 dangerouslySetInnerHTML={createMarkup(content)}
               ></div>
             </div>

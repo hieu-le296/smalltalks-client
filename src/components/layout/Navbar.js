@@ -2,25 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useAuth, logout } from '../../context/auth/AuthState';
-import { usePosts, clearPosts, clearPost } from '../../context/post/PostState';
-
-import {
-  useComment,
-  clearCommentsWhenBack,
-} from '../../context/comment/commentState';
 
 const Navbar = ({ icon }) => {
   const [authState, authDispatch] = useAuth();
   const { isAuthenticated, user } = authState;
 
-  // We just need postDispatch, so postDispatch is at index 1
-  const postDispatch = usePosts()[1];
-
-  const commentDispatch = useComment()[1];
-
   const onLogout = () => {
     logout(authDispatch);
-    clearPosts(postDispatch);
     window.location.reload();
   };
 
@@ -117,16 +105,10 @@ const Navbar = ({ icon }) => {
     </Fragment>
   );
 
-  const onClick = (e) => {
-    //e.preventDefault()
-    clearCommentsWhenBack(commentDispatch);
-    clearPost(postDispatch);
-  };
-
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <div className='container-fluid '>
-        <Link to='/' className='navbar-brand text-white' onClick={onClick}>
+        <Link to='/' className='navbar-brand text-white'>
           <h4 className='ms-3'>
             <i className={icon} /> Small Talks
           </h4>

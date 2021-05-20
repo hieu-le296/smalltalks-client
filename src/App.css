@@ -197,3 +197,13 @@ textarea {
 .read-more:focus {
   outline: 0;
 }
+
+.dynamic-content-div img {
+  display: block;
+  max-width: 80%;
+  border-radius: 15px;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}

@@ -4,11 +4,12 @@ import CommentContext from './commentContext';
 import commentReducer from './commentReducer';
 
 import {
-  GET_COMMENTS_OF_A_QUESTION,
+  GET_COMMENTS_OF_A_POST,
   CLEAR_COMMENTS_WHEN_BACK,
   SET_CURRENT_COMMENT,
   CLEAR_CURRENT_COMMENT,
   UPDATE_COMMENT,
+  GET_COMMENTS_ERROR,
   COMMENT_ERROR,
   DELETE_COMMENT,
   ADD_COMMENT,
@@ -23,13 +24,18 @@ export const useComment = () => {
 };
 
 // Get All Posts
-export const getCommentsOfAPost = async (dispatch, postId) => {
+export const getCommentsOfAPost = async (dispatch, postId, cancelToken) => {
   try {
-    const res = await axios.get(`${API_URL}/posts/${postId}/comments`);
-    dispatch({ type: GET_COMMENTS_OF_A_QUESTION, payload: res.data.data });
+    const res = await axios.get(`${API_URL}/posts/${postId}/comments`, {
+      cancelToken: cancelToken,
+    });
+    dispatch({ type: GET_COMMENTS_OF_A_POST, payload: res.data.data });
   } catch (err) {
-    //dispatch({ type: QUESTION_ERROR, payload: err.response.msg });
-    console.log(err);
+    if (axios.isCancel(err)) {
+      console.log('Get requestion cancelled');
+    } else {
+      dispatch({ type: GET_COMMENTS_ERROR, payload: err.response.data.msg });
+    }
   }
 };
 
