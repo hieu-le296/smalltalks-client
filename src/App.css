@@ -113,10 +113,6 @@ textarea {
   }
 }
 
-.article-content {
-  white-space: pre-line;
-}
-
 .profile-pic {
   margin-top: -5rem;
   border: solid lightgray;

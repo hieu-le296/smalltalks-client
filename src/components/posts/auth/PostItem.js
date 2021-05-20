@@ -77,7 +77,7 @@ const PostItem = ({ post }) => {
         <div className='mb-3'>
           <div
             dangerouslySetInnerHTML={createMarkup(content)}
-            className='card-text article-content'
+            className='card-text dynamic-content-div'
           ></div>
           <button className='read-more' onClick={handleShowText}>
             {!state.showOriginalHTML ? 'read more' : 'show less'}

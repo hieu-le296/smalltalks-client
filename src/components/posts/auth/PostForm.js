@@ -200,7 +200,7 @@ const PostForm = () => {
         <h2 className='text-center'>
           {current ? (
             <div>
-              <i class='fas fa-edit fa-lg' /> Edit Post
+              <i className='fas fa-edit fa-lg' /> Edit Post
             </div>
           ) : (
             <div>
@@ -237,9 +237,6 @@ const PostForm = () => {
               onEditorStateChange={onEditorStateChange}
               editorClassName='editor-class form-control'
               toolbarClassName='form-control'
-              toolbar={{
-                image: { defaultSize: { height: '512px', width: '1024px' } },
-              }}
             />
           </div>
         </div>

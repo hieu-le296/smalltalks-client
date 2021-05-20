@@ -59,7 +59,7 @@ const PreviewModal = ({ open, currentPost, title, content, onClose }) => {
               )
             )}
             <div
-              className='card-text article-content'
+              className='card-text dynamic-content-div'
               dangerouslySetInnerHTML={createMarkup(content)}
             ></div>
           </div>
