@@ -2,7 +2,7 @@ import React, { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'https://datacomputation.com/api/v1/auth/forgotpassword';
+const API_URL = `${process.env.REACT_APP_API_URL}/api/v1/auth/forgotpassword`;
 
 const ForgotPassword = () => {
   const [isSent, setIsSent] = useState(false);
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
             </p>
             <h1 className='text-center'>Forgot Password?</h1>
             <p className='text-center lead mt-3'>{msg}</p>
-            <Link to='/' className='btn btn-primary btn-block mt-3'>
+            <Link to='/' className='btn btn-primary btn-rounded btn-block mt-3'>
               Go Home
             </Link>
           </div>
@@ -69,7 +69,10 @@ const ForgotPassword = () => {
                 />
               </div>
 
-              <button type='submit' className='btn btn-primary btn-block mb-4'>
+              <button
+                type='submit'
+                className='btn btn-primary btn-rounded btn-block mb-4'
+              >
                 Request Password
               </button>
               <div className='text-center'>

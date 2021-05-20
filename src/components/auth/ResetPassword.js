@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AlertContext from '../../context/alert/alertContext';
 
-const API_URL = 'https://datacomputation.com/api/v1/auth/resetpassword';
+const API_URL = `${process.env.REACT_APP_API_URL}/api/v1/auth/resetpassword`;
 
 const ResetPassword = ({ match }) => {
   const alertContext = useContext(AlertContext);
@@ -63,7 +63,10 @@ const ResetPassword = ({ match }) => {
             <p className='text-center lead mt-3'>
               You have successfully reset password!
             </p>
-            <Link to='/login' className='btn btn-primary btn-block mt-3'>
+            <Link
+              to='/login'
+              className='btn btn-primary btn-rounded btn-block mt-3'
+            >
               Login now
             </Link>
           </div>
