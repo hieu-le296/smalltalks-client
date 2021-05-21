@@ -68,22 +68,15 @@ const PostForm = () => {
 
       let contentState;
 
-      if (!current.content.startsWith('<p>')) {
-        contentState = ContentState.createFromText(current.content);
-        setEditorState(() => EditorState.createWithContent(contentState));
-        setContent(current.content);
-        setIsPreviewDisabled(false);
-      } else {
-        const contentBlock = htmlToDraft(current.content);
-        if (contentBlock) {
-          contentState = ContentState.createFromBlockArray(
-            contentBlock.contentBlocks
-          );
-          setEditorState(() => EditorState.createWithContent(contentState));
-          setContent(current.content);
-          setIsPreviewDisabled(false);
-        }
-      }
+      const blocksFromHtml = htmlToDraft(current.content);
+      const { contentBlocks, entityMap } = blocksFromHtml;
+      contentState = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+      setEditorState(() => EditorState.createWithContent(contentState));
+      setContent(current.content);
+      setIsPreviewDisabled(false);
     } else {
       emptyFields();
     }

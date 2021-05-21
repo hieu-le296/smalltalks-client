@@ -89,7 +89,10 @@ const Login = (props) => {
             <Link to='/forgotpassword'>Forget Password?</Link>
           </div>
 
-          <button type='submit' className='btn btn-primary btn-block mb-4'>
+          <button
+            type='submit'
+            className='btn btn-primary btn-rounded btn-block mb-4'
+          >
             Sign in
           </button>
           <div className='text-center'>

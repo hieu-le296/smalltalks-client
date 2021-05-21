@@ -139,7 +139,10 @@ const Register = (props) => {
             />
           </div>
 
-          <button type='submit' className='btn btn-primary btn-block mb-4'>
+          <button
+            type='submit'
+            className='btn btn-primary btn-rounded btn-block mb-4'
+          >
             Submit
           </button>
           <div className='text-center'>
