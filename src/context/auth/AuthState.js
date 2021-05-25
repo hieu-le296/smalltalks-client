@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, useReducer, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import AuthContext from '../auth/authContext';
 import authReducer from '../auth/authReducer';
@@ -175,8 +175,13 @@ const AuthState = (props) => {
     setAuthToken(state.token);
   }, [state.token]);
 
+  // useMemo to memoize the value given to the provider
+  const contextValue = useMemo(() => {
+    return { state, dispatch };
+  }, [state, dispatch]);
+
   return (
-    <AuthContext.Provider value={{ state: state, dispatch }}>
+    <AuthContext.Provider value={contextValue}>
       {props.children}
     </AuthContext.Provider>
   );

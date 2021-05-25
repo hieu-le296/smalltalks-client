@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useMemo } from 'react';
 import axios from 'axios';
 import UserContext from './userContext';
 import userReducer from './userReducer';
@@ -174,8 +174,13 @@ const UserState = (props) => {
 
   const [state, dispatch] = useReducer(userReducer, initState);
 
+  // useMemo to memoize the value given to the provider
+  const contextValue = useMemo(() => {
+    return { state, dispatch };
+  }, [state, dispatch]);
+
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
+    <UserContext.Provider value={contextValue}>
       {props.children}
     </UserContext.Provider>
   );

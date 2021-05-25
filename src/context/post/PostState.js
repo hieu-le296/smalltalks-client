@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useMemo } from 'react';
 import axios from 'axios';
 import PostContext from './postContext';
 import postReducer from './postReducer';
@@ -172,8 +172,13 @@ const PostState = (props) => {
 
   const [state, dispatch] = useReducer(postReducer, initState);
 
+  // useMemo to memoize the value given to the provider
+  const contextValue = useMemo(() => {
+    return { state, dispatch };
+  }, [state, dispatch]);
+
   return (
-    <PostContext.Provider value={{ state, dispatch }}>
+    <PostContext.Provider value={contextValue}>
       {props.children}
     </PostContext.Provider>
   );

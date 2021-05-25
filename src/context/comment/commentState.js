@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useMemo } from 'react';
 import axios from 'axios';
 import CommentContext from './commentContext';
 import commentReducer from './commentReducer';
@@ -115,8 +115,13 @@ const CommentState = (props) => {
 
   const [state, dispatch] = useReducer(commentReducer, initState);
 
+  // useMemo to memoize the value given to the provider
+  const contextValue = useMemo(() => {
+    return { state, dispatch };
+  }, [state, dispatch]);
+
   return (
-    <CommentContext.Provider value={{ state, dispatch }}>
+    <CommentContext.Provider value={contextValue}>
       {props.children}
     </CommentContext.Provider>
   );
