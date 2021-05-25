@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import PostItem from './PostItem';
+import PostItem from '../../posts/public/PostItem';
 import { usePosts, getUserPosts } from '../../../context/post/PostState';
 import Spinner from '../../layout/Spinner';
 

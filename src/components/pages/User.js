@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import PublicProfile from '../posts/public/PublicProfile';
+import PublicProfile from '../users/public/PublicProfile';
+import UserPosts from '../users/public/UserPosts';
 import PostFilter from '../posts/PostFilter';
-import UserPosts from '../posts/public/UserPosts';
 
 const User = ({ match }) => {
   return (

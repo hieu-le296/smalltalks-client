@@ -2,12 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
 import { useUsers, getUser, clearUser } from '../../../context/users/UserState';
-import {
-  useQuestions,
-  clearQuestions,
-} from '../../../context/question/QuestionState';
-
-const API_URL = 'https://datacomputation.com/uploads';
+import { usePosts, clearPosts } from '../../../context/post/PostState';
 
 const PublicProfile = ({ username }) => {
   const [spinner, setSpinner] = useState(true);
@@ -16,7 +11,7 @@ const PublicProfile = ({ username }) => {
 
   const { user } = userState;
 
-  const questionDispatch = useQuestions()[1];
+  const postDispatch = usePosts()[1];
 
   useEffect(() => {
     async function fetchUser() {
@@ -28,7 +23,7 @@ const PublicProfile = ({ username }) => {
 
   const onBackHome = () => {
     clearUser(userDispatch);
-    clearQuestions(questionDispatch);
+    clearPosts(postDispatch);
   };
 
   if (spinner) return <Spinner />;
@@ -45,7 +40,10 @@ const PublicProfile = ({ username }) => {
       <div className='container-fluid text-center'>
         <div>
           <img
-            src={user && `${API_URL}/backgrounds/${user.backgroundPic}`}
+            src={
+              user &&
+              `${process.env.REACT_APP_API_URL}/uploads/backgrounds/${user.backgroundPic}`
+            }
             className='img-fluid shadow-2-strong rounded img-thumbnail background-pic'
             alt='...'
             loading='lazy'
@@ -54,7 +52,10 @@ const PublicProfile = ({ username }) => {
         </div>
         <div>
           <img
-            src={user && `${API_URL}/avatars/${user.profilePic}`}
+            src={
+              user &&
+              `${process.env.REACT_APP_API_URL}/uploads/avatars/${user.profilePic}`
+            }
             className='rounded-circle shadow-2-strong profile-pic'
             height='150'
             width='150'
