@@ -1,5 +1,7 @@
 # SmallTalks Client
 
+## Live Demo:
+https://smalltalks.tk/
 
 ## Available Scripts
 
