@@ -81,7 +81,7 @@ const Admin = () => {
         >
           <div className='row'>
             <div className='card text-center' style={backgroundStyle}>
-              <i className='fas fa-post-circle fa-3x mt-3' />
+              <i className='fas fa-blog fa-3x mt-3' />
               <h2 className='mt-3 mb-3'>Post Administration</h2>
             </div>
             {current !== null ? (
