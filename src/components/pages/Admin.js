@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import PostForm from '../posts/auth/PostForm';
 import PostFilter from '../posts/PostFilter';
-import Posts from '../admin/Posts';
-import Users from '../admin/Users';
+import PostPage from '../admin/posts/PostPage';
+import Users from '../admin/users/Users';
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
 
@@ -131,7 +131,7 @@ const Admin = () => {
             <div className='col-xl-6 col-md-6 mb-4'>
               <h3 className='text-center mt-5'>Posted Posts</h3>
               <PostFilter />
-              <Posts />
+              <PostPage />
             </div>
           </div>
         </div>

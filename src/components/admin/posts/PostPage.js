@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import PostItem from '../posts/auth/PostItem';
-import { usePosts, getPosts } from '../../context/post/PostState';
-import { useAuth } from '../../context/auth/AuthState';
-import Spinner from '../layout/Spinner';
+import { usePosts, getPosts } from '../../../context/post/PostState';
+import { useAuth } from '../../../context/auth/AuthState';
+import Posts from './Posts';
+import Spinner from '../../layout/Spinner';
 
-const Posts = () => {
+const PostPage = () => {
   const [spinner, setSpinner] = useState(true);
 
   // We just need authState, so autState is at index 0
@@ -27,18 +27,6 @@ const Posts = () => {
     // eslint-disable-next-line
   }, [user, isAuthenticated, setSpinner]);
 
-  const showFilteredPosts =
-    filtered &&
-    filtered.map((filter) => (
-      <PostItem key={filter.postId} id={filter.postId} post={filter} />
-    ));
-
-  const showAllPosts =
-    posts &&
-    posts.map((post) => (
-      <PostItem key={post.postId} id={post.postId} post={post} />
-    ));
-
   if (spinner) return <Spinner />;
 
   if (posts.length === 0 || posts === null) {
@@ -46,8 +34,14 @@ const Posts = () => {
   }
 
   return (
-    <Fragment>{filtered !== null ? showFilteredPosts : showAllPosts}</Fragment>
+    <Fragment>
+      {posts.length > 0 ? (
+        <Posts posts={posts} filtered={filtered} spinner={spinner} />
+      ) : (
+        <Spinner />
+      )}
+    </Fragment>
   );
 };
 
-export default Posts;
+export default PostPage;

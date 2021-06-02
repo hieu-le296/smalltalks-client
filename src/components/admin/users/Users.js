@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-import { getUsers, useUsers } from '../../context/users/UserState';
-import { useAuth } from '../../context/auth/AuthState';
-import UserItem from './users/UserItem';
-import Spinner from '../layout/Spinner';
-import UserModalAdd from './users/UserModalAdd';
+import { getUsers, useUsers } from '../../../context/users/UserState';
+import { useAuth } from '../../../context/auth/AuthState';
+import UserItem from './UserItem';
+import Spinner from '../../layout/Spinner';
+import UserModalAdd from './UserModalAdd';
 
 const Users = () => {
   const [spinner, setSpinner] = useState(true);
