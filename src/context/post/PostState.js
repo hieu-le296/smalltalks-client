@@ -39,7 +39,7 @@ export const getPosts = async (dispatch, cancelToken) => {
     dispatch({ type: GET_POSTS, payload: res.data.data });
   } catch (err) {
     if (axios.isCancel(err)) {
-      console.log('Get Request Canceled');
+      return;
     } else {
       dispatch({ type: POST_ERROR, payload: err.response.msg });
     }

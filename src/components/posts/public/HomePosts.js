@@ -1,30 +1,18 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
+import React, { Fragment } from 'react';
+import usePagination from '../../../hooks/usePagination';
 import PostItem from './PostItem';
-import { usePosts, getPosts } from '../../../context/post/PostState';
-import Spinner from '../../layout/Spinner';
 
-const HomePosts = ({ postHomeStyles }) => {
-  const [spinner, setSpinner] = useState(true);
-
-  const [postState, postDispatch] = usePosts();
-  const { posts, filtered } = postState;
-
-  // Run once when re-render
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    async function getAllPosts() {
-      await getPosts(postDispatch, source.token);
-      setSpinner(false);
-    }
-
-    getAllPosts();
-
-    return () => {
-      source.cancel();
-    };
-    // eslint-disable-next-line
-  }, [setSpinner]);
+const HomePosts = ({ posts, filtered, postHomeStyles }) => {
+  // Using custom hooks
+  const {
+    slicedData,
+    pagination,
+    pages,
+    currentPage,
+    prevPage,
+    nextPage,
+    changePage,
+  } = usePagination({ itemsPerPage: 5, data: posts });
 
   const showFilteredPosts =
     filtered &&
@@ -32,24 +20,82 @@ const HomePosts = ({ postHomeStyles }) => {
       <PostItem key={filter.postId} id={filter.postId} post={filter} />
     ));
 
-  const showAllPosts =
-    posts &&
-    posts.map((post) => (
+  const showSlicedPosts =
+    slicedData.length > 0 &&
+    slicedData.map((post) => (
       <PostItem key={post.postId} id={post.postId} post={post} />
     ));
 
-  if (spinner) return <Spinner />;
+  const showPagination = (
+    <>
+      <nav className='mt-3' aria-label='...'>
+        <ul className='pagination justify-content-center pagination-lg'>
+          {currentPage === 1 ? null : (
+            <li className='page-item'>
+              <a
+                className='page-link '
+                href='#!'
+                tabIndex='-1'
+                aria-disabled='true'
+                onClick={prevPage}
+              >
+                Previous
+              </a>
+            </li>
+          )}
+
+          {pagination.map((page) => {
+            if (!page.ellipsis) {
+              return (
+                <li
+                  key={page.id}
+                  className={page.current ? 'page-item active' : 'page-item'}
+                >
+                  <a
+                    href='/#'
+                    className='page-link'
+                    onClick={(e) => changePage(page.id, e)}
+                  >
+                    {page.id}
+                  </a>
+                </li>
+              );
+            } else {
+              return (
+                <li key={page.id} className=' pagination-ellipsis'>
+                  &hellip;
+                </li>
+              );
+            }
+          })}
+
+          {currentPage === pages ? null : (
+            <li className='page-item'>
+              <a
+                className='page-link'
+                href='#!'
+                tabIndex='-1'
+                onClick={nextPage}
+              >
+                Next
+              </a>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </>
+  );
 
   if (posts.length === 0 || posts === null)
-    return <h4 className='text-center mt-5'>Wanna share something?</h4>;
+    return <h4 classNameName='text-center mt-5'>Wanna share something?</h4>;
 
   return (
     <Fragment>
-      {posts && (
-        <div style={postHomeStyles}>
-          {filtered !== null ? showFilteredPosts : showAllPosts}
-        </div>
-      )}
+      <div style={postHomeStyles}>
+        {filtered !== null ? showFilteredPosts : showSlicedPosts}
+      </div>
+
+      {showPagination}
     </Fragment>
   );
 };
