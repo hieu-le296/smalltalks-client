@@ -111,6 +111,15 @@ textarea {
     height: 75px;
     margin-top: -2.5rem !important;
   }
+
+  .card {
+    width: 90vw;
+  }
+
+  .homePost {
+    justify-items: center;
+    justify-content: center;
+  }
 }
 
 .profile-pic {

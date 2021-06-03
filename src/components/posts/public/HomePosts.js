@@ -91,7 +91,7 @@ const HomePosts = ({ posts, filtered, postHomeStyles }) => {
 
   return (
     <Fragment>
-      <div style={postHomeStyles}>
+      <div className='homePost' style={postHomeStyles}>
         {filtered !== null ? showFilteredPosts : showSlicedPosts}
       </div>
 

@@ -79,11 +79,11 @@ const Admin = () => {
           role='tabpanel'
           aria-labelledby='ex2-tab-2'
         >
+          <div className='card text-center' style={backgroundStyle}>
+            <i className='fas fa-blog fa-3x mt-3' />
+            <h2 className='mt-3 mb-3'>Post Administration</h2>
+          </div>
           <div className='row'>
-            <div className='card text-center' style={backgroundStyle}>
-              <i className='fas fa-blog fa-3x mt-3' />
-              <h2 className='mt-3 mb-3'>Post Administration</h2>
-            </div>
             {current !== null ? (
               <Fragment>
                 <div className='col-xl-6 col-md-6 mb-4'>
