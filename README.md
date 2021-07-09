@@ -1,7 +1,7 @@
 # SmallTalks Client
 
 ## Live Demo:
-https://smalltalks.tk/
+https://smalltalks.cf/
 
 ## Available Scripts
 
