@@ -55,21 +55,18 @@ const About = () => {
       </header>
 
       <div className='row'>
-        <div className='col-xl-6 col-md-4 mb-auto'>
-          <div
-            className='card mt-3 border-0 shadow'
-            style={{ height: '400px', width: '550px' }}
-          >
+        <div className='col-xl-6 col-md-6 mb-4'>
+          <div className='card border-0 shadow'>
             <img
               src='https://hieulocker.tk/images/hieu.jpg'
               className='card-img-top rounded-circle mx-auto mt-3'
               alt='...'
-              style={{ maxHeight: '50%', maxWidth: '35%' }}
+              style={{ maxHeight: '50%', maxWidth: '50%' }}
             />
             <div className='card-body text-center'>
               <h5 className='card-title mb-0'>Team member</h5>
               <div className='card-text text-black-50'>
-                My name is Hieu Le. I am the third year student in Bachelor of
+                My name is Hieu. I am the third year student in Bachelor of
                 Computer Information System at the University of the Fraser
                 Valley, concerntrating on Software Development. In my spare
                 time, I like playing Cities Skylines, GTAV, reading techblogs
@@ -79,12 +76,32 @@ const About = () => {
           </div>
         </div>
 
-        <div className='col-xl-6 col-md-8 mb-auto'>
-          <div
-            className='mt-3 card form-container'
-            style={{ height: '400px', width: '550px' }}
-          >
-            <h4 className='text-center mt-3'>Contact Me</h4>
+        <div className='col-xl-6 col-md-6 mb-4'>
+          <div className='card border-0 shadow'>
+            <img
+              src='https://gurjitlocker.tk/images/profile.jpg'
+              className='card-img-top rounded-circle mx-auto mt-3'
+              alt='...'
+              style={{ maxHeight: '50%', maxWidth: '50%' }}
+            />
+            <div className='card-body text-center'>
+              <h5 className='card-title mb-0'>Team member</h5>
+              <div className='card-text text-black-50'>
+                I am Gurjit! A 3rd year Computer Information Systems student at
+                UFV, majoring in Software Development and an aspiring Software
+                Developer! I love exploring new places, reading tech blogs, and
+                talking to new people {':)'} My expertise is in {'=>'} Java,
+                JavaScript, Node, React, SQL, and Python!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='mb-auto'>
+          <div className='mt-3 card' style={{ padding: 30 }}>
+            <h4 className='text-center mt-3'>Contact Us</h4>
             <form onSubmit={onSubmit}>
               <div className=' mb-4'>
                 <label className='form-label' htmlFor='name'>
@@ -128,13 +145,15 @@ const About = () => {
                   onChange={onChange}
                 ></textarea>
               </div>
-
-              <button
-                type='submit'
-                className='btn btn-primary btn-rounded btn-block mb-4'
-              >
-                Send
-              </button>
+              <div className='text-center'>
+                <button
+                  type='submit'
+                  className='btn btn-primary btn-rounded btn-lg'
+                  style={{ width: '20rem' }}
+                >
+                  Send
+                </button>
+              </div>
             </form>
           </div>
         </div>
