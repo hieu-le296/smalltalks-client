@@ -1,5 +1,8 @@
 # SmallTalks Client
 
+## Server:
+https://github.com/hieu-le296/smalltalks-server
+
 ## Live Demo:
 https://smalltalks.cf/
 
