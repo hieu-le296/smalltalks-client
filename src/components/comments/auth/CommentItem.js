@@ -93,9 +93,9 @@ const CommentItem = ({ singleComment }) => {
               id={`comment-${singleComment.commentId}-input`}
               readOnly={true}
               ref={comment}
-            >
-              {singleComment.content}
-            </textarea>
+              defaultValue={singleComment.content}
+            />
+
             {(isAuthenticated &&
               singleComment.postedBy.commentUserId === user.data.userId) ||
             (isAuthenticated && user.data.role === 'admin') ? (
